@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">XBC Application</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+
     <string name="hintUsername">Username</string>
     <string name="hintPassword">Password</string>
     <string name="textLoginButton">Login</string>
