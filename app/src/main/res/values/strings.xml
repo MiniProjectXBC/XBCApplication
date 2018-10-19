@@ -7,4 +7,6 @@
     <string name="hintUsername">Username</string>
     <string name="hintPassword">Password</string>
     <string name="textLoginButton">Login</string>
+    <string name="userNameEmpty">Username Empty</string>
+    <string name="passwordEmpty">Password Empty</string>
 </resources>
