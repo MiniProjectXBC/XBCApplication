@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group>
+        <item android:id="@+id/menuBiodata"
+            android:title="Biodata"/>
+    </group>
+    <group>
+        <item android:id="@+id/menuTrainer"
+            android:title="Trainer"/>
+    </group>
+    <group>
+        <item android:id="@+id/menuTechnology"
+            android:title="News"/>
+    </group>
+    <item android:title="Bootcamp">
+        <menu>
+            <item
+                android:id="@+id/menuBatch"
+                android:title="Batch"/>
+
+            <item
+                android:id="@+id/menuClass"
+                android:title="Class" />
+        </menu>
+    </item>
+    <item android:title="Assestment">
+        <menu>
+            <item
+                android:id="@+id/menuFiltering"
+                android:title="Filtering"/>
+
+            <item
+                android:id="@+id/menuMiniProject"
+                android:title="Mini Project" />
+
+            <item
+                android:id="@+id/menuCustom"
+                android:title="Custom" />
+        </menu>
+    </item>
+    <item android:title="Portal">
+        <menu>
+            <item
+                android:id="@+id/menuFeedback"
+                android:title="Feedback"/>
+
+            <item
+                android:id="@+id/menuIdleNews"
+                android:title="idle News" />
+
+            <item
+                android:id="@+id/menuKataIdle"
+                android:title="Kata Idle" />
+        </menu>
+    </item>
+    <item android:title="Idle">
+        <menu>
+            <item
+                android:id="@+id/menuMonitoring"
+                android:title="Monitoring"/>
+
+            <item
+                android:id="@+id/menuAssignment"
+                android:title="Assignment" />
+        </menu>
+    </item>
+
+
+
+</menu>
