@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +55,11 @@ public class HomeActivity extends AppCompatActivity
 
         //Menu Biodata
         if (id == R.id.menuBiodata) {
-
+            setActionBarTitle("Biodata");
+            BiodataFragment biodataFragment= new BiodataFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment,"Biodata");
+            fragmentTransaction.commit();
         }
         //Menu Trainer
         else if (id == R.id.menuTrainer) {
