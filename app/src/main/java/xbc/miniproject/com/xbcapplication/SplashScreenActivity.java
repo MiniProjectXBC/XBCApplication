@@ -18,24 +18,24 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                //pindah ke scree berikutnya
-                if (SessionManager.isRegister(context)) {
-                    //bypass ke main menu
-                    Intent intent = new Intent(context, /*MainMenuActivity*/. class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, /*WelcomeActivity*/. class);
-                    startActivity(intent);
-                }
-
-                finish();
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(timerTask, Constanta.SPLASH_DELAY_TIME);
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                //pindah ke scree berikutnya
+//                if (SessionManager.isRegister(context)) {
+//                    //bypass ke main menu
+//                    Intent intent = new Intent(context, /*MainMenuActivity*/. class);
+//                    startActivity(intent);
+//                } else {
+//                    Intent intent = new Intent(context, /*WelcomeActivity*/. class);
+//                    startActivity(intent);
+//                }
+//
+//                finish();
+//            }
+//        };
+//
+//        Timer timer = new Timer();
+//        timer.schedule(timerTask, Constanta.SPLASH_DELAY_TIME);
     }
 }
