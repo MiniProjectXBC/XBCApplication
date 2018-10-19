@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -98,6 +99,18 @@ public class HomeActivity extends AppCompatActivity
 
     private void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //deteksi klik burger icon
+        if (id == android.R.id.home){
+            //slide navigation drawer
+            drawerLayout.openDrawer(Gravity.LEFT);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
