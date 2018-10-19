@@ -17,10 +17,15 @@ public class SplashScreenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
+        //rahmat
+
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
 //                //pindah ke scree berikutnya
 //                if (SessionManager.isRegister(context)) {
 //                    //bypass ke main menu
