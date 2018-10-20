@@ -15,6 +15,10 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 
 public class HomeActivity extends AppCompatActivity

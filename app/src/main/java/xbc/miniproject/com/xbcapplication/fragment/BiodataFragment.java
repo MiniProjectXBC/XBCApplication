@@ -15,12 +15,20 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xbc.miniproject.com.xbcapplication.R;
+import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
+import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 
 public class BiodataFragment extends Fragment {
     EditText biodataEditTextSearch;
     Button biodataButtonInsert;
     RecyclerView biodataRecyclerViewList;
+
+    List<BiodataModel> listBiodata = new ArrayList<>();
+    BiodataListAdapter biodataListAdapter;
 
     public BiodataFragment() {
 
@@ -29,7 +37,7 @@ public class BiodataFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_biodata,container,false);
+        View view = inflater.inflate(R.layout.fragment_biodata, container, false);
 
         //Cara mendapatkan Context di Fragment dengan menggunakan getActivity() atau getContext()
         //Toast.makeText(getContext(),"Test Context Behasil", Toast.LENGTH_LONG).show();
@@ -48,7 +56,28 @@ public class BiodataFragment extends Fragment {
                 LinearLayout.VERTICAL, false);
         biodataRecyclerViewList.setLayoutManager(layoutManager);
 
+        tampilkanListBiodata();
+
+
 
         return view;
+    }
+
+    private void tampilkanListBiodata() {
+        addDummyList();
+        if (biodataListAdapter == null) {
+            biodataListAdapter = new BiodataListAdapter(getContext(),listBiodata);
+            biodataRecyclerViewList.setAdapter(biodataListAdapter);
+        }
+    }
+
+    private void addDummyList() {
+        for (int i = 0; i < 5; i++) {
+            BiodataModel data = new BiodataModel();
+            data.setName("Dummy Name");
+            data.setMajor("Dummy Major");
+            data.setGpa("Dummy GPA");
+            listBiodata.add(data);
+        }
     }
 }

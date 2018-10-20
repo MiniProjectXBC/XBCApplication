@@ -1,6 +1,6 @@
 package xbc.miniproject.com.xbcapplication.dummyModel;
 
-public class biodataModel {
+public class BiodataModel {
     private String name;
     private String major;
     private String gpa;
