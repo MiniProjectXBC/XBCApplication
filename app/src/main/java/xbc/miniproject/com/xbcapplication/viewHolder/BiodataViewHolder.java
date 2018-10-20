@@ -79,7 +79,6 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        ((Activity)context).finish();
                     }
                 })
                 .setCancelable(false)
