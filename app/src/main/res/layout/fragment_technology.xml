@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:layout_weight="4"
-                android:hint="Search by Technology / Name" />
+                android:hint="Search by Name" />
 
             <Button
                 android:id="@+id/technologyButtonInsert"
@@ -63,7 +63,8 @@
             android:id="@+id/technologyRecyclerViewList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"></android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="10dp">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

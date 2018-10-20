@@ -5,6 +5,6 @@
         android:title="Edit"/>
 
     <item
-        android:id="@+id/biodataMenuDeactivate"
+        android:id="@+id/tchnologyMenuDeactivate"
         android:title="Deactivate" />
 </menu>
