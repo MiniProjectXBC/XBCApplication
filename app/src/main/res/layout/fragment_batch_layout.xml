@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,73 +14,70 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <EditText
-                android:id="@+id/batchSearch"
+                android:id="@+id/biodataEditTextSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:layout_marginRight="20dp"
-                android:hint="Searching by Technology/Name"
-                android:textSize="12dp"/>
-            <ImageView
-                android:id="@+id/buttonInsertBatch"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:id="@+id/biodataButtonInsert"
                 android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_weight="1"
-                android:src="@mipmap/icon_add"
-                android:layout_gravity="center_horizontal|center_vertical"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
+
             <TextView
+                android:textSize="12sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="TECHNOLOGY"/>
+
             <TextView
+                android:textSize="12sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="NAME" />
+                android:layout_weight="3"
+                android:text="NAME"/>
+
             <TextView
+                android:textSize="12sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="TRAINER"/>
-            <TextView
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/biodataRecyclerViewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/technologyRecyclerViewList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/nameRecyclerViewList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/trainerRecyclerViewList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/forButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
