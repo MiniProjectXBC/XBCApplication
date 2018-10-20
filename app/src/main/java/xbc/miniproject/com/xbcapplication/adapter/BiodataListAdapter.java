@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
@@ -37,7 +38,7 @@ public class BiodataListAdapter extends RecyclerView.Adapter<BiodataViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull BiodataViewHolder biodataViewHolder, int position) {
         final BiodataModel user = biodataList.get(position);
-        biodataViewHolder.setModel(user,position,context);
+        biodataViewHolder.setModel(user, position, context);
     }
 
     @Override
@@ -47,5 +48,10 @@ public class BiodataListAdapter extends RecyclerView.Adapter<BiodataViewHolder> 
         } else {
             return 0;
         }
+    }
+
+    public void filterList(List<BiodataModel> filterList) {
+        biodataList = filterList;
+        notifyDataSetChanged();
     }
 }
