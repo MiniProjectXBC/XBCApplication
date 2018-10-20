@@ -16,11 +16,13 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/biodataEditTextSearch"
+                android:id="@+id/batchSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:hint="Searching by Technology/Name"
+                android:textSize="12dp"/>
 
             <Button
                 android:id="@+id/biodataButtonInsert"
@@ -39,28 +41,33 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="NAME"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="MAJORS"/>
+                android:layout_weight="2"
+                android:text="TECHNOLOGY"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="GPA"/>
+                android:text="NAME" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="TRAINER"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""/>
 
         </LinearLayout>
 
+        
         <android.support.v7.widget.RecyclerView
             android:id="@+id/biodataRecyclerViewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
