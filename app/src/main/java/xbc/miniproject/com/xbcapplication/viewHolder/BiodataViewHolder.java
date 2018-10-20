@@ -3,9 +3,11 @@ package xbc.miniproject.com.xbcapplication.viewHolder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setModel(BiodataModel biodataModel, final int position, final Context context){
+    public void setModel(BiodataModel biodataModel, final int position, final Context context) {
         listBiodataTextViewName.setText(biodataModel.getName());
         listBiodataTextViewMajors.setText(biodataModel.getMajor());
         listBiodataTextViewGpa.setText(biodataModel.getGpa());
@@ -37,7 +39,25 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
         listBiodataButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Anda Menekan Action Posisi: "+position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Anda Menekan Action Posisi: "+position,Toast.LENGTH_SHORT).show();
+                PopupMenu popupMenu = new PopupMenu(context, listBiodataButtonAction);
+                popupMenu.inflate(R.menu.biodata_action_menu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.biodataMenuEdit:
+                                Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.biodataMenuDeactivate:
+                                Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popupMenu.show();
             }
         });
     }
