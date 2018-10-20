@@ -20,7 +20,9 @@
             android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".AddBiodataActivity"></activity>
+        <activity android:name=".AddBiodataActivity" />
+        <activity android:name=".AddTechnologyActivity"></activity>
+        <activity android:name=".EditBiodataActivity"></activity>
     </application>
 
 </manifest>
