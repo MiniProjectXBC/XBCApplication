@@ -22,6 +22,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".AddBiodataActivity" />
         <activity android:name=".AddTechnologyActivity"></activity>
+        <activity android:name=".EditBiodataActivity"></activity>
     </application>
 
 </manifest>

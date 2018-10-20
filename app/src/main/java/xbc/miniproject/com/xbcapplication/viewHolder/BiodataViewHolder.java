@@ -1,6 +1,10 @@
 package xbc.miniproject.com.xbcapplication.viewHolder;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -11,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 
@@ -47,10 +52,13 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.biodataMenuEdit:
-                                Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, EditBiodataActivity.class);
+                                ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.biodataMenuDeactivate:
-                                Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                DeactiveSuccessNotification(context);
                                 return true;
                             default:
                                 return false;
@@ -60,5 +68,20 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                 popupMenu.show();
             }
         });
+    }
+
+    private void DeactiveSuccessNotification(final Context context) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("NOTIFICATION !")
+                .setMessage("Data Successfully Deactivated!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }
