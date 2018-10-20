@@ -1,6 +1,7 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import xbc.miniproject.com.xbcapplication.AddBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
@@ -77,7 +79,8 @@ public class BiodataFragment extends Fragment {
         biodataButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),AddBiodataActivity.class);
+                startActivity(intent);
             }
         });
 
