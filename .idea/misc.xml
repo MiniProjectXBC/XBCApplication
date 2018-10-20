@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
 =======
   <component name="NullableNotNullManager">
@@ -32,6 +33,7 @@
       </value>
     </option>
   </component>
+>>>>>>> 659bffb88e5ab3763b362fed5cfcb85225fca588
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
 >>>>>>> e33993f099263079f6fca1371183e0bec5149189
     <output url="file://$PROJECT_DIR$/build/classes" />
