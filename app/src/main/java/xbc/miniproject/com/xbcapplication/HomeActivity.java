@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -75,7 +76,10 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Bootcamp
         else if (id == R.id.menuBatch) {
-
+            setActionBarTitle("Batch");
+            BiodataFragment biodataFragment = new BiodataFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Batch");
         } else if (id == R.id.menuClass) {
 
         }
