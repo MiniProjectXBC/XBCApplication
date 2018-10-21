@@ -36,7 +36,7 @@ public class AddTechnologyActivity extends Activity {
         addTechnologyButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
     }
