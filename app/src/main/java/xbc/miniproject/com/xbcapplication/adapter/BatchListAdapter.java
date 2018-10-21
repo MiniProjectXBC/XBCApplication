@@ -41,6 +41,16 @@ public class BatchListAdapter extends RecyclerView.Adapter<BatchViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        if (batchList != null) {
+            return batchList.size();
+        } else {
+            return 0;
+        }
+    }
+
+    public  void filterList(List<BatchModel> filterList) {
+        batchList = filterList;
+        notifyDataSetChanged();
     }
 }

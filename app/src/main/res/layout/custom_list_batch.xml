@@ -47,12 +47,8 @@
                 android:id="@+id/listBatchButtonAction"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@color/colorPrimary"/>
+                android:src="@drawable/baseline_dehaze_black_18"/>
 
         </LinearLayout>
-
     </LinearLayout>
-
-
-
 </android.support.constraint.ConstraintLayout>

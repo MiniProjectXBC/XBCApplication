@@ -7,10 +7,12 @@
         <item android:id="@+id/menuBiodata"
             android:title="Biodata"/>
     </group>
+
     <group>
         <item android:id="@+id/menuTrainer"
             android:title="Trainer"/>
     </group>
+
     <group>
         <item android:id="@+id/menuTechnology"
             android:title="Technology"/>
@@ -61,7 +63,6 @@
             <item
                 android:id="@+id/menuMonitoring"
                 android:title="Monitoring"/>
-
             <item
                 android:id="@+id/menuAssignment"
                 android:title="Assignment" />

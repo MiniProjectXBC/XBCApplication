@@ -8,6 +8,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import xbc.miniproject.com.xbcapplication.adapter.BatchListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
 
@@ -18,5 +19,9 @@ public class BatchFragment extends Fragment {
     private RecyclerView batchRecyclerViewList;
 
     private List<BatchModel> listBatch = new ArrayList<>();
+    private BatchListAdapter batchListAdapter;
 
+    public BatchFragment() {
+
+    }
 }
