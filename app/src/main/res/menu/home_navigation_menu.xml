@@ -15,7 +15,7 @@
 
     <group>
         <item android:id="@+id/menuTechnology"
-            android:title="News"/>
+            android:title="Technology"/>
     </group>
     <item android:title="Bootcamp">
         <menu>

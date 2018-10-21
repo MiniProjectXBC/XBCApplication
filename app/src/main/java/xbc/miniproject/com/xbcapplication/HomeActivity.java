@@ -21,6 +21,7 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,7 +73,11 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Technologi
         else if (id == R.id.menuTechnology) {
-
+            setActionBarTitle("Technology");
+            TechnologyFragment technologyFragment = new TechnologyFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, technologyFragment, "Technology");
+            fragmentTransaction.commit();
         }
         //Menu Bootcamp
         else if (id == R.id.menuBatch) {
