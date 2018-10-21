@@ -1,8 +1,10 @@
 package xbc.miniproject.com.xbcapplication.viewHolder;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import xbc.miniproject.com.xbcapplication.EditTechnologyActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 
@@ -37,8 +40,8 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
                         switch (item.getItemId()){
                             case R.id.technologyMenuEdit:
                                 Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(context, EditBiodataActivity.class);
-//                                ((Activity)context).startActivity(intent);
+                                Intent intent = new Intent(context, EditTechnologyActivity.class);
+                                ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.tchnologyMenuDeactivate:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
@@ -49,6 +52,7 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
                         }
                     }
                 });
+                popupMenu.show();
             }
         });
     }

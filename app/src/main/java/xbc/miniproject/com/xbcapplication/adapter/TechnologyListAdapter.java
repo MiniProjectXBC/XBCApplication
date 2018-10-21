@@ -16,6 +16,7 @@ import xbc.miniproject.com.xbcapplication.viewHolder.TechnologyViewHolder;
 public class TechnologyListAdapter extends RecyclerView.Adapter<TechnologyViewHolder> {
     private Context context;
     private List<TechnologyModel> technologyModelList;
+
     public TechnologyListAdapter(Context context, List<TechnologyModel> technologyModelList) {
         this.context = context;
         this.technologyModelList = technologyModelList;
@@ -36,7 +37,6 @@ public class TechnologyListAdapter extends RecyclerView.Adapter<TechnologyViewHo
     public void onBindViewHolder(@NonNull TechnologyViewHolder technologyViewHolder, int position) {
         final TechnologyModel user= technologyModelList.get(position);
         technologyViewHolder.setModel(user, position, context);
-
     }
 
     @Override
@@ -47,8 +47,8 @@ public class TechnologyListAdapter extends RecyclerView.Adapter<TechnologyViewHo
             return 0;
         }
     }
-    public  void filterlist(List<TechnologyModel> techlist){
-        technologyModelList = techlist;
+    public  void filterList(List<TechnologyModel> filterList){
+        technologyModelList = filterList;
         notifyDataSetChanged();
     }
 }

@@ -43,7 +43,7 @@ public class TechnologyFragment extends Fragment {
              false);
      technologyRecyclerViewList.setLayoutManager(layoutManager);
      technologyEditTextSearch =(EditText) view.findViewById(R.id.technologyEditTextSearch);
-
+     technologyRecyclerViewList.setVisibility(view.INVISIBLE);
      technologyEditTextSearch.addTextChangedListener(new TextWatcher() {
          @Override
          public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,18 +73,21 @@ public class TechnologyFragment extends Fragment {
              startActivity(intent);
          }
      });
+
+
         tampilkanListTechnology();
         return  view;
     }
     public void filter(String text){
         ArrayList<TechnologyModel> filteredList = new ArrayList<>();
+
         for(TechnologyModel item: technologyModelList){
             if(item.getName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
 
         }
-        technologyListAdapter.filterlist(filteredList);
+        technologyListAdapter.filterList(filteredList);
     }
     public void tampilkanListTechnology(){
         addDummyList();
@@ -97,7 +100,7 @@ public class TechnologyFragment extends Fragment {
         int index =1;
         for(int i=0; i<5; i++){
             TechnologyModel data =  new TechnologyModel();
-            data.setName("Dunny Name"+index);
+            data.setName("Dummy Name"+index);
             technologyModelList.add(data);
             index++;
         }
