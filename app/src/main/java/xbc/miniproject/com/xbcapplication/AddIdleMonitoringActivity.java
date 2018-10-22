@@ -7,35 +7,80 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.R;
+import xbc.miniproject.com.xbcapplication.utility.NiceAutoCompleteTextView;
 
-public class AddIdleMonitoringActivity extends Activity {
-    Context context = this;
+public class AddIdleMonitoringActivity extends AppCompatActivity {
+    private Context context = this;
 
-    EditText addMonitoringEditTextName,
-            addMonitoringEditTextIdleDate,
+    private EditText addMonitoringEditTextIdleDate,
             addMonitoringEditTextLastProjectAt,
             addMonitoringEditTextIdleReason;
 
-    Button addMonitoringButtonSave,
+    private AutoCompleteTextView addMonitoringEditTextName;
+
+    private Button addMonitoringButtonSave,
             addMonitoringButtonCancel;
+
+    private String[] names = {"Agus",
+            "Bagus",
+            "Cagus",
+            "Dagus",
+            "Eagus"};
+
+    private boolean isNameSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_monitoring);
+        setContentView(R.layout.activity_add_idle_monitoring);
 
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Input Idle");
 
-        addMonitoringEditTextName = (EditText) findViewById(R.id.addMonitoringEditTextName);
+        addMonitoringEditTextName = (AutoCompleteTextView) findViewById(R.id.addMonitoringEditTextName);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, names);
+        addMonitoringEditTextName.setThreshold(0);
+        addMonitoringEditTextName.setAdapter(adapter);
+
+        addMonitoringEditTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                isNameSelected = true;
+            }
+        });
+
+        addMonitoringEditTextName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                isNameSelected = false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         addMonitoringEditTextIdleDate = (EditText) findViewById(R.id.addMonitoringEditTextIdleDate);
         addMonitoringEditTextLastProjectAt = (EditText) findViewById(R.id.addMonitoringEditTextLastProjectAt);
         addMonitoringEditTextIdleReason = (EditText) findViewById(R.id.addMonitoringEditTextIdleReason);
@@ -58,11 +103,14 @@ public class AddIdleMonitoringActivity extends Activity {
     }
 
     private void inputValidation() {
-        if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Name Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addMonitoringEditTextIdleDate.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Idle Date Field still empty!",Toast.LENGTH_SHORT).show();
-        } else{
+        if (addMonitoringEditTextName.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Name Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addMonitoringEditTextIdleDate.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Idle Date Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (!isNameSelected) {
+            addMonitoringEditTextName.setText("");
+            Toast.makeText(context, "Name Field Must From the List!", Toast.LENGTH_SHORT).show();
+        } else {
             SaveSuccessNotification();
         }
     }
@@ -87,7 +135,7 @@ public class AddIdleMonitoringActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

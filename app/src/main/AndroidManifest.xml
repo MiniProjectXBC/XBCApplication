@@ -24,7 +24,8 @@
         <activity android:name=".AddTechnologyActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
-        <activity android:name=".AddIdleMonitoringActivity"></activity>
+        <activity android:name=".AddIdleMonitoringActivity"
+            android:theme="@style/AppCompatTheme"></activity>
     </application>
 
 </manifest>
