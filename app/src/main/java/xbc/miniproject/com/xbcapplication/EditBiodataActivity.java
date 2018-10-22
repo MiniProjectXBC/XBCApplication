@@ -35,6 +35,7 @@ public class EditBiodataActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         ((ActionBar) actionBar).setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit Biodata");
 
         editBiodataEditTextName = (EditText) findViewById(R.id.editBiodataEditTextName);
         editBiodataEditTextLastEducation = (EditText) findViewById(R.id.editBiodataEditTextLastEducation);

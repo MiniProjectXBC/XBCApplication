@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -17,48 +16,49 @@ import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 
-public class BiodataViewHolder extends RecyclerView.ViewHolder {
-    TextView listBiodataTextViewName,
-            listBiodataTextViewMajors,
-            listBiodataTextViewGpa;
+public class MonitoringViewHolder extends RecyclerView.ViewHolder {
+    TextView listMonitoringTextViewName,
+            listMonitoringTextViewIdleDate,
+            listMonitoringTextViewPlacementDate;
 
-    ImageView listBiodataButtonAction;
+    ImageView listMonitoringButtonAction;
 
-    public BiodataViewHolder(@NonNull View itemView) {
+    public MonitoringViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        listBiodataButtonAction = (ImageView) itemView.findViewById(R.id.listBiodataButtonAction);
-        listBiodataTextViewName = (TextView) itemView.findViewById(R.id.listBiodataTextViewName);
-        listBiodataTextViewMajors = (TextView) itemView.findViewById(R.id.listBiodataTextViewMajors);
-        listBiodataTextViewGpa = (TextView) itemView.findViewById(R.id.listBiodataTextViewGpa);
+        listMonitoringTextViewName = (TextView) itemView.findViewById(R.id.listMonitoringTextViewName);
+        listMonitoringTextViewIdleDate = (TextView) itemView.findViewById(R.id.listMonitoringTextViewIdleDate);
+        listMonitoringTextViewPlacementDate = (TextView) itemView.findViewById(R.id.listMonitoringTextViewPlacementDate);
 
+        listMonitoringButtonAction = (ImageView) itemView.findViewById(R.id.listMonitoringButtonAction);
     }
 
-    public void setModel(final BiodataModel biodataModel, final int position, final Context context) {
-        listBiodataTextViewName.setText(biodataModel.getName());
-        listBiodataTextViewMajors.setText(biodataModel.getMajor());
-        listBiodataTextViewGpa.setText(biodataModel.getGpa());
+    public void setModel(final MonitoringModel monitoringModel, final int position, final Context context){
+        listMonitoringTextViewName.setText(monitoringModel.getName());
+        listMonitoringTextViewIdleDate.setText(monitoringModel.getIdleDate());
+        listMonitoringTextViewPlacementDate.setText(monitoringModel.getPlacementDate());
 
-        listBiodataButtonAction.setOnClickListener(new View.OnClickListener() {
+        listMonitoringButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, "Anda Menekan Action Posisi: "+position,Toast.LENGTH_SHORT).show();
-                PopupMenu popupMenu = new PopupMenu(context,listBiodataButtonAction);
-                popupMenu.inflate(R.menu.biodata_action_menu);
+                PopupMenu popupMenu = new PopupMenu(context, listMonitoringButtonAction);
+                popupMenu.inflate(R.menu.monitoring_action_menu);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.biodataMenuEdit:
-                                //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, EditBiodataActivity.class);
-                                ((Activity)context).startActivity(intent);
+                            case R.id.monitoringMenuEdit:
+                                Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: " + position, Toast.LENGTH_SHORT).show();
                                 return true;
-                            case R.id.biodataMenuDeactivate:
-                                //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeactiveQuestion(biodataModel,position,context);
+                            case R.id.monitoringMenuPlacement:
+                                Toast.makeText(context, "Anda Menekan Action Placement pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.monitoringMenuDelete:
+                                Toast.makeText(context, "Anda Menekan Action Delete pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                DeleteQuestion(monitoringModel, position, context);
                                 return true;
                             default:
                                 return false;
@@ -70,11 +70,11 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeactiveQuestion(final BiodataModel biodataModel, final int position, final Context context) {
+    private void DeleteQuestion(final MonitoringModel monitoringModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan MenonAktifkan "+ biodataModel.getName()+"?")
+                .setMessage("Apakah Anda Yakin Akan Delete "+ monitoringModel.getName()+"?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -96,7 +96,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deactivated!")
+                .setMessage("Data Successfully Deleted!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
