@@ -21,6 +21,7 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -86,7 +87,11 @@ public class HomeActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Batch");
         } else if (id == R.id.menuClass) {
-
+            setActionBarTitle("Class");
+            ClassFragment classFragment = new ClassFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, classFragment, "Class");
+            fragmentTransaction.commit();
         }
         //Menu Assestment
         else if (id == R.id.menuFiltering) {
