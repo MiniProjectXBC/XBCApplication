@@ -1,10 +1,13 @@
 package xbc.miniproject.com.xbcapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +31,9 @@ public class AddBiodataActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_biodata);
+
+        ActionBar actionBar = getActionBar();
+        ((ActionBar) actionBar).setDisplayHomeAsUpEnabled(true);
 
         addBiodataEditTextName = (EditText) findViewById(R.id.addBiodataEditTextName);
         addBiodataEditTextLastEducation = (EditText) findViewById(R.id.addBiodataEditTextLastEducation);
@@ -90,4 +96,13 @@ public class AddBiodataActivity extends Activity {
                 .show();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
