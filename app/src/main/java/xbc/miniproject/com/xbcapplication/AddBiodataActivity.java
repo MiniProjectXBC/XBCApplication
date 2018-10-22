@@ -59,8 +59,6 @@ public class AddBiodataActivity extends Activity {
                 finish();
             }
         });
-
-
     }
 
     private void inputValidation() {

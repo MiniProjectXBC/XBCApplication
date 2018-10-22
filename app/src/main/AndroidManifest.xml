@@ -24,7 +24,10 @@
         <activity android:name=".AddTechnologyActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
-        <activity android:name=".AddIdleMonitoringActivity"></activity>
+        <activity android:name=".AddIdleMonitoringActivity" />
+        <activity android:name=".EditIdleNewsActivity" />
+        <activity android:name=".ShareIdleNewsActivity" />
+        <activity android:name=".AddIdleNewsActivity"></activity>
     </application>
 
 </manifest>
