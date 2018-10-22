@@ -25,9 +25,16 @@
         <activity android:name=".AddTrainerActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
+<<<<<<< HEAD
         <activity android:name=".AddIdleMonitoringActivity" />
         <activity android:name=".AddTestimonyActivity" />
         <activity android:name=".EditTestimonyActivity"></activity>
+=======
+        <activity
+            android:name=".AddIdleMonitoringActivity"
+            android:theme="@style/AppCompatTheme" />
+        <activity android:name=".AddPlacementMonitoringActivity"></activity>
+>>>>>>> 975d5a6b3d156822d9d2758103d547dff06a5f7f
     </application>
 
 </manifest>
