@@ -16,9 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".AddBiodataActivity" />
+        <activity android:name=".AddTechnologyActivity" />
+        <activity android:name=".EditBiodataActivity" />
+        <activity android:name=".EditTechnologyActivity"></activity>
     </application>
 
 </manifest>

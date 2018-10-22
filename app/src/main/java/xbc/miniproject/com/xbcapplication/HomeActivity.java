@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,7 +61,11 @@ public class HomeActivity extends AppCompatActivity
 
         //Menu Biodata
         if (id == R.id.menuBiodata) {
-
+            setActionBarTitle("Biodata");
+            BiodataFragment biodataFragment= new BiodataFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment,"Biodata");
+            fragmentTransaction.commit();
         }
         //Menu Trainer
         else if (id == R.id.menuTrainer) {
@@ -61,11 +73,18 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Technologi
         else if (id == R.id.menuTechnology) {
-
+            setActionBarTitle("Technology");
+            TechnologyFragment technologyFragment = new TechnologyFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, technologyFragment, "Technology");
+            fragmentTransaction.commit();
         }
         //Menu Bootcamp
         else if (id == R.id.menuBatch) {
-
+            setActionBarTitle("Batch");
+            BiodataFragment biodataFragment = new BiodataFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Batch");
         } else if (id == R.id.menuClass) {
 
         }
