@@ -16,7 +16,7 @@
             android:orientation="vertical"
             android:layout_margin="30dp">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/addMonitoringEditTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,20 +27,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/addMonitoringEditTextIdleDate"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:layout_weight="9"
                     android:inputType="text"
                     android:hint="Idle Date"/>
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@color/colorAccent"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/baseline_calendar_today_black_18"/>
+                </LinearLayout>
 
             </LinearLayout>
 
