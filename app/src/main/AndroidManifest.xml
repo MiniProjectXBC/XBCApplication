@@ -25,12 +25,9 @@
         <activity android:name=".AddTrainerActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
-
-
-        <activity android:name=".AddIdleMonitoringActivity">
-
-        </activity>
-
+        <activity android:name=".AddIdleMonitoringActivity" />
+        <activity android:name=".AddTestimonyActivity" />
+        <activity android:name=".EditTestimonyActivity"></activity>
     </application>
 
 </manifest>
