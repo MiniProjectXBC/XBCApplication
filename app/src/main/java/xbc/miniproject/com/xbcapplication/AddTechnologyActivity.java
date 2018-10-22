@@ -1,8 +1,12 @@
 package xbc.miniproject.com.xbcapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +23,10 @@ public class AddTechnologyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_technology);
+
+        ActionBar actionBar = getActionBar();
+        ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+
         addTechnologyEditTextName = (EditText) findViewById(R.id.addTechnologyEditTextName);
         addTechnologyEditTexNote = (EditText) findViewById(R.id.addTechnologyEditTexNote);
         addTechnologyButtonSave = (Button) findViewById(R.id.addTechnologyButtonSave);
@@ -47,6 +55,31 @@ public class AddTechnologyActivity extends Activity {
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(context,"Data succesfully added!",Toast.LENGTH_SHORT).show();
+            saveSuccesNotification();
         }
+    }
+    public void saveSuccesNotification(){
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("NOTIFICATION !")
+                .setMessage("Data Successfully Added! ")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
