@@ -3,7 +3,6 @@ package xbc.miniproject.com.xbcapplication;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,17 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
+import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,6 +63,11 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Trainer
         else if (id == R.id.menuTrainer) {
+            setActionBarTitle("Trainer");
+            TrainerFragment trainerFragment = new TrainerFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, trainerFragment, "Trainer");
+            fragmentTransaction.commit();
 
         }
         //Menu Technologi

@@ -23,7 +23,8 @@
         <activity android:name=".AddBiodataActivity" />
         <activity android:name=".AddTechnologyActivity" />
         <activity android:name=".EditBiodataActivity" />
-        <activity android:name=".EditTechnologyActivity"></activity>
+        <activity android:name=".EditTechnologyActivity" />
+        <activity android:name=".AddTrainerActivity" />
     </application>
 
 </manifest>
