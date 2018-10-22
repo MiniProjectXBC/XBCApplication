@@ -22,6 +22,7 @@ import java.util.List;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -108,6 +109,11 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Idle
         else if (id == R.id.menuMonitoring) {
+            setActionBarTitle("Monitoring");
+            MonitoringFragment monitoringFragment = new MonitoringFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, monitoringFragment,"Monitoring");
+            fragmentTransaction.commit();
 
         } else if (id == R.id.menuAssignment) {
 
