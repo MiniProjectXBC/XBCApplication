@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +11,22 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.utility.NiceAutoCompleteTextView;
@@ -42,6 +51,8 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
 
     private boolean isNameSelected;
 
+    private Calendar calendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +61,18 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Input Idle");
+
+        calendar = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
 
         addMonitoringEditTextName = (AutoCompleteTextView) findViewById(R.id.addMonitoringEditTextName);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -82,6 +105,17 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         });
 
         addMonitoringEditTextIdleDate = (EditText) findViewById(R.id.addMonitoringEditTextIdleDate);
+        addMonitoringEditTextIdleDate.setFocusable(false);
+        addMonitoringEditTextIdleDate.setClickable(true);
+        addMonitoringEditTextIdleDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(context, date, calendar
+                        .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         addMonitoringEditTextLastProjectAt = (EditText) findViewById(R.id.addMonitoringEditTextLastProjectAt);
         addMonitoringEditTextIdleReason = (EditText) findViewById(R.id.addMonitoringEditTextIdleReason);
 
@@ -100,6 +134,13 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd-MM-yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        addMonitoringEditTextIdleDate.setText(sdf.format(calendar.getTime()));
     }
 
     private void inputValidation() {
