@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/monitoringMenuEdit"
+        android:title="Edit"/>
+
+    <item
+        android:id="@+id/monitoringMenuPlacement"
+        android:title="Placement" />
+
+    <item
+        android:id="@+id/monitoringMenuDelete"
+        android:title="Delete" />
+</menu>
