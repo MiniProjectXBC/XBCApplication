@@ -10,4 +10,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="DatePickerPeriod" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:calendarViewShown">false</item>
+        <item name="android:spinnersShown">true</item>
+        <item name="colorPrimary">#FF0000</item>
+        <item name="colorPrimaryDark">#550000</item>
+        <item name="colorAccent">#0000AA</item>
+    </style>
+
 </resources>

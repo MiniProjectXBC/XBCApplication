@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import xbc.miniproject.com.xbcapplication.AddBatchActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BatchListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
@@ -75,13 +76,15 @@ public class BatchFragment extends Fragment {
             }
         });
 
-//        batchButtonInsert = (Button) view.findViewById(R.id.batchButtonInsert);
-//        batchButtonInsert.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), AddBa)
-//            }
-//        });
+        batchButtonInsert = (Button) view.findViewById(R.id.batchButtonInsert);
+        batchButtonInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddBatchActivity.class);
+                startActivity(intent);
+                startActivity(intent);
+            }
+        });
         tampilkanListBatch();
 
         return view;
