@@ -36,7 +36,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setModel(BiodataModel biodataModel, final int position, final Context context) {
+    public void setModel(final BiodataModel biodataModel, final int position, final Context context) {
         listBiodataTextViewName.setText(biodataModel.getName());
         listBiodataTextViewMajors.setText(biodataModel.getMajor());
         listBiodataTextViewGpa.setText(biodataModel.getGpa());
@@ -58,7 +58,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                                 return true;
                             case R.id.biodataMenuDeactivate:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeactiveSuccessNotification(context);
+                                DeactiveQuestion(biodataModel,position,context);
                                 return true;
                             default:
                                 return false;
@@ -68,6 +68,28 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                 popupMenu.show();
             }
         });
+    }
+
+    private void DeactiveQuestion(final BiodataModel biodataModel, final int position, final Context context) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Warning!")
+                .setMessage("Apakah Anda Yakin Akan MenonAktifkan "+ biodataModel.getName()+"?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DeactiveSuccessNotification(context);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
     private void DeactiveSuccessNotification(final Context context) {
