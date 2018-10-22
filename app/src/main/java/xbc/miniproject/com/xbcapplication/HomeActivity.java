@@ -12,7 +12,16 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
+>>>>>>> beb169faf22918289e4b5421c0c448525e00e11a
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
+import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
@@ -81,11 +90,16 @@ public class HomeActivity extends AppCompatActivity
         //Menu Bootcamp
         else if (id == R.id.menuBatch) {
             setActionBarTitle("Batch");
-            BiodataFragment biodataFragment = new BiodataFragment();
+            BatchFragment batchFragment = new BatchFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Batch");
+            fragmentTransaction.replace(R.id.frame_all_menu, batchFragment, "Batch");
+            fragmentTransaction.commit();
         } else if (id == R.id.menuClass) {
-
+            setActionBarTitle("Class");
+            ClassFragment classFragment = new ClassFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, classFragment, "Class");
+            fragmentTransaction.commit();
         }
         //Menu Assestment
         else if (id == R.id.menuFiltering) {

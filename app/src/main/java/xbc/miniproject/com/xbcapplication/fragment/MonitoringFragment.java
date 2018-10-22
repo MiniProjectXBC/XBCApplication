@@ -1,5 +1,6 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import xbc.miniproject.com.xbcapplication.AddIdleMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.MonitoringListAdapter;
@@ -44,7 +46,8 @@ public class MonitoringFragment extends Fragment {
         monitoringButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),AddIdleMonitoringActivity.class);
+                startActivity(intent);
             }
         });
 
