@@ -15,17 +15,18 @@
             android:orientation="vertical"
             android:layout_margin="30dp">
 
-            <EditText
-                android:id="@+id/feedbackEditTextTest"
+            <AutoCompleteTextView
+                android:id="@+id/feedbackTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="10dp"
                 android:inputType="text"
                 android:hint="Test"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/feedbackRecyclerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         </android.support.v7.widget.RecyclerView>
@@ -40,7 +41,9 @@
                     android:id="@+id/feedbackButtonSave"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Save"/>
+                    android:text="Save"
+
+                    />
 
                 <Button
                     android:id="@+id/feedbackButtonCancel"

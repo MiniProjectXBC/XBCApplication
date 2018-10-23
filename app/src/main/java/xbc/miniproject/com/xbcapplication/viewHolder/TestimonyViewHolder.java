@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.EditTestimonyActivity;
 import xbc.miniproject.com.xbcapplication.R;
+import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
 public class TestimonyViewHolder extends RecyclerView.ViewHolder {
     private TextView listTesimonyTitle;
@@ -25,7 +26,7 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
         listTesimonyTitle = (TextView)itemView.findViewById(R.id.listTesimonyTitle);
         listTestimonyButtonAction = (ImageView)itemView.findViewById(R.id.listTestimonyButtonAction);
     }
-    public void setModel(TestimonyModel testimonyModel, final int position, final Context context){
+    public void setModel(final TestimonyModel testimonyModel, final int position, final Context context){
         listTesimonyTitle.setText(testimonyModel.getName());
         listTestimonyButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +44,7 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
                                 return true;
                             case R.id.testimonyMenuDelete:
                                 Toast.makeText(context,"Anda Menekan Delete pada Posisi"+position, Toast.LENGTH_SHORT).show();
-                                DeleteSuccessNotification(context);
+                                DeleteQuestion(testimonyModel, position, context);
                                 return true;
                             default:
                                 return false;
@@ -53,6 +54,27 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
                 popupMenu.show();
             }
         });
+    }
+    private void DeleteQuestion(TestimonyModel testimonyModel, final int position, final Context context){
+        final AlertDialog.Builder builder;
+        builder =  new AlertDialog.Builder(context);
+        builder.setTitle("Warning!")
+                .setMessage("Apakah Anda Yakin Akan Delete "+ testimonyModel.getName())
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        DeleteSuccessNotification(context);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
     private void DeleteSuccessNotification(final Context context) {
         final AlertDialog.Builder builder;

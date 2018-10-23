@@ -30,8 +30,8 @@ public class TrainerViewHolder extends RecyclerView.ViewHolder {
         listTrainerName = (TextView)itemView.findViewById(R.id.listTrainerName);
         listTrainerButtonAction = (ImageView)itemView.findViewById(R.id.listTrainerButtonAction);
     }
-    public void setModel(TrainerModel technologyModel, final int position, final Context context) {
-        listTrainerName.setText(technologyModel.getName());
+    public void setModel(TrainerModel trainerModel, final int position, final Context context) {
+        listTrainerName.setText(trainerModel.getName());
         listTrainerButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
