@@ -12,31 +12,22 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/listBatchTextViewTechnology"
+            android:id="@+id/listIdelNewsTextViewTitle"
             android:paddingRight="5dp"
             android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="TECHNOLOGY"/>
+            android:text="TITLE"/>
 
         <TextView
-            android:id="@+id/listBatchTextViewName"
+            android:id="@+id/listIdleNewsTextViewCategory"
             android:paddingRight="5dp"
             android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="NAME"/>
-
-        <TextView
-            android:id="@+id/listBatchTextViewTrainer"
-            android:paddingRight="5dp"
-            android:textSize="12sp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="TRAINER"/>
+            android:layout_weight="4"
+            android:text="CATEGORY"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,7 +35,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/listBatchButtonAction"
+                android:id="@+id/listIdleNewsButtonAction"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/baseline_dehaze_black_18"/>

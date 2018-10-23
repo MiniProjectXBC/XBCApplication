@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/idleNewsMenuEdit"
+        android:title="Edit"/>
+
+    <item
+        android:id="@+id/idleNewsMenuPublish"
+        android:title="Publish"/>
+
+    <item
+        android:id="@+id/idleNewsMenuShare"
+        android:title="Share to Email"/>
+
+    <item
+        android:id="@+id/idleNewsMenuDelete"
+        android:title="Delete" />
+</menu>

@@ -6,14 +6,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,25 +19,25 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
-import xbc.miniproject.com.xbcapplication.R;
+public class EditIdleMonitoringActivity extends Activity {
+    Context context = this;
+    
+    AutoCompleteTextView editMonitoringEditTextName;
+    
+    EditText editMonitoringEditTextIdleDate,
+            editMonitoringEditTextLastProjectAt,
+            editMonitoringEditTextIdleReason;
+    
+    Button editMonitoringButtonSave,
+            editMonitoringButtonCancel;
 
-public class AddIdleMonitoringActivity extends AppCompatActivity {
-    private Context context = this;
+    boolean isNameSelected = false;
 
-    private EditText addMonitoringEditTextIdleDate,
-            addMonitoringEditTextLastProjectAt,
-            addMonitoringEditTextIdleReason;
-
-    private AutoCompleteTextView addMonitoringEditTextName;
-
-    private Button addMonitoringButtonSave,
-            addMonitoringButtonCancel;
+    Calendar calendar;
 
     private String[] names = {"Agus",
             "Agus",
@@ -67,18 +63,10 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             "Dagus",
             "Eagus"};
 
-    private boolean isNameSelected;
-
-    private Calendar calendar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_idle_monitoring);
-
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Input Idle");
+        setContentView(R.layout.activity_edit_idle_monitoring);
 
         calendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -92,30 +80,30 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             }
         };
 
-        addMonitoringEditTextName = (AutoCompleteTextView) findViewById(R.id.addMonitoringEditTextName);
+        editMonitoringEditTextName = (AutoCompleteTextView) findViewById(R.id.editMonitoringEditTextName);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item, names);
-        addMonitoringEditTextName.setThreshold(0);
-        addMonitoringEditTextName.setAdapter(adapter);
+        editMonitoringEditTextName.setThreshold(0);
+        editMonitoringEditTextName.setAdapter(adapter);
 
-        addMonitoringEditTextName.setOnClickListener(new View.OnClickListener() {
+        editMonitoringEditTextName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
-                    addMonitoringEditTextName.showDropDown();
+                if (editMonitoringEditTextName.getText().toString().trim().length() == 0){
+                    editMonitoringEditTextName.showDropDown();
                 }
             }
         });
 
-        addMonitoringEditTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        editMonitoringEditTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isNameSelected = true;
-                addMonitoringEditTextName.setError(null);
+                editMonitoringEditTextName.setError(null);
             }
         });
 
-        addMonitoringEditTextName.addTextChangedListener(new TextWatcher() {
+        editMonitoringEditTextName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -124,7 +112,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 isNameSelected = false;
-                addMonitoringEditTextName.setError("Name must from the list!");
+                editMonitoringEditTextName.setError("Name must from the list!");
             }
 
             @Override
@@ -133,10 +121,10 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             }
         });
 
-        addMonitoringEditTextIdleDate = (EditText) findViewById(R.id.addMonitoringEditTextIdleDate);
-        addMonitoringEditTextIdleDate.setFocusable(false);
-        addMonitoringEditTextIdleDate.setClickable(true);
-        addMonitoringEditTextIdleDate.setOnClickListener(new View.OnClickListener() {
+        editMonitoringEditTextIdleDate = (EditText) findViewById(R.id.editMonitoringEditTextIdleDate);
+        editMonitoringEditTextIdleDate.setFocusable(false);
+        editMonitoringEditTextIdleDate.setClickable(true);
+        editMonitoringEditTextIdleDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(context, date, calendar
@@ -145,40 +133,49 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             }
         });
 
-        addMonitoringEditTextLastProjectAt = (EditText) findViewById(R.id.addMonitoringEditTextLastProjectAt);
-        addMonitoringEditTextIdleReason = (EditText) findViewById(R.id.addMonitoringEditTextIdleReason);
 
-        addMonitoringButtonSave = (Button) findViewById(R.id.addMonitoringButtonSave);
-        addMonitoringButtonSave.setOnClickListener(new View.OnClickListener() {
+        editMonitoringEditTextLastProjectAt = (EditText) findViewById(R.id.editMonitoringEditTextLastProjectAt);
+        editMonitoringEditTextIdleReason = (EditText) findViewById(R.id.editMonitoringEditTextIdleReason);
+
+        editMonitoringButtonSave = (Button) findViewById(R.id.editMonitoringButtonSave);
+        editMonitoringButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    inputValidation();
+                inputValidation();
             }
         });
-
-        addMonitoringButtonCancel = (Button) findViewById(R.id.addMonitoringButtonCancel);
-        addMonitoringButtonCancel.setOnClickListener(new View.OnClickListener() {
+        
+        editMonitoringButtonCancel =(Button) findViewById(R.id.editMonitoringButtonCancel);
+        editMonitoringButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit Idle");
+
+
+
+
     }
 
     private void updateLabel() {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        addMonitoringEditTextIdleDate.setText(sdf.format(calendar.getTime()));
+        editMonitoringEditTextIdleDate.setText(sdf.format(calendar.getTime()));
     }
 
     private void inputValidation() {
-        if (addMonitoringEditTextName.getText().toString().trim().length() == 0) {
+        if (editMonitoringEditTextName.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Name Field still empty!", Toast.LENGTH_SHORT).show();
-        } else if (addMonitoringEditTextIdleDate.getText().toString().trim().length() == 0) {
+        } else if (editMonitoringEditTextIdleDate.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Idle Date Field still empty!", Toast.LENGTH_SHORT).show();
         } else if (!isNameSelected) {
-            addMonitoringEditTextName.setText("");
+            editMonitoringEditTextName.setText("");
             Toast.makeText(context, "Name Field Must From the List!", Toast.LENGTH_SHORT).show();
         } else {
             SaveSuccessNotification();
@@ -189,7 +186,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Idle Successfully Added!")
+                .setMessage("Idle Successfully Edited!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
