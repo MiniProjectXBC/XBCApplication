@@ -22,6 +22,7 @@ import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
+import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -113,7 +114,11 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.menuIdleNews) {
 
         } else if (id == R.id.menuKataIdle) {
-
+            setActionBarTitle("Testimony");
+            TestimonyFragment testimonyFragment =  new TestimonyFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, testimonyFragment, "Testimony");
+            fragmentTransaction.commit();
         }
         //Menu Idle
         else if (id == R.id.menuMonitoring) {
