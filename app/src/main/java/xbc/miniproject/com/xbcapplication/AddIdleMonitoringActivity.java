@@ -98,15 +98,12 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         addMonitoringEditTextName.setThreshold(0);
         addMonitoringEditTextName.setAdapter(adapter);
 
-        addMonitoringEditTextName.setOnTouchListener(new View.OnTouchListener() {
+        addMonitoringEditTextName.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (names.length > 0){
-                    if (!addMonitoringEditTextName.getText().toString().equals(""))
-                        adapter.getFilter().filter(null);
+            public void onClick(View v) {
+                if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
                     addMonitoringEditTextName.showDropDown();
                 }
-                return false;
             }
         });
 
