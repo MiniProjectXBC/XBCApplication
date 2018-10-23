@@ -42,10 +42,9 @@ public class FeedbackFragment extends Fragment {
 
     private List<FeedbackModel> feedbackModelList = new ArrayList<>();
 
-
     private boolean isTestSelected;
-    private String[] test = {"Android"
-            };
+    private String[] test = {"Android", "Java"
+    };
 
 
     public FeedbackFragment() {
@@ -61,7 +60,7 @@ public class FeedbackFragment extends Fragment {
                 LinearLayout.VERTICAL,
                 false);
         feedbackRecyclerView.setLayoutManager(layoutManager);
-        feedbackRecyclerView.setVisibility(View.INVISIBLE);
+        feedbackRecyclerView.setVisibility(View.GONE);
 
 
         feedbackButtonSave = (Button) view.findViewById(R.id.feedbackButtonSave);
@@ -77,7 +76,6 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //finish();
-                getActivity().finish();
             }
         });
 
@@ -101,6 +99,8 @@ public class FeedbackFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isTestSelected = true;
                 feedbackTextName.setError(null);
+                filter(feedbackTextName.getText().toString().trim());
+                feedbackRecyclerView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -117,14 +117,17 @@ public class FeedbackFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 isTestSelected = false;
                 feedbackTextName.setError("Test must from the list!");
-
+                feedbackRecyclerView.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if (feedbackTextName.getText().toString().trim().length() == 0) {
+                    feedbackRecyclerView.setVisibility(View.GONE);
+                }
             }
         });
+
 
         tampilkanListQuestion();
         return view;
@@ -132,17 +135,16 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void inputValidation() {
-        if (feedbackTextName.getText().toString().trim().length() == 0){
-            Toast.makeText(getActivity(),"Test Field still empty!",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        if (feedbackTextName.getText().toString().trim().length() == 0) {
+            Toast.makeText(getActivity(), "Test Field still empty!", Toast.LENGTH_SHORT).show();
+        } else {
             saveSuccesNotification();
 
         }
     }
 
 
-    public void saveSuccesNotification(){
+    public void saveSuccesNotification() {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("NOTIFICATION !")
@@ -166,11 +168,11 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
-    public void filter(String text){
+    public void filter(String text) {
         ArrayList<FeedbackModel> filteredList = new ArrayList<>();
 
-        for(FeedbackModel item: feedbackModelList){
-            if(item.getTest().toLowerCase().contains(text.toLowerCase())){
+        for (FeedbackModel item : feedbackModelList) {
+            if (item.getTest().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
 
@@ -179,13 +181,18 @@ public class FeedbackFragment extends Fragment {
     }
 
 
-
     public void addDummyList() {
         int index = 1;
         for (int i = 0; i < 5; i++) {
-
             FeedbackModel data = new FeedbackModel();
             data.setTest("Android");
+            data.setQuestion("Dummy Name" + index);
+            feedbackModelList.add(data);
+            index++;
+        }
+        for (int i = 0; i < 3; i++) {
+            FeedbackModel data = new FeedbackModel();
+            data.setTest("Java");
             data.setQuestion("Dummy Name" + index);
             feedbackModelList.add(data);
             index++;

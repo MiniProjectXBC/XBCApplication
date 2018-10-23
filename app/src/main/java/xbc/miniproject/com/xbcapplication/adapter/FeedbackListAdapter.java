@@ -23,7 +23,7 @@ public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackViewHolder
     private Context context;
     private List<FeedbackModel> feedbackModelList;
 
-    public FeedbackListAdapter(Context context, List<FeedbackModel> trainerModelList) {
+    public FeedbackListAdapter(Context context, List<FeedbackModel> feedbackModelList) {
         this.context = context;
         this.feedbackModelList = feedbackModelList;
     }
