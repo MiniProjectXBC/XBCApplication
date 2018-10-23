@@ -25,11 +25,9 @@
         <activity android:name=".AddTrainerActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
-        <activity android:name=".AddIdleMonitoringActivity" />
         <activity android:name=".EditIdleNewsActivity" />
         <activity android:name=".ShareIdleNewsActivity" />
         <activity android:name=".AddIdleNewsActivity"></activity>
-        <activity android:name=".AddIdleMonitoringActivity" />
         <activity android:name=".AddTestimonyActivity" />
         <activity android:name=".EditTestimonyActivity"></activity>
         <activity

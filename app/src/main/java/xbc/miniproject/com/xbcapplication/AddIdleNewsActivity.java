@@ -1,6 +1,7 @@
 package xbc.miniproject.com.xbcapplication;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddIdleNewsActivity extends AppCompatActivity {
+public class AddIdleNewsActivity extends Activity {
     private Context context = this;
 
     EditText addIdleNewsEditTextTitle,
