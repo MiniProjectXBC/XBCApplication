@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-=======
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="MissingDefaultResource">
->>>>>>> 40492ed4a5ad8f727e200afafce2cc8498f21640
+
     <item
         android:id="@+id/batchMenuEdit"
         android:title="Edit"/>
