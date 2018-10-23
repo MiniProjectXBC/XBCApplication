@@ -152,7 +152,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         addMonitoringButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputValidation();
+                    inputValidation();
             }
         });
 
@@ -189,7 +189,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Added!")
+                .setMessage("Idle Successfully Added!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

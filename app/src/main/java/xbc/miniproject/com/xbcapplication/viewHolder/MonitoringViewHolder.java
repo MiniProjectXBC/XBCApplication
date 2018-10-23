@@ -14,6 +14,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import xbc.miniproject.com.xbcapplication.AddPlacementMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
@@ -54,7 +55,9 @@ public class MonitoringViewHolder extends RecyclerView.ViewHolder {
                                 Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: " + position, Toast.LENGTH_SHORT).show();
                                 return true;
                             case R.id.monitoringMenuPlacement:
-                                Toast.makeText(context, "Anda Menekan Action Placement pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Anda Menekan Action Placement pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context,AddPlacementMonitoringActivity.class);
+                                context.startActivity(intent);
                                 return true;
                             case R.id.monitoringMenuDelete:
                                 Toast.makeText(context, "Anda Menekan Action Delete pada Posisi: " + position, Toast.LENGTH_SHORT).show();
