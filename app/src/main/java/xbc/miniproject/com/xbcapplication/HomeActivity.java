@@ -21,11 +21,8 @@ import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.fragment.FeedbackFragment;
-=======
 import xbc.miniproject.com.xbcapplication.fragment.IdleNewsFragment;
->>>>>>> c23dc41959d7c7015107997314e1256de442da90
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
