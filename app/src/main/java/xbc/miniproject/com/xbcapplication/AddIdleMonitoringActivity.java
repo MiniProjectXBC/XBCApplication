@@ -101,11 +101,10 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         addMonitoringEditTextName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (names.length > 0){
-                    if (!addMonitoringEditTextName.getText().toString().equals(""))
-                        adapter.getFilter().filter(null);
-                    addMonitoringEditTextName.showDropDown();
-                }
+                    if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
+                        //adapter.getFilter().filter(null);
+                        addMonitoringEditTextName.showDropDown();
+                    }
                 return false;
             }
         });
