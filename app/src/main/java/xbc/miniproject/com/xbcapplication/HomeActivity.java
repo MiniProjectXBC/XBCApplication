@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -102,12 +103,15 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Assestment
         else if (id == R.id.menuFiltering) {
+            Toast.makeText(context,"Menu Filtering Saat Ini Belum Tersedia",Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.menuMiniProject) {
-
+            Toast.makeText(context,"Menu MiniProject Saat Ini Belum Tersedia",Toast.LENGTH_SHORT).show();
+            
         } else if (id == R.id.menuCustom) {
-
+            Toast.makeText(context,"Menu Custom Saat Ini Belum Tersedia",Toast.LENGTH_SHORT).show();
         }
+
         //Menu Portal
         else if (id == R.id.menuFeedback) {
 
