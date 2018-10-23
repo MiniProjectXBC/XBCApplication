@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPlacementMonitoringActivity">
+    tools:context=".EditIdleMonitoringActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,8 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/editMonitoringEditTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="text"
+                android:hint="Name"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,13 +31,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/placementEditTextPlacementDate"
+                    android:id="@+id/editMonitoringEditTextIdleDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="9"
-                    android:hint="Placement Date"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:hint="Idle Date"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -40,26 +48,27 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/baseline_calendar_today_black_18" />
+                        android:src="@drawable/baseline_calendar_today_black_18"/>
                 </LinearLayout>
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/placementEditTextPlacementAt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:hint="Placement At"
-                android:inputType="text" />
 
             <EditText
-                android:id="@+id/placementEditTextNotes"
+                android:id="@+id/editMonitoringEditTextLastProjectAt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="Notes"
-                android:inputType="textMultiLine" />
+                android:inputType="text"
+                android:hint="Last Project At"/>
+
+            <EditText
+                android:id="@+id/editMonitoringEditTextIdleReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="text"
+                android:hint="Idle Reason"/>
 
             <LinearLayout
                 android:layout_marginTop="20dp"
@@ -68,21 +77,22 @@
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/placementButtonSave"
+                    android:id="@+id/editMonitoringButtonSave"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Save"/>
 
                 <Button
-                    android:id="@+id/placementButtonCancel"
+                    android:id="@+id/editMonitoringButtonCancel"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>
 
             </LinearLayout>
 
+
         </LinearLayout>
-
-
     </ScrollView>
+
+
 </android.support.constraint.ConstraintLayout>

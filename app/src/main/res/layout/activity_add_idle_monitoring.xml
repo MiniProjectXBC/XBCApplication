@@ -67,8 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:maxLength="4"
-                android:inputType="number"
+                android:inputType="text"
                 android:hint="Idle Reason"/>
 
             <LinearLayout
