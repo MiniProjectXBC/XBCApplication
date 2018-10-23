@@ -111,7 +111,7 @@ public class IdleNewsFragment extends Fragment {
         for (int i = 0; i < 5; i++) {
             IdleNewsModel data = new IdleNewsModel();
             data.setTitle("Dummy Title " + index);
-            data.setCategory("Dummy Category");
+            data.setCategory("Dummy Category " + index);
             listIdleNews.add(data);
             index++;
         }

@@ -13,15 +13,13 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.EditIdleNewsActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.ShareIdleNewsActivity;
-import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.IdleNewsModel;
 
 public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
-    TextView listIdelNewsTextViewTitle,
+    TextView listIdleNewsTextViewTitle,
             listIdleNewsTextViewCategory;
 
     ImageView listIdleNewsButtonAction;
@@ -30,13 +28,13 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         listIdleNewsButtonAction = (ImageView) itemView.findViewById(R.id.listIdleNewsButtonAction);
-        listIdelNewsTextViewTitle = (TextView) itemView.findViewById(R.id.listIdelNewsTextViewTitle);
+        listIdleNewsTextViewTitle = (TextView) itemView.findViewById(R.id.listIdelNewsTextViewTitle);
         listIdleNewsTextViewCategory = (TextView) itemView.findViewById(R.id.listIdleNewsTextViewCategory);
     }
 
     public void setModelIdle(final IdleNewsModel idleNewsModel, final int position, final Context context){
-        listIdelNewsTextViewTitle.setText(idleNewsModel.getTitle());
-        listIdelNewsTextViewTitle.setText(idleNewsModel.getCategory());
+        listIdleNewsTextViewTitle.setText(idleNewsModel.getTitle());
+        listIdleNewsTextViewCategory.setText(idleNewsModel.getCategory());
 
         listIdleNewsButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
