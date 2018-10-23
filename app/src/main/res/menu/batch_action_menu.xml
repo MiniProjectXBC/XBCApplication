@@ -2,11 +2,13 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="MissingDefaultResource">
+
     <item
-        android:id="@+id/biodataMenuEdit"
+        android:id="@+id/batchMenuEdit"
         android:title="Edit"/>
 
     <item
-        android:id="@+id/biodataMenuDeactivate"
+        android:id="@+id/batchMenuAddParticipant"
         android:title="Add Participant" />
+
 </menu>
