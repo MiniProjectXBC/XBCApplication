@@ -1,6 +1,8 @@
 package xbc.miniproject.com.xbcapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -171,5 +173,28 @@ public class HomeActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-}
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setMessage("Are you sure want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //jika yes
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //jika no
+                        dialog.cancel();
+                    }
+                })
+                .setCancelable(false);
+
+        AlertDialog showAlert = alert.create();
+        showAlert.show();
+    }
+}

@@ -9,9 +9,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -23,9 +26,13 @@ public class AddBatchActivity extends Activity {
     EditText addBatchEditTextTechnology, addBatchEditTextTrainer,
             addBatchEditTextName, addBatchEditTextPeriodForm,
             addBatchEditTextPeriodTo, addBatchEditTextRoom,
-            addBatchEditTextType, addBatchEditTextNotes;
-
+            addBatchEditTextNotes;
+    Spinner spinnerBatchType;
     Button addBatchButtonSave, addBatchButtonCancel;
+
+    String[] arrayType = {
+            "- Pilih Type -","Gratis","Berbayar"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,13 @@ public class AddBatchActivity extends Activity {
             }
         });
 
+        spinnerBatchType = (Spinner) findViewById(R.id.spinnerBatchType);
+
+        ArrayAdapter<String> adapterType = new ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_item,
+                arrayType);
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBatchType.setAdapter(adapterType);
 
         addBatchEditTextPeriodTo = (EditText) findViewById(R.id.addBatchEditTextPeriodTo);
         addBatchEditTextPeriodTo.setFocusable(false);
@@ -97,7 +111,7 @@ public class AddBatchActivity extends Activity {
         });
 
         addBatchEditTextRoom = (EditText) findViewById(R.id.addBatchEditTextRoom);
-        addBatchEditTextType = (EditText) findViewById(R.id.addBatchEditTextType);
+
         addBatchEditTextNotes = (EditText) findViewById(R.id.addBatchEditTextNotes);
 
         addBatchButtonSave = (Button) findViewById(R.id.addBatchButtonSave);
@@ -130,8 +144,6 @@ public class AddBatchActivity extends Activity {
             Toast.makeText(context, "Period to Field still empty!", Toast.LENGTH_SHORT).show();
         } else if (addBatchEditTextRoom.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Room Field still empty!", Toast.LENGTH_SHORT).show();
-        } else if (addBatchEditTextType.getText().toString().trim().length() == 0) {
-            Toast.makeText(context, "Type Field still empty!", Toast.LENGTH_SHORT).show();
         } else if (addBatchEditTextNotes.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Notes Field still empty!", Toast.LENGTH_SHORT).show();
         } else{

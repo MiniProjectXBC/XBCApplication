@@ -82,7 +82,6 @@ public class BatchFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), AddBatchActivity.class);
                 startActivity(intent);
-                startActivity(intent);
             }
         });
         tampilkanListBatch();

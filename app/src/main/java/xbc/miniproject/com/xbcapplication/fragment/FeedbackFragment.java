@@ -76,7 +76,13 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //finish();
+<<<<<<< HEAD
                 getActivity().finish();
+=======
+                feedbackRecyclerView.setVisibility(View.GONE);
+                feedbackTextName.setText("");
+                feedbackTextName.setError(null);
+>>>>>>> d8db9415ae6879e183566d4dc69f56b9afc8a944
             }
         });
 
