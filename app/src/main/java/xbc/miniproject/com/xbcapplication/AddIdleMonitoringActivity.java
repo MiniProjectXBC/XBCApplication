@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -96,6 +97,18 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
                 (this, android.R.layout.select_dialog_item, names);
         addMonitoringEditTextName.setThreshold(0);
         addMonitoringEditTextName.setAdapter(adapter);
+
+        addMonitoringEditTextName.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (names.length > 0){
+                    if (!addMonitoringEditTextName.getText().toString().equals(""))
+                        adapter.getFilter().filter(null);
+                    addMonitoringEditTextName.showDropDown();
+                }
+                return false;
+            }
+        });
 
         addMonitoringEditTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
