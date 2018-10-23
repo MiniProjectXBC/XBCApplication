@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.fragment.AssignmentFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
@@ -134,7 +135,11 @@ public class HomeActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.menuAssignment) {
-
+            setActionBarTitle("Assignment");
+            AssignmentFragment assignmentFragment = new AssignmentFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, assignmentFragment,"Assignment");
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

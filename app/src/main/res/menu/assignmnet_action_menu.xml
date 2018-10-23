@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/assignmnetMenuEdit"
+        android:title="Edit"/>
+
+    <item
+        android:id="@+id/assignmnetMenuHold"
+        android:title="Hold" />
+
+    <item
+        android:id="@+id/assignmnetMenuDone"
+        android:title="Mark as Done" />
+</menu>
