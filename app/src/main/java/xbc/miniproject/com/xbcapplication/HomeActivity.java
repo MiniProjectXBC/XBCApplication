@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import xbc.miniproject.com.xbcapplication.fragment.AssignmentFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
+import xbc.miniproject.com.xbcapplication.fragment.FeedbackFragment;
 import xbc.miniproject.com.xbcapplication.fragment.IdleNewsFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
@@ -30,7 +32,7 @@ import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Context context;
+    private Context context = this;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -66,9 +68,9 @@ public class HomeActivity extends AppCompatActivity
         //Menu Biodata
         if (id == R.id.menuBiodata) {
             setActionBarTitle("Biodata");
-            BiodataFragment biodataFragment= new BiodataFragment();
+            BiodataFragment biodataFragment = new BiodataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment,"Biodata");
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Biodata");
             fragmentTransaction.commit();
         }
         //Menu Trainer
@@ -104,15 +106,22 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Assestment
         else if (id == R.id.menuFiltering) {
+            Toast.makeText(context, "Menu Filtering Saat Ini Belum Tersedia", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.menuMiniProject) {
+            Toast.makeText(context, "Menu MiniProject Saat Ini Belum Tersedia", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.menuCustom) {
-
+            Toast.makeText(context, "Menu Custom Saat Ini Belum Tersedia", Toast.LENGTH_SHORT).show();
         }
+
         //Menu Portal
         else if (id == R.id.menuFeedback) {
-
+            setActionBarTitle("Feedback");
+            FeedbackFragment feedbackFragment = new FeedbackFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, feedbackFragment, "Feedback");
+            fragmentTransaction.commit();
         } else if (id == R.id.menuIdleNews) {
             setActionBarTitle("Idle News");
             IdleNewsFragment idleNewsFragment = new IdleNewsFragment();
@@ -121,7 +130,7 @@ public class HomeActivity extends AppCompatActivity
             fragmentTransaction.commit();
         } else if (id == R.id.menuKataIdle) {
             setActionBarTitle("Testimony");
-            TestimonyFragment testimonyFragment =  new TestimonyFragment();
+            TestimonyFragment testimonyFragment = new TestimonyFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_all_menu, testimonyFragment, "Testimony");
             fragmentTransaction.commit();
@@ -131,7 +140,7 @@ public class HomeActivity extends AppCompatActivity
             setActionBarTitle("Monitoring");
             MonitoringFragment monitoringFragment = new MonitoringFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_all_menu, monitoringFragment,"Monitoring");
+            fragmentTransaction.replace(R.id.frame_all_menu, monitoringFragment, "Monitoring");
             fragmentTransaction.commit();
 
         } else if (id == R.id.menuAssignment) {
@@ -156,7 +165,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //deteksi klik burger icon
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             //slide navigation drawer
             drawerLayout.openDrawer(Gravity.LEFT);
         }

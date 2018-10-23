@@ -30,12 +30,11 @@
         <activity android:name=".AddIdleNewsActivity" />
         <activity android:name=".AddBatchActivity" />
         <activity android:name=".AddTestimonyActivity" />
-        <activity android:name=".EditTestimonyActivity" />
-        <activity
-            android:name=".AddIdleMonitoringActivity"
+        <activity android:name=".EditIdleMonitoringActivity" />
+        <activity android:name=".EditTestimonyActivity"></activity>
+        <activity android:name=".AddIdleMonitoringActivity"
             android:theme="@style/AppCompatTheme" />
         <activity android:name=".AddPlacementMonitoringActivity" />
-        <activity android:name=".EditIdleMonitoringActivity" />
         <activity android:name=".AddAssignmentActivity" />
         <activity android:name=".EditAssignmnetActivity" />
         <activity android:name=".DoneAssignmentActivity"></activity>

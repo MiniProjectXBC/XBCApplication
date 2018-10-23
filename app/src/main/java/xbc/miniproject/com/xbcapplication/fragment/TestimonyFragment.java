@@ -61,6 +61,7 @@ public class TestimonyFragment extends Fragment {
                     testimonyRecyclerViewList.setVisibility(View.INVISIBLE);
                 }else{
                     testimonyRecyclerViewList.setVisibility(view.VISIBLE);
+                    filter(s.toString());
                 }
             }
         });

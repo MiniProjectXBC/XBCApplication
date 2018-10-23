@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:textStyle="bold"
-                android:text="TTLE"/>
+                android:text="TITLE"/>
 
             <LinearLayout
                 android:layout_width="0dp"

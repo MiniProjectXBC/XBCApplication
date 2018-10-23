@@ -27,7 +27,7 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
         listTecnologyName = (TextView)itemView.findViewById(R.id.listTecnologyName);
         listTechnologyButtonAction = (ImageView)itemView.findViewById(R.id.listTechnologyButtonAction);
     }
-    public void setModel(TechnologyModel technologyModel, final int position, final Context context) {
+    public void setModel(final TechnologyModel technologyModel, final int position, final Context context) {
         listTecnologyName.setText(technologyModel.getName());
         listTechnologyButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,8 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
                                 return true;
                             case R.id.tchnologyMenuDeactivate:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeactiveSuccessNotification(context);
+                                DeactiveQuestion(technologyModel, position, context);
+//                                DeactiveSuccessNotification(context);
                                 return true;
                             default:
                                 return false;
@@ -55,6 +56,27 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
                 popupMenu.show();
             }
         });
+    }
+    private  void  DeactiveQuestion(TechnologyModel technologyModel, final int position, final Context context){
+        final AlertDialog.Builder builder;
+        builder =  new AlertDialog.Builder(context);
+        builder.setTitle("Warning!")
+                .setMessage("Apakah Anda Yakin Akan Deactive "+technologyModel.getName())
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        DeactiveSuccessNotification(context);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
     private void DeactiveSuccessNotification(final Context context) {
         final AlertDialog.Builder builder;
