@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.utility.NiceAutoCompleteTextView;
 
 public class AddIdleMonitoringActivity extends AppCompatActivity {
     private Context context = this;
@@ -44,6 +44,24 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             addMonitoringButtonCancel;
 
     private String[] names = {"Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
             "Bagus",
             "Cagus",
             "Dagus",
@@ -80,10 +98,20 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         addMonitoringEditTextName.setThreshold(0);
         addMonitoringEditTextName.setAdapter(adapter);
 
+        addMonitoringEditTextName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
+                    addMonitoringEditTextName.showDropDown();
+                }
+            }
+        });
+
         addMonitoringEditTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isNameSelected = true;
+                addMonitoringEditTextName.setError(null);
             }
         });
 
@@ -96,6 +124,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 isNameSelected = false;
+                addMonitoringEditTextName.setError("Name must from the list!");
             }
 
             @Override

@@ -28,6 +28,7 @@
         <activity android:name=".EditIdleNewsActivity" />
         <activity android:name=".ShareIdleNewsActivity" />
         <activity android:name=".AddIdleNewsActivity"></activity>
+        <activity android:name=".AddBatchActivity"></activity>
         <activity android:name=".AddTestimonyActivity" />
         <activity android:name=".EditTestimonyActivity"></activity>
         <activity
