@@ -10,4 +10,6 @@ public class TrainerModel {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

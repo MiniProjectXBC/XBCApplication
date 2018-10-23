@@ -20,6 +20,7 @@ import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
+import xbc.miniproject.com.xbcapplication.fragment.FeedbackFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
@@ -110,7 +111,11 @@ public class HomeActivity extends AppCompatActivity
         }
         //Menu Portal
         else if (id == R.id.menuFeedback) {
-
+            setActionBarTitle("Feedback");
+            FeedbackFragment feedbackFragment = new FeedbackFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, feedbackFragment, "Feedback");
+            fragmentTransaction.commit();
         } else if (id == R.id.menuIdleNews) {
 
         } else if (id == R.id.menuKataIdle) {
