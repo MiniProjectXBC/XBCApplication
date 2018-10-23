@@ -76,6 +76,7 @@ public class FeedbackFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //finish();
+                getActivity().finish();
             }
         });
 
