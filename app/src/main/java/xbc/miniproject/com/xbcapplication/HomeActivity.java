@@ -30,6 +30,7 @@ import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
+import xbc.miniproject.com.xbcapplication.fragment.UserFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -150,6 +151,13 @@ public class HomeActivity extends AppCompatActivity
             AssignmentFragment assignmentFragment = new AssignmentFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame_all_menu, assignmentFragment,"Assignment");
+            fragmentTransaction.commit();
+        }
+        else if(id == R.id.menuUser){
+            setActionBarTitle("User");
+            UserFragment userFragment =  new UserFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, userFragment, "User");
             fragmentTransaction.commit();
         }
 
