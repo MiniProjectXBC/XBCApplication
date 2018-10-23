@@ -96,6 +96,9 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 isNameSelected = false;
+                if (!isNameSelected){
+                    addMonitoringEditTextName.setError("Name must from the list!");
+                }
             }
 
             @Override

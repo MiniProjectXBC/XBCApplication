@@ -59,10 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Idle Reason"
-                android:inputType="number"
-                android:maxLength="4" />
-
-
+                android:inputType="text" />
         </LinearLayout>
 
 
