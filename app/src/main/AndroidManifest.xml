@@ -25,17 +25,11 @@
         <activity android:name=".AddTrainerActivity" />
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
-        <activity android:name=".EditIdleNewsActivity" />
-        <activity android:name=".ShareIdleNewsActivity" />
-        <activity android:name=".AddIdleNewsActivity"></activity>
-        <activity android:name=".AddBatchActivity"></activity>
         <activity android:name=".AddTestimonyActivity" />
-        <activity android:name=".EditTestimonyActivity" />
-        <activity
-            android:name=".AddIdleMonitoringActivity"
+        <activity android:name=".EditTestimonyActivity"></activity>
+        <activity android:name=".AddIdleMonitoringActivity"
             android:theme="@style/AppCompatTheme" />
-        <activity android:name=".AddPlacementMonitoringActivity" />
-        <activity android:name=".EditIdleMonitoringActivity"></activity>
+        <activity android:name=".AddPlacementMonitoringActivity"></activity>
     </application>
 
 </manifest>
