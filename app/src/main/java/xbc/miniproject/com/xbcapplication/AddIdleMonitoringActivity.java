@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.utility.NiceAutoCompleteTextView;
 
 public class AddIdleMonitoringActivity extends AppCompatActivity {
     private Context context = this;
@@ -44,6 +43,24 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             addMonitoringButtonCancel;
 
     private String[] names = {"Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
+            "Agus",
             "Bagus",
             "Cagus",
             "Dagus",
@@ -84,6 +101,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isNameSelected = true;
+                addMonitoringEditTextName.setError(null);
             }
         });
 
@@ -96,9 +114,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 isNameSelected = false;
-                if (!isNameSelected){
-                    addMonitoringEditTextName.setError("Name must from the list!");
-                }
+                addMonitoringEditTextName.setError("Name must from the list!");
             }
 
             @Override
