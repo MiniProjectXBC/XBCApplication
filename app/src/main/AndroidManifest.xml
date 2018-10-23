@@ -26,7 +26,9 @@
         <activity android:name=".EditBiodataActivity" />
         <activity android:name=".EditTechnologyActivity" />
         <activity android:name=".AddTestimonyActivity" />
+        <activity android:name=".EditIdleMonitoringActivity" />
         <activity android:name=".EditTestimonyActivity"></activity>
+        <activity android:name=".AddIdleNewsActivity"></activity>
         <activity android:name=".AddIdleMonitoringActivity"
             android:theme="@style/AppCompatTheme" />
         <activity android:name=".AddPlacementMonitoringActivity"></activity>
