@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddIdleMonitoringActivity">
+    tools:context=".EditIdleMonitoringActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_margin="30dp">
 
             <AutoCompleteTextView
-                android:id="@+id/addMonitoringEditTextName"
+                android:id="@+id/editMonitoringEditTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/addMonitoringEditTextIdleDate"
+                    android:id="@+id/editMonitoringEditTextIdleDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -55,7 +55,7 @@
 
 
             <EditText
-                android:id="@+id/addMonitoringEditTextLastProjectAt"
+                android:id="@+id/editMonitoringEditTextLastProjectAt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -63,7 +63,7 @@
                 android:hint="Last Project At"/>
 
             <EditText
-                android:id="@+id/addMonitoringEditTextIdleReason"
+                android:id="@+id/editMonitoringEditTextIdleReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -77,13 +77,13 @@
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/addMonitoringButtonSave"
+                    android:id="@+id/editMonitoringButtonSave"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Save"/>
 
                 <Button
-                    android:id="@+id/addMonitoringButtonCancel"
+                    android:id="@+id/editMonitoringButtonCancel"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>
@@ -93,5 +93,6 @@
 
         </LinearLayout>
     </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

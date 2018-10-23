@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.AddPlacementMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
+import xbc.miniproject.com.xbcapplication.EditIdleMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 
@@ -52,12 +53,14 @@ public class MonitoringViewHolder extends RecyclerView.ViewHolder {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.monitoringMenuEdit:
-                                Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent(context,EditIdleMonitoringActivity.class);
+                                context.startActivity(intent1);
                                 return true;
                             case R.id.monitoringMenuPlacement:
                                 //Toast.makeText(context, "Anda Menekan Action Placement pada Posisi: " + position, Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context,AddPlacementMonitoringActivity.class);
-                                context.startActivity(intent);
+                                Intent intent2 = new Intent(context,AddPlacementMonitoringActivity.class);
+                                context.startActivity(intent2);
                                 return true;
                             case R.id.monitoringMenuDelete:
                                 Toast.makeText(context, "Anda Menekan Action Delete pada Posisi: " + position, Toast.LENGTH_SHORT).show();
