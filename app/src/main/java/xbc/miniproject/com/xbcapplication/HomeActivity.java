@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class HomeActivity extends AppCompatActivity
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setPopupTheme(R.style.PopupMenu);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -178,9 +181,25 @@ public class HomeActivity extends AppCompatActivity
         if (id == android.R.id.home) {
             //slide navigation drawer
             drawerLayout.openDrawer(Gravity.LEFT);
+        } else if(id == R.id.homeOptionLogout){
+            Intent intent = new Intent(context,LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else if(id == R.id.homeOptionHome){
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_option_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 
     @Override
     public void onBackPressed() {
