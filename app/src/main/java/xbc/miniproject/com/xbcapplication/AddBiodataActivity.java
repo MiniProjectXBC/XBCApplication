@@ -14,6 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class AddBiodataActivity extends Activity {
     Context context = this;
 
@@ -26,6 +34,10 @@ public class AddBiodataActivity extends Activity {
 
     Button addBiodataButtonSave,
             addBiodataButtonCancel;
+
+    RequestAPIServices apiServices;
+
+    String notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +74,47 @@ public class AddBiodataActivity extends Activity {
     }
 
     private void inputValidation() {
-        if (addBiodataEditTextName.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Name Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addBiodataEditTextLastEducation.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Last Education Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addBiodataEditTextEducationLevel.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Education Level Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addBiodataEditTextGraduationYear.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Graduation Year Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addBiodataEditTextMajors.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"Majors Field still empty!",Toast.LENGTH_SHORT).show();
-        } else if(addBiodataEditTextGpa.getText().toString().trim().length() == 0){
-            Toast.makeText(context,"GPA Field still empty!",Toast.LENGTH_SHORT).show();
-        } else{
-            SaveSuccessNotification();
+        if (addBiodataEditTextName.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Name Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addBiodataEditTextLastEducation.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Last Education Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addBiodataEditTextEducationLevel.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Education Level Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addBiodataEditTextGraduationYear.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Graduation Year Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addBiodataEditTextMajors.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "Majors Field still empty!", Toast.LENGTH_SHORT).show();
+        } else if (addBiodataEditTextGpa.getText().toString().trim().length() == 0) {
+            Toast.makeText(context, "GPA Field still empty!", Toast.LENGTH_SHORT).show();
+        } else {
+//            SaveSuccessNotification();
+            callAPICreateBiodata();
         }
+    }
+
+    private void callAPICreateBiodata() {
+        apiServices = APIUtilities.getAPIServices();
+        DataList data = new DataList();
+        data.setName(addBiodataEditTextName.getText().toString());
+        data.setLastEducation(addBiodataEditTextLastEducation.getText().toString());
+        data.setEducationalLevel(addBiodataEditTextEducationLevel.getText().toString());
+        data.setGraduationYear(addBiodataEditTextGraduationYear.getText().toString());
+        data.setMajors(addBiodataEditTextMajors.getText().toString());
+        data.setGpa(addBiodataEditTextGpa.getText().toString());
+        apiServices.createNewBiodata("application/json", data)
+                .enqueue(new Callback<DataList>() {
+                    @Override
+                    public void onResponse(Call<DataList> call, Response<DataList> response) {
+                        if (response.code() == 201) {
+                            SaveSuccessNotification();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DataList> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void SaveSuccessNotification() {
@@ -99,7 +137,7 @@ public class AddBiodataActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

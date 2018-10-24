@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,18 +22,27 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class BiodataFragment extends Fragment {
     private EditText biodataEditTextSearch;
     private Button biodataButtonInsert;
     private RecyclerView biodataRecyclerViewList;
 
-    private List<BiodataModel> listBiodata = new ArrayList<>();
+    private List<DataList> listBiodata = new ArrayList<>();
     private BiodataListAdapter biodataListAdapter;
+
+    private RequestAPIServices apiServices;
 
     public BiodataFragment() {
 
@@ -45,6 +55,8 @@ public class BiodataFragment extends Fragment {
 
         //Cara mendapatkan Context di Fragment dengan menggunakan getActivity() atau getContext()
         //Toast.makeText(getContext(),"Test Context Behasil", Toast.LENGTH_LONG).show();
+
+        getDataFromAPI();
 
         biodataRecyclerViewList = (RecyclerView) view.findViewById(R.id.biodataRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
@@ -90,10 +102,33 @@ public class BiodataFragment extends Fragment {
         return view;
     }
 
-    private void filter(String text) {
-        ArrayList<BiodataModel> filteredList = new ArrayList<>();
+    private void getDataFromAPI() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListBiodata().enqueue(new Callback<ModelBiodata>() {
+            @Override
+            public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
+                if (response.code() == 200){
+                    List<DataList> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size();i++){
+                        DataList data = tmp.get(i);
+                        listBiodata.add(data);
+                    }
+                } else{
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
 
-        for (BiodataModel item : listBiodata) {
+            @Override
+            public void onFailure(Call<ModelBiodata> call, Throwable t) {
+                Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<DataList> filteredList = new ArrayList<>();
+
+        for (DataList item : listBiodata) {
             if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
@@ -103,22 +138,22 @@ public class BiodataFragment extends Fragment {
     }
 
     private void tampilkanListBiodata() {
-        addDummyList();
+        //addDummyList();
         if (biodataListAdapter == null) {
             biodataListAdapter = new BiodataListAdapter(getContext(), listBiodata);
             biodataRecyclerViewList.setAdapter(biodataListAdapter);
         }
     }
 
-    private void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            BiodataModel data = new BiodataModel();
-            data.setName("Dummy Name " + index);
-            data.setMajor("Dummy Major");
-            data.setGpa("Dummy GPA");
-            listBiodata.add(data);
-            index++;
-        }
-    }
+//    private void addDummyList() {
+//        int index = 1;
+//        for (int i = 0; i < 5; i++) {
+//            BiodataModel data = new BiodataModel();
+//            data.setName("Dummy Name " + index);
+//            data.setMajor("Dummy Major");
+//            data.setGpa("Dummy GPA");
+//            listBiodata.add(data);
+//            index++;
+//        }
+//    }
 }
