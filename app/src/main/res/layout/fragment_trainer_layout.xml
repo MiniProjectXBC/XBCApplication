@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="horizontal">
 
             <EditText
@@ -36,16 +37,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_head_linear_table"
             android:gravity="center_vertical"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:textSize="16sp"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="10"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:padding="5dp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
                 android:text="NAME"/>
 
             <LinearLayout
@@ -64,8 +69,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/trainerRecyclerViewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent">
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
