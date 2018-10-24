@@ -50,16 +50,20 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.assignmnetMenuEdit:
+                            case R.id.assignmentMenuEdit:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: " + position, Toast.LENGTH_SHORT).show();
                                 Intent intent1 = new Intent(context, EditAssignmnetActivity.class);
                                 context.startActivity(intent1);
                                 return true;
-                            case R.id.assignmnetMenuHold:
-                                Toast.makeText(context, "Anda Menekan Action Hold pada Posisi: " + position, Toast.LENGTH_SHORT).show();
+                            case R.id.assignmentMenuDelete:
+                                //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                DeleteQuestion(assignmentModel,position,context);
+                                return true;
+                            case R.id.assignmentMenuHold:
+//                                Toast.makeText(context, "Anda Menekan Action Hold pada Posisi: " + position, Toast.LENGTH_SHORT).show();
                                 HoldQuestion(assignmentModel, position, context);
                                 return true;
-                            case R.id.assignmnetMenuDone:
+                            case R.id.assignmentMenuDone:
 //                                Toast.makeText(context, "Anda Menekan Action Done pada Posisi: " + position, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, DoneAssignmentActivity.class);
                                 context.startActivity(intent);
@@ -72,6 +76,43 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
                 popupMenu.show();
             }
         });
+    }
+
+    private void DeleteQuestion(final AssignmentModel assignmentModel, final int position, final Context context) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("Warning!")
+                .setMessage("Apakah Anda Yakin Akan Menghapus " + assignmentModel.getName() + "?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DeleteSuccessNotification(context);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    private void DeleteSuccessNotification(final Context context) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("NOTIFICATION !")
+                .setMessage("Data Successfully Delete!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
     private void HoldQuestion(final AssignmentModel assignmentModel, final int position, final Context context) {
@@ -100,7 +141,7 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deactivated!")
+                .setMessage("Data Successfully Update!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/assignmnetMenuEdit"
+        android:id="@+id/assignmentMenuEdit"
         android:title="Edit"/>
 
     <item
-        android:id="@+id/assignmnetMenuHold"
+        android:id="@+id/assignmentMenuDelete"
+        android:title="Delete"/>
+
+    <item
+        android:id="@+id/assignmentMenuHold"
         android:title="Hold" />
 
     <item
-        android:id="@+id/assignmnetMenuDone"
+        android:id="@+id/assignmentMenuDone"
         android:title="Mark as Done" />
 </menu>
