@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
-
+        <item name="android:colorPrimary">@color/blue</item>
     </style>
 
     <style name="FullScreenTheme" parent="AppTheme">
@@ -12,11 +12,14 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppCompatTheme" parent="@style/Base.Theme.AppCompat.Light"/>
+    <style name="AppCompatTheme" parent="@style/Base.Theme.AppCompat.Light">
+        <item name="android:colorPrimary">@color/blue</item>
+    </style>
 
     <style name="AppTheme.NoActionBar" parent="@style/Base.Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:colorPrimary">@color/blue</item>
     </style>
 
     <style name="DatePickerPeriod" parent="Theme.AppCompat.Light.Dialog">
