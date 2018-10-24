@@ -100,8 +100,8 @@ public class UserFragment extends Fragment{
         for (int i =0; i<5 ;i++){
             UserModel data = new UserModel();
             data.setUsername("Dummy Name"+ index);
-            data.setRole("Dummy Role"+index);
-            data.setStatus("Dummy Status"+index);
+            data.setRole("Staff "+index);
+            data.setStatus("Active "+index);
             userModelList.add(data);
             index++;
         }
@@ -109,8 +109,8 @@ public class UserFragment extends Fragment{
         for (int i =0; i<5; i++){
             UserModel data = new UserModel();
             data.setUsername("Dummy2 Name"+ index2);
-            data.setRole("Dummy2 Role"+index2);
-            data.setStatus("Dummy2 Status"+index2);
+            data.setRole("Admin "+index2);
+            data.setStatus("Active "+index2);
             userModelList.add(data);
             index2++;
         }

@@ -6,4 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".AddUserActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="30dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/addUserEditTextRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="text"
+                android:hint="Role"/>
+
+            <EditText
+                android:id="@+id/addUserEditTexUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Username"/>
+            <EditText
+                android:id="@+id/addUserEditTexPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_marginBottom="10dp"
+                android:hint="Password"/>
+            <EditText
+                android:id="@+id/addUserEditTexRetypePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:layout_marginBottom="10dp"
+                android:hint="Re-type Password"/>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/addUserButtonSave"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Save"/>
+
+                <Button
+                    android:id="@+id/addUserButtonCancel"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
