@@ -18,6 +18,7 @@ import android.widget.Toast;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
 
 public class BiodataViewHolder extends RecyclerView.ViewHolder {
     TextView listBiodataTextViewName,
@@ -36,9 +37,9 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setModel(final BiodataModel biodataModel, final int position, final Context context) {
+    public void setModel(final DataList biodataModel, final int position, final Context context) {
         listBiodataTextViewName.setText(biodataModel.getName());
-        listBiodataTextViewMajors.setText(biodataModel.getMajor());
+        listBiodataTextViewMajors.setText(biodataModel.getMajors());
         listBiodataTextViewGpa.setText(biodataModel.getGpa());
 
         listBiodataButtonAction.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +71,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeactiveQuestion(final BiodataModel biodataModel, final int position, final Context context) {
+    private void DeactiveQuestion(final DataList biodataModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
