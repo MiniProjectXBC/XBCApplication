@@ -125,6 +125,17 @@ public class EditAssignmnetActivity extends Activity {
     }
 
     private void inputValidation() {
+
+        String startDateText = editAssignmentEditTextStartDate.getText().toString();
+        String[] tempStart = startDateText.split("-");
+        Calendar tempCalStart = Calendar.getInstance();
+        tempCalStart.set(Integer.parseInt(tempStart[2]),Integer.parseInt(tempStart[1]),Integer.parseInt(tempStart[0]));
+
+        String endDateText = editAssignmentEditTextEndDate.getText().toString();
+        String[] tempEnd = endDateText.split("-");
+        Calendar tempCalEnd = Calendar.getInstance();
+        tempCalEnd.set(Integer.parseInt(tempEnd[2]),Integer.parseInt(tempEnd[1]),Integer.parseInt(tempEnd[0]));
+
         if (editAssignmentEditTextName.getText().toString().trim().length() == 0){
             Toast.makeText(context,"Name Field still empty!",Toast.LENGTH_SHORT).show();
         } else if(editAssignmentEditTextTitle.getText().toString().trim().length() == 0){
@@ -133,6 +144,8 @@ public class EditAssignmnetActivity extends Activity {
             Toast.makeText(context,"Start Date Field still empty!",Toast.LENGTH_SHORT).show();
         } else if(editAssignmentEditTextEndDate.getText().toString().trim().length() == 0){
             Toast.makeText(context,"End Date Field still empty!",Toast.LENGTH_SHORT).show();
+        } else if (tempCalStart.after(tempCalEnd)) {
+            Toast.makeText(context, "End Date Must greater than or equal to the Start Date!", Toast.LENGTH_SHORT).show();
         } else{
             SaveSuccessNotification();
         }
