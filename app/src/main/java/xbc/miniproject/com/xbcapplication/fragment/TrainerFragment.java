@@ -15,10 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddTechnologyActivity;
 import xbc.miniproject.com.xbcapplication.AddTrainerActivity;
 import xbc.miniproject.com.xbcapplication.R;
@@ -26,14 +30,21 @@ import xbc.miniproject.com.xbcapplication.adapter.TechnologyListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.TrainerListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class TrainerFragment extends Fragment {
 
     private EditText trainerEditTextSearch;
     private Button trainerButtonInsert;
     private RecyclerView trainerRecyclerViewList;
-    private List<TrainerModel> trainerModelList =  new ArrayList<>();
+    private List<DataListTrainer> trainerModelList =  new ArrayList<>();
     private TrainerListAdapter trainerListAdapter;
+    private RequestAPIServices apiServices;
     public TrainerFragment() {
     }
 
@@ -41,11 +52,14 @@ public class TrainerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_trainer_layout, container, false);
+        getDataFromAPI();
+
         trainerRecyclerViewList = (RecyclerView)view.findViewById(R.id.trainerRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
                 LinearLayout.VERTICAL,
                 false);
         trainerRecyclerViewList.setLayoutManager(layoutManager);
+
         trainerEditTextSearch =(EditText) view.findViewById(R.id.trainerEditTextSearch);
         trainerRecyclerViewList.setVisibility(view.INVISIBLE);
         trainerEditTextSearch.addTextChangedListener(new TextWatcher() {
@@ -82,10 +96,34 @@ public class TrainerFragment extends Fragment {
         tampilkanListTrainer();
         return  view;
     }
-    public void filter(String text){
-        ArrayList<TrainerModel> filteredList = new ArrayList<>();
 
-        for(TrainerModel item: trainerModelList){
+    private void getDataFromAPI() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListTrainer().enqueue(new Callback<ModelTrainer>() {
+            @Override
+            public void onResponse(Call<ModelTrainer> call, Response<ModelTrainer> response) {
+                if (response.code() == 200){
+                    List<DataListTrainer> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size();i++){
+                        DataListTrainer data = tmp.get(i);
+                        trainerModelList.add(data);
+                    }
+                } else{
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelTrainer> call, Throwable t) {
+                Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void filter(String text){
+        ArrayList<DataListTrainer> filteredList = new ArrayList<>();
+
+        for(DataListTrainer item: trainerModelList){
             if(item.getName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
@@ -94,20 +132,13 @@ public class TrainerFragment extends Fragment {
         trainerListAdapter.filterList(filteredList);
     }
     public void tampilkanListTrainer(){
-        addDummyList();
+
         if(trainerListAdapter==null){
             trainerListAdapter = new TrainerListAdapter(getContext(), trainerModelList);
             trainerRecyclerViewList.setAdapter(trainerListAdapter);
         }
     }
-    public void addDummyList(){
-        int index =1;
-        for(int i=0; i<5; i++){
-            TrainerModel data =  new TrainerModel();
-            data.setName("Dummy Name"+index);
-            trainerModelList.add(data);
-            index++;
-        }
+
 
     }
-}
+

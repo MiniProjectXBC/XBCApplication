@@ -16,6 +16,8 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
 
 public interface RequestAPIServices {
 
@@ -29,4 +31,17 @@ public interface RequestAPIServices {
     @POST("/xbc-ws/api/biodata/create")
     Call<DataList> createNewBiodata(@Header("Content-Type") String contentType,
                                     @Body DataList data);
+
+    //koneksi API di menu trainer
+    //get data
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/trainer/name/123")
+    Call<ModelTrainer> getListTrainer();
+
+    //create data
+    @POST("xbc-ws/api/trainer/create")
+    Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
+                                           @Body DataListTrainer data);
+
+
 }
