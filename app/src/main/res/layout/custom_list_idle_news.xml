@@ -6,6 +6,7 @@
     android:layout_marginBottom="10dp">
 
     <LinearLayout
+        android:background="@drawable/custom_content_linear_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -22,7 +23,6 @@
 
         <TextView
             android:id="@+id/listIdleNewsTextViewCategory"
-            android:paddingRight="5dp"
             android:textSize="12sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

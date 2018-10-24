@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:background="@drawable/custom_head_linear_table"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
@@ -46,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:textStyle="bold"
-                android:text="TITLE"/>
+                android:text="TITLE"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:textSize="16sp"
@@ -54,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:textStyle="bold"
-                android:text="CATEGORY"/>
+                android:text="CATEGORY"
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:layout_width="0dp"
