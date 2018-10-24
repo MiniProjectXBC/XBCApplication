@@ -1,12 +1,18 @@
 package xbc.miniproject.com.xbcapplication.viewHolder;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import xbc.miniproject.com.xbcapplication.EditBatchActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
 
@@ -17,8 +23,6 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
 
     ImageView listBatchButtonAction;
 
-
-
     public BatchViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -26,6 +30,7 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
         listBatchTextViewName = (TextView) itemView.findViewById(R.id.listBatchTextViewName);
         listBatchTextViewTechnology = (TextView) itemView.findViewById(R.id.listBatchTextViewTechnology);
         listBatchTextViewTrainer = (TextView) itemView.findViewById(R.id.listBatchTextViewTrainer);
+
     }
 
     public  void setModel(BatchModel batchModel, final int position , final Context context){
@@ -33,12 +38,33 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
         listBatchTextViewName.setText(batchModel.getName());
         listBatchTextViewTrainer.setText(batchModel.getTrainer());
 
-        listBatchTextViewTrainer.setOnClickListener(new View.OnClickListener() {
+        listBatchButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Toast.makeText(context, "Anda Menekan Action Posisi: "+position,Toast.LENGTH_SHORT).show();
+                PopupMenu popupMenu = new PopupMenu(context,listBatchButtonAction);
+                popupMenu.inflate(R.menu.batch_action_menu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.batchMenuEdit:
+                                //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, EditBatchActivity.class);
+                                ((Activity)context).startActivity(intent);
+                                return true;
+                            case R.id.batchMenuAddParticipant:
+                                //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
+                                Intent intent2 = new Intent(context, EditBatchActivity.class);
+                                ((Activity)context).startActivity(intent2);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popupMenu.show();
             }
         });
     }
-
 }

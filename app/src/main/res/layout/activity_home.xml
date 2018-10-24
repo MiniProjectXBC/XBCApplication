@@ -29,11 +29,13 @@
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
+                    android:theme="@style/ToolbarColoredIcon"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/blue"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                    app:itemIconTint="@color/colorAccent"/>
+                    app:itemIconTint="@color/white"
+                    app:titleTextColor="@color/white"/>
 
             </android.support.design.widget.AppBarLayout>
 
@@ -49,8 +51,10 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_menu"
+        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        app:headerLayout="@layout/home_navigation_header"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:menu="@menu/home_navigation_menu"

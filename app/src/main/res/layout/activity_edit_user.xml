@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddUserActivity">
+    tools:context=".EditUserActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_margin="30dp">
 
             <AutoCompleteTextView
-                android:id="@+id/addUserEditTextRole"
+                android:id="@+id/editUserEditTextRole"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -25,20 +25,20 @@
                 android:hint="Role"/>
 
             <EditText
-                android:id="@+id/addUserEditTexUsername"
+                android:id="@+id/editUserEditTexUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Username"/>
             <EditText
-                android:id="@+id/addUserEditTexPassword"
+                android:id="@+id/editUserEditTexPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:layout_marginBottom="10dp"
                 android:hint="Password"/>
             <EditText
-                android:id="@+id/addUserEditTexRetypePassword"
+                android:id="@+id/editUserEditTexRetypePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -52,13 +52,13 @@
                 android:gravity="right">
 
                 <Button
-                    android:id="@+id/addUserButtonSave"
+                    android:id="@+id/editUserButtonSave"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Save"/>
 
                 <Button
-                    android:id="@+id/addUserButtonCancel"
+                    android:id="@+id/editUserButtonCancel"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>

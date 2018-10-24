@@ -1,8 +1,10 @@
 package xbc.miniproject.com.xbcapplication.viewHolder;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import xbc.miniproject.com.xbcapplication.EditUserActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.UserModel;
 
@@ -27,7 +30,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         listUserStatus = (TextView) itemView.findViewById(R.id.listUserStatus);
         listUserButtonAction = (ImageView)itemView.findViewById(R.id.listUserButtonAction);
     }
-    public void setModel(UserModel userModel, final int position, final Context context){
+    public void setModel(final UserModel userModel, final int position, final Context context){
         listUserUsername.setText(userModel.getUsername());
         listUserRole.setText(userModel.getRole());
         listUserStatus.setText(userModel.getStatus());
@@ -41,11 +44,11 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.userMenuEdit:
-                                //Toast anda menekan edit user
-                                //panggil activity edit user
+                                Intent intent = new Intent(context, EditUserActivity.class);
+                                ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.userMenuDeactivate:
-                                //Toas anda menekan deactive user
+                                DeactiveQuestion(userModel, position, context);
                                 return true;
                             default:
                                 return false;
