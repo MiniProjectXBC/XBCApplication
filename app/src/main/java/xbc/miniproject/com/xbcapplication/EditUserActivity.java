@@ -1,7 +1,9 @@
 package xbc.miniproject.com.xbcapplication;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.zip.CheckedOutputStream;
 
@@ -74,5 +77,47 @@ public class EditUserActivity extends Activity {
 
             }
         });
+        editUserButtonSave =  (Button) findViewById(R.id.editUserButtonSave);
+        editUserButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveValidation();
+            }
+        });
+        editUserButtonCancel =  (Button) findViewById(R.id.editUserButtonCancel);
+        editUserButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+    private  void saveValidation(){
+        if(editUserEditTextRole.getText().toString().trim().length()==0){
+            Toast.makeText(context,  "Role field still empty !", Toast.LENGTH_SHORT).show();
+        }else if(editUserEditTexUsername.getText().toString().trim().length()==0){
+            Toast.makeText(context,  "Username field still empty !", Toast.LENGTH_SHORT).show();
+        }else if(editUserEditTexPassword.getText().toString().trim().length()==0){
+            Toast.makeText(context,  "Password field still empty !", Toast.LENGTH_SHORT).show();
+        }else if(editUserEditTexRetypePassword.getText().toString().trim().length()==0){
+            Toast.makeText(context,  "Please Retype password !", Toast.LENGTH_SHORT).show();
+        }else{
+            saveNotification();
+        }
+    }
+    private void saveNotification(){
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("NOTIFICATION !")
+                .setMessage("Data Successfully updated !")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 }
