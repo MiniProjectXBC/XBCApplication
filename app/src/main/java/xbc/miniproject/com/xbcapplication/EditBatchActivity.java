@@ -21,14 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class EditBatchActivity extends Activity {
-    Context context = this;
+    private Context context = this;
 
-    EditText editBatchEditTextTechnology, editBatchEditTextTrainer,
+    private EditText editBatchEditTextTechnology, editBatchEditTextTrainer,
             editBatchEditTextName, editBatchEditTextPeriodForm,
             editBatchEditTextPeriodTo, editBatchEditTextRoom,
             editBatchEditTextNotes;
-    Spinner spinnerBatchType;
-    Button editBatchButtonSave, editBatchButtonCancel;
+    private Spinner spinnerBatchType;
+    private Button editBatchButtonSave, editBatchButtonCancel;
 
     String[] arrayType = {
             "- Pilih Type -","Gratis","Berbayar"
@@ -37,6 +37,7 @@ public class EditBatchActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_batch);
 
         ActionBar actionBar = getActionBar();
