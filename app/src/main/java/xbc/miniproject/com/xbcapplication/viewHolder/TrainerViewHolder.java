@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.EditTechnologyActivity;
+import xbc.miniproject.com.xbcapplication.EditTrainerActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
@@ -43,7 +44,7 @@ public class TrainerViewHolder extends RecyclerView.ViewHolder {
                         switch (item.getItemId()){
                             case R.id.trainerMenuEdit:
                                 Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, EditTechnologyActivity.class);
+                                Intent intent = new Intent(context, EditTrainerActivity.class);
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.trainerMenuDeactivate:

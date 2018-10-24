@@ -54,7 +54,7 @@ public class AddTechnologyActivity extends Activity {
         }else if (addTechnologyEditTexNote.getText().toString().trim().length()==0){
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context,"Data succesfully added!",Toast.LENGTH_SHORT).show();
+
             saveSuccesNotification();
         }
     }

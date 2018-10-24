@@ -25,6 +25,7 @@ public class EditTestimonyActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit Testimony");
         editTestimonyEditTextTitle = (EditText) findViewById(R.id.editTestimonyEditTextTitle);
         editTestimonyEditTexContent = (EditText) findViewById(R.id.editTestimonyEditTexContent);
         editTestimonyButtonSave = (Button) findViewById(R.id.editTestimonyButtonSave);

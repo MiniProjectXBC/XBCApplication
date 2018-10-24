@@ -24,7 +24,8 @@ public class EditTechnologyActivity extends Activity {
         setContentView(R.layout.activity_edit_technology);
 
         ActionBar actionBar =  getActionBar();
-        ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit Technology");
 
         editTechnologyEditTextName = (EditText)findViewById(R.id.editTechnologyEditTextName);
         editTechnologyEditTexNote = (EditText) findViewById(R.id.editTechnologyEditTexNote);

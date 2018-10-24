@@ -44,8 +44,12 @@
         <activity android:name=".EditAssignmnetActivity" />
         <activity android:name=".DoneAssignmentActivity" />
         <activity android:name=".AddUserActivity" />
+<<<<<<< HEAD
+        <activity android:name=".EditTrainerActivity"></activity>
+=======
         <activity android:name=".EditUserActivity"></activity>
         <activity android:name=".EditBatchActivity"></activity>
+>>>>>>> f86d0ca4ac19fffef1541fb89fe3c305f86e366c
     </application>
 
 </manifest>

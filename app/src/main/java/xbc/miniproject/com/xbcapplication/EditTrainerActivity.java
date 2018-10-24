@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,60 +13,62 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddTrainerActivity extends Activity {
-
-    private Context context =this;
-    private EditText addTrainerEditTextName
-            ,addTrainerEditTexNote;
-    private Button addTrainerButtonSave,
-            addTrainerButtonCancel;
+public class EditTrainerActivity extends Activity {
+    private Context context=this;
+    private EditText editTrainerEditTextName,
+            editTrainerEditTexNote;
+    private Button editTrainerButtonSave,
+            editTrainerButtonCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_trainer);
+        setContentView(R.layout.activity_edit_trainer);
 
-        ActionBar actionBar =  getActionBar();
+
+        ActionBar actionBar = getActionBar();
         ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit Trainer");
 
-        addTrainerEditTextName = (EditText) findViewById(R.id.addTrainerEditTextName);
-        addTrainerEditTexNote = (EditText) findViewById(R.id.addTrainerEditTexNote);
-        addTrainerButtonSave = (Button) findViewById(R.id.addTrainerButtonSave);
-        addTrainerButtonCancel = (Button) findViewById(R.id.addTrainerButtonCancel);
-
-        //button save data
-        addTrainerButtonSave.setOnClickListener(new View.OnClickListener() {
+        editTrainerEditTextName = (EditText) findViewById(R.id.editTrainerEditTextName);
+        editTrainerEditTexNote = (EditText) findViewById(R.id.editTrainerEditTexNote);
+        editTrainerButtonSave = (Button) findViewById(R.id.editTrainerButtonSave);
+        editTrainerButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputValidation();
+                editValidation();
             }
         });
 
-        //button cancel
-        addTrainerButtonCancel.setOnClickListener(new View.OnClickListener() {
+
+        editTrainerButtonCancel = (Button) findViewById(R.id.editTrainerButtonCancel);
+        editTrainerButtonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
     }
-    private void inputValidation(){
-        if(addTrainerEditTextName.getText().toString().trim().length()==0){
+
+    public void editValidation(){
+        if(editTrainerEditTextName.getText().toString().trim().length()==0){
             Toast.makeText(context,"Name Field still empty!",Toast.LENGTH_SHORT).show();
-        }else if (addTrainerEditTexNote.getText().toString().trim().length()==0){
+        }else if(editTrainerEditTexNote.getText().toString().trim().length()==0){
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
-
-            saveSuccesNotification();
+            //hanya pesan
+            saveSuccessfullyNotification();
+            Toast.makeText(context,"Data successfully updated!",Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    public void saveSuccesNotification(){
+    public  void saveSuccessfullyNotification(){
         final AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(context);
+        builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Added! ")
+                .setMessage("Data Successfully Updated!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -85,5 +88,4 @@ public class AddTrainerActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

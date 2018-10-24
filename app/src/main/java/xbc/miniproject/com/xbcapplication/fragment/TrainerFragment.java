@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.AddTechnologyActivity;
+import xbc.miniproject.com.xbcapplication.AddTrainerActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.TechnologyListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.TrainerListAdapter;
@@ -72,7 +73,7 @@ public class TrainerFragment extends Fragment {
         trainerButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddTechnologyActivity.class);
+                Intent intent = new Intent(getContext(), AddTrainerActivity.class);
                 startActivity(intent);
             }
         });
