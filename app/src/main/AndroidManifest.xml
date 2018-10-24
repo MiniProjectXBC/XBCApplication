@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,8 @@
         <activity
             android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/FullScreenTheme"/>
         <activity android:name=".AddBiodataActivity" />
         <activity android:name=".AddTechnologyActivity" />
         <activity android:name=".AddTrainerActivity" />
@@ -31,13 +33,15 @@
         <activity android:name=".AddBatchActivity" />
         <activity android:name=".AddTestimonyActivity" />
         <activity android:name=".EditIdleMonitoringActivity" />
-        <activity android:name=".EditTestimonyActivity"></activity>
-        <activity android:name=".AddIdleMonitoringActivity"
+        <activity android:name=".EditTestimonyActivity" />
+        <activity
+            android:name=".AddIdleMonitoringActivity"
             android:theme="@style/AppCompatTheme" />
         <activity android:name=".AddPlacementMonitoringActivity" />
         <activity android:name=".AddAssignmentActivity" />
         <activity android:name=".EditAssignmnetActivity" />
-        <activity android:name=".DoneAssignmentActivity"></activity>
+        <activity android:name=".DoneAssignmentActivity" />
+        <activity android:name=".AddUserActivity"></activity>
     </application>
 
 </manifest>
