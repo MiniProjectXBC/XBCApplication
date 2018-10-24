@@ -16,6 +16,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 
 public interface RequestAPIServices {
 
@@ -24,6 +25,12 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/biodata/name/123")
     Call<ModelBiodata> getListBiodata();
+
+    //Koneksi API di menu User
+    //Get Data
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/user/name/123")
+    Call<ModelUser> getListUsser();
 
     //Create Data
     @POST("/xbc-ws/api/biodata/create")

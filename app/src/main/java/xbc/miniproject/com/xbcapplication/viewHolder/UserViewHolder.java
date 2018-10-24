@@ -14,9 +14,14 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import xbc.miniproject.com.xbcapplication.EditUserActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.UserModel;
+import xbc.miniproject.com.xbcapplication.model.user.DataList;
+import xbc.miniproject.com.xbcapplication.model.user.Role;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
     private TextView listUserUsername;
@@ -30,10 +35,13 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         listUserStatus = (TextView) itemView.findViewById(R.id.listUserStatus);
         listUserButtonAction = (ImageView)itemView.findViewById(R.id.listUserButtonAction);
     }
-    public void setModel(final UserModel userModel, final int position, final Context context){
-        listUserUsername.setText(userModel.getUsername());
-        listUserRole.setText(userModel.getRole());
-        listUserStatus.setText(userModel.getStatus());
+    public void setModel(final DataList dataList, final int position, final Context context){
+        listUserUsername.setText(dataList.getUsername());
+        
+
+        //final Role role = new Role();
+
+
         listUserButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +56,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.userMenuDeactivate:
-                                DeactiveQuestion(userModel, position, context);
+                                DeactiveQuestion(dataList, position, context);
                                 return true;
                             default:
                                 return false;
@@ -59,11 +67,11 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    private void DeactiveQuestion(UserModel userModel, final int position, final Context context){
+    private void DeactiveQuestion(DataList dataList, final int position, final Context context){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("Warning !")
-                .setMessage("Apakan Anda Yakin Akan Deactive "+userModel.getUsername())
+                .setMessage("Apakan Anda Yakin Akan Deactive "+dataList.getUsername())
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
