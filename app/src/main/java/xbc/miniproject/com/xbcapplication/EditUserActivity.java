@@ -101,11 +101,19 @@ public class EditUserActivity extends Activity {
             Toast.makeText(context,  "Password field still empty !", Toast.LENGTH_SHORT).show();
         }else if(editUserEditTexRetypePassword.getText().toString().trim().length()==0){
             Toast.makeText(context,  "Please Retype password !", Toast.LENGTH_SHORT).show();
+        }else if(isRoleSelected == false){
+            Toast.makeText(context,  "Role must from the list !", Toast.LENGTH_SHORT).show();
         }else{
-            saveNotification();
+            final String pas = editUserEditTexPassword.getText().toString();
+            final String repas = editUserEditTexRetypePassword.getText().toString();
+            if(pas.equalsIgnoreCase(repas)){
+                saveDataNotification();
+            }else{
+                Toast.makeText(context, "Pasword tidak sama!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-    private void saveNotification(){
+    private void saveDataNotification(){
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")

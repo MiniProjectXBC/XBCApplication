@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 
 public class AddUserActivity extends Activity {
@@ -99,25 +100,33 @@ public class AddUserActivity extends Activity {
             Toast.makeText(context,"Username field still empty !", Toast.LENGTH_SHORT).show();
         }else if(addUserEditTexPassword.getText().toString().trim().length()==0){
             Toast.makeText(context, "Password field still empty !", Toast.LENGTH_SHORT).show();
-        }else if(addUserEditTexRetypePassword.getText().toString().trim().length()==0){
+        }else if(addUserEditTexRetypePassword.getText().toString().trim().length()== 0){
             Toast.makeText(context, "Please Retype password !", Toast.LENGTH_SHORT).show();
+        }else if(isRoleSelected ==false){
+            Toast.makeText(context, "Role Must from the list!", Toast.LENGTH_SHORT).show();
         }else{
-            saveDataNotification();
+            final String pas = addUserEditTexPassword.getText().toString();
+            final String repas = addUserEditTexRetypePassword.getText().toString();
+            if(pas.equalsIgnoreCase(repas)){
+                saveDataNotification();
+            }else{
+                Toast.makeText(context, "Password Tidak Sama!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     private void saveDataNotification(){
-        final AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(context);
-        builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully added !")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                })
-                .setCancelable(false)
-                .show();
+            final AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(context);
+            builder.setTitle("NOTIFICATION !")
+                    .setMessage("Data Successfully added !")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
     }
 }

@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import xbc.miniproject.com.xbcapplication.AddParticipantBatchActivity;
 import xbc.miniproject.com.xbcapplication.EditBatchActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
@@ -55,7 +56,7 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
                                 return true;
                             case R.id.batchMenuAddParticipant:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                Intent intent2 = new Intent(context, EditBatchActivity.class);
+                                Intent intent2 = new Intent(context, AddParticipantBatchActivity.class);
                                 ((Activity)context).startActivity(intent2);
                                 return true;
                             default:
