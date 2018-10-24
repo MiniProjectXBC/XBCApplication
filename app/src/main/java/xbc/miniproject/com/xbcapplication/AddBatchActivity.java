@@ -63,7 +63,7 @@ public class AddBatchActivity extends Activity {
                         Calendar selected = Calendar.getInstance();
                         selected.set(year,month,dayOfMonth);
 
-                        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
                         String periodForm = formatDate.format(selected.getTime());
 
                         addBatchEditTextPeriodForm.setText(periodForm);
@@ -97,7 +97,7 @@ public class AddBatchActivity extends Activity {
                         Calendar selected = Calendar.getInstance();
                         selected.set(year,month,dayOfMonth);
 
-                        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
                         String periodTo = formatDate.format(selected.getTime());
 
                         addBatchEditTextPeriodTo.setText(periodTo);
