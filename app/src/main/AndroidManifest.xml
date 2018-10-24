@@ -44,9 +44,10 @@
         <activity android:name=".EditAssignmnetActivity" />
         <activity android:name=".DoneAssignmentActivity" />
         <activity android:name=".AddUserActivity" />
-        <activity android:name=".EditTrainerActivity"></activity>
-        <activity android:name=".EditUserActivity"></activity>
-        <activity android:name=".EditBatchActivity"></activity>
+        <activity android:name=".EditTrainerActivity" />
+        <activity android:name=".EditUserActivity" />
+        <activity android:name=".EditBatchActivity" />
+        <activity android:name=".AddParticipantBatchActivity"></activity>
     </application>
 
 </manifest>
