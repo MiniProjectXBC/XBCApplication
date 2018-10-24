@@ -45,6 +45,7 @@
         <activity android:name=".DoneAssignmentActivity" />
         <activity android:name=".AddUserActivity" />
         <activity android:name=".EditUserActivity"></activity>
+        <activity android:name=".EditBatchActivity"></activity>
     </application>
 
 </manifest>
