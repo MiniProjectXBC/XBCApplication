@@ -43,7 +43,7 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 //Toast.makeText(context, "Anda Menekan Action Posisi: "+position,Toast.LENGTH_SHORT).show();
                 PopupMenu popupMenu = new PopupMenu(context,listBatchButtonAction);
-                popupMenu.inflate(R.menu.biodata_action_menu);
+                popupMenu.inflate(R.menu.batch_action_menu);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
