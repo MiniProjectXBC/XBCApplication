@@ -13,15 +13,16 @@ import java.util.List;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 import xbc.miniproject.com.xbcapplication.viewHolder.TechnologyViewHolder;
 import xbc.miniproject.com.xbcapplication.viewHolder.TrainerViewHolder;
 
 public class TrainerListAdapter extends RecyclerView.Adapter<TrainerViewHolder> {
 
     private Context context;
-    private List<TrainerModel> trainerModelList;
+    private List<DataListTrainer> trainerModelList;
 
-    public TrainerListAdapter(Context context, List<TrainerModel> trainerModelList) {
+    public TrainerListAdapter(Context context, List<DataListTrainer> trainerModelList) {
         this.context = context;
         this.trainerModelList = trainerModelList;
     }
@@ -39,7 +40,7 @@ public class TrainerListAdapter extends RecyclerView.Adapter<TrainerViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull TrainerViewHolder trainerViewHolder, int position) {
-        final TrainerModel user= trainerModelList.get(position);
+        final DataListTrainer user= trainerModelList.get(position);
         trainerViewHolder.setModel(user, position, context);
     }
 
@@ -51,7 +52,7 @@ public class TrainerListAdapter extends RecyclerView.Adapter<TrainerViewHolder> 
             return 0;
         }
     }
-    public  void filterList(ArrayList<TrainerModel> filterList){
+    public  void filterList(ArrayList<DataListTrainer> filterList){
         trainerModelList = filterList;
         notifyDataSetChanged();
     }

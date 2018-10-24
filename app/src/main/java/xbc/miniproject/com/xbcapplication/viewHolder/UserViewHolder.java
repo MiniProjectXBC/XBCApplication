@@ -37,7 +37,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     }
     public void setModel(final DataList dataList, final int position, final Context context){
         listUserUsername.setText(dataList.getUsername());
-        
+
 
         //final Role role = new Role();
 

@@ -21,6 +21,7 @@ import xbc.miniproject.com.xbcapplication.EditTrainerActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 
 public class TrainerViewHolder extends RecyclerView.ViewHolder {
     private TextView listTrainerName;
@@ -31,7 +32,7 @@ public class TrainerViewHolder extends RecyclerView.ViewHolder {
         listTrainerName = (TextView)itemView.findViewById(R.id.listTrainerName);
         listTrainerButtonAction = (ImageView)itemView.findViewById(R.id.listTrainerButtonAction);
     }
-    public void setModel(TrainerModel trainerModel, final int position, final Context context) {
+    public void setModel(DataListTrainer trainerModel, final int position, final Context context) {
         listTrainerName.setText(trainerModel.getName());
         listTrainerButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override

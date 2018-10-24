@@ -12,6 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class AddTrainerActivity extends Activity {
 
     private Context context =this;
@@ -19,6 +27,9 @@ public class AddTrainerActivity extends Activity {
             ,addTrainerEditTexNote;
     private Button addTrainerButtonSave,
             addTrainerButtonCancel;
+
+
+    RequestAPIServices apiServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +66,37 @@ public class AddTrainerActivity extends Activity {
         }else if (addTrainerEditTexNote.getText().toString().trim().length()==0){
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
+            callAPICreateTrainer();
 
-            saveSuccesNotification();
+
+            //saveSuccesNotification();
         }
     }
 
+    private void callAPICreateTrainer() {
+        apiServices = APIUtilities.getAPIServices();
+        DataListTrainer data = new DataListTrainer();
+        data.setName(addTrainerEditTextName.getText().toString());
+        data.setNotes(addTrainerEditTexNote.getText().toString());
 
-    public void saveSuccesNotification(){
+        apiServices.createNewTrainer("application/json", data)
+                .enqueue(new Callback<DataListTrainer>() {
+                    @Override
+                    public void onResponse(Call<DataListTrainer> call, Response<DataListTrainer> response) {
+                        if (response.code() == 201) {
+                            SaveSuccessNotification();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DataListTrainer> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+
+    public void SaveSuccessNotification(){
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")

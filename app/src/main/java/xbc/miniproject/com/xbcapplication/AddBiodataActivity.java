@@ -94,6 +94,7 @@ public class AddBiodataActivity extends Activity {
 
     private void callAPICreateBiodata() {
         apiServices = APIUtilities.getAPIServices();
+
         DataList data = new DataList();
         data.setName(addBiodataEditTextName.getText().toString());
         data.setLastEducation(addBiodataEditTextLastEducation.getText().toString());
@@ -101,6 +102,7 @@ public class AddBiodataActivity extends Activity {
         data.setGraduationYear(addBiodataEditTextGraduationYear.getText().toString());
         data.setMajors(addBiodataEditTextMajors.getText().toString());
         data.setGpa(addBiodataEditTextGpa.getText().toString());
+
         apiServices.createNewBiodata("application/json", data)
                 .enqueue(new Callback<DataList>() {
                     @Override
