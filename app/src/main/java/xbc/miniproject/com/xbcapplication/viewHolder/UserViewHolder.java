@@ -27,7 +27,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         listUserStatus = (TextView) itemView.findViewById(R.id.listUserStatus);
         listUserButtonAction = (ImageView)itemView.findViewById(R.id.listUserButtonAction);
     }
-    public void setModel(UserModel userModel, final int position, final Context context){
+    public void setModel(final UserModel userModel, final int position, final Context context){
         listUserUsername.setText(userModel.getUsername());
         listUserRole.setText(userModel.getRole());
         listUserStatus.setText(userModel.getStatus());
@@ -45,7 +45,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                                 //panggil activity edit user
                                 return true;
                             case R.id.userMenuDeactivate:
-                                //Toas anda menekan deactive user
+                                DeactiveQuestion(userModel, position, context);
                                 return true;
                             default:
                                 return false;
