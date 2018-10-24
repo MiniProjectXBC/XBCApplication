@@ -27,6 +27,7 @@ import xbc.miniproject.com.xbcapplication.fragment.BatchFragment;
 import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.fragment.ClassFragment;
 import xbc.miniproject.com.xbcapplication.fragment.FeedbackFragment;
+import xbc.miniproject.com.xbcapplication.fragment.HomeFragment;
 import xbc.miniproject.com.xbcapplication.fragment.IdleNewsFragment;
 import xbc.miniproject.com.xbcapplication.fragment.MonitoringFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
@@ -64,6 +65,10 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("XBC MOBILE APPS");
+        HomeFragment homeFragment= new HomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_all_menu, homeFragment,"XBC MOBILE APPS");
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -188,7 +193,11 @@ public class HomeActivity extends AppCompatActivity
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else if(id == R.id.homeOptionHome){
-
+            setActionBarTitle("XBC MOBILE APPS");
+            HomeFragment homeFragment= new HomeFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_all_menu, homeFragment,"XBC MOBILE APPS");
+            fragmentTransaction.commit();
         }
         return super.onOptionsItemSelected(item);
     }
