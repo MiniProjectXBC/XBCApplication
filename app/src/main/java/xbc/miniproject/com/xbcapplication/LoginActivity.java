@@ -45,6 +45,7 @@ public class LoginActivity extends Activity {
         } else {
             Intent intent = new Intent(context, HomeActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

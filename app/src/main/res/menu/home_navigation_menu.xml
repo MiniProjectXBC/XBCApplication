@@ -4,27 +4,39 @@
 
 
     <group>
-        <item android:id="@+id/menuBiodata"
-            android:title="Biodata"/>
+        <item
+            android:id="@+id/menuBiodata"
+            android:icon="@android:drawable/ic_menu_share"
+            android:iconTint="@color/black"
+            android:title="Biodata" />
     </group>
 
     <group>
         <item android:id="@+id/menuTrainer"
-            android:title="Trainer"/>
+            android:icon="@android:drawable/ic_menu_share"
+            android:iconTint="@color/black"
+            android:title="Trainer"
+            />
     </group>
 
     <group>
         <item android:id="@+id/menuTechnology"
+            android:icon="@android:drawable/ic_menu_share"
+            android:iconTint="@color/black"
             android:title="Technology"/>
     </group>
     <item android:title="Bootcamp">
         <menu>
             <item
                 android:id="@+id/menuBatch"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Batch"/>
 
             <item
                 android:id="@+id/menuClass"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Class" />
         </menu>
     </item>
@@ -32,14 +44,20 @@
         <menu>
             <item
                 android:id="@+id/menuFiltering"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Filtering"/>
 
             <item
                 android:id="@+id/menuMiniProject"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Mini Project" />
 
             <item
                 android:id="@+id/menuCustom"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Custom" />
         </menu>
     </item>
@@ -47,14 +65,20 @@
         <menu>
             <item
                 android:id="@+id/menuFeedback"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Feedback"/>
 
             <item
                 android:id="@+id/menuIdleNews"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="idle News" />
 
             <item
                 android:id="@+id/menuKataIdle"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Kata Idle" />
         </menu>
     </item>
@@ -62,9 +86,13 @@
         <menu>
             <item
                 android:id="@+id/menuMonitoring"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Monitoring"/>
             <item
                 android:id="@+id/menuAssignment"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="Assignment" />
         </menu>
     </item>
@@ -72,6 +100,8 @@
         <menu>
             <item
                 android:id="@+id/menuUser"
+                android:icon="@android:drawable/ic_menu_share"
+                android:iconTint="@color/black"
                 android:title="User"/>
         </menu>
     </item>
