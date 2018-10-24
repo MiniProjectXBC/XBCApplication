@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_xsis"/>
 
     <EditText
         android:id="@+id/userName"
@@ -17,7 +27,7 @@
         android:hint="@string/hintUsername"
         android:padding="10dp"
         android:textColor="@color/ef_white"
-        android:textColorHint="@color/yellow"
+        android:textColorHint="@color/ef_grey"
         android:textSize="20sp" />
 
     <EditText
@@ -30,7 +40,7 @@
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="@color/ef_white"
-        android:textColorHint="@color/yellow"
+        android:textColorHint="@color/ef_grey"
         android:textSize="20sp" />
 
     <Button

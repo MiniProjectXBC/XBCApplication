@@ -68,6 +68,14 @@
                 android:title="Assignment" />
         </menu>
     </item>
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/menuUser"
+                android:title="User"/>
+        </menu>
+    </item>
+
 
 
 
