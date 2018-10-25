@@ -75,5 +75,11 @@ public interface RequestAPIServices {
                                     @Header("Authorization") String authorization,
                                        @Body Trainer data);
 
+    //PUT Deactivate
+    @PUT("/xbc-ws/api/trainer/deactivate/{id}")
+    Call<ModelTrainer> deactivateTrainer(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization,
+                                         @Path("id") int id);
+
 
 }

@@ -107,7 +107,7 @@ public class EditTrainerActivity extends Activity {
         data.setNotes(editTrainerEditTexNote.getText().toString());
 
         apiServices.editTrainer(Constanta.CONTENT_TYPE_API,
-                Constanta.AUTHORIZATION_EDIT_BIODATA,
+                Constanta.AUTHORIZATION_DEACTIVATED_TRAINER,
                 data)
                 .enqueue(new Callback<ModelTrainer>() {
                     @Override
@@ -135,7 +135,7 @@ public class EditTrainerActivity extends Activity {
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
