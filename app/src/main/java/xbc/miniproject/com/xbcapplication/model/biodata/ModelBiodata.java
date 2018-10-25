@@ -9,16 +9,16 @@ public class ModelBiodata {
 
     @SerializedName("dataList")
     @Expose
-    private List<DataList> dataList = null;
+    private List<BiodataList> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<DataList> getDataList() {
+    public List<BiodataList> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<DataList> dataList) {
+    public void setDataList(List<BiodataList> dataList) {
         this.dataList = dataList;
     }
 
