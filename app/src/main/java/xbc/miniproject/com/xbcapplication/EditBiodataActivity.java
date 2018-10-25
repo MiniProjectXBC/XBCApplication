@@ -99,13 +99,13 @@ public class EditBiodataActivity extends Activity {
                     editBiodataEditTextMajors.setText(data.getMajors());
                     editBiodataEditTextGpa.setText(data.getGpa());
                 } else{
-                    Toast.makeText(context, "Gagal Mendapatkan Data Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Gagal Mendapatkan Testimony Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelBiodata> call, Throwable t) {
-                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Get Testimony onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

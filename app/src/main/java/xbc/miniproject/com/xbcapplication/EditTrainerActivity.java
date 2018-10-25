@@ -77,13 +77,13 @@ public class EditTrainerActivity extends Activity {
                     editTrainerEditTextName.setText(data.getName());
                     editTrainerEditTexNote.setText(data.getNotes().toString());
                 } else{
-                    Toast.makeText(context, "Gagal Mendapatkan Data Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Gagal Mendapatkan Testimony Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelTrainer> call, Throwable t) {
-                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Get Testimony onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

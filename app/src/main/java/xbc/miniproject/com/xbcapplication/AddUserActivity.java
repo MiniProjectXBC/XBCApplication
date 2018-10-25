@@ -126,7 +126,7 @@ public class AddUserActivity extends Activity {
     }
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
-//        DataList data = new DataList();
+//        DataListTestimony data = new DataListTestimony();
 //        Role role = new Role();
 //        for(role.getId()!){
 //
@@ -143,7 +143,7 @@ public class AddUserActivity extends Activity {
             final AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(context);
             builder.setTitle("NOTIFICATION !")
-                    .setMessage("Data Successfully added !")
+                    .setMessage("Testimony Successfully added !")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

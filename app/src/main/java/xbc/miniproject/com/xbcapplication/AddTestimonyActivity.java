@@ -45,7 +45,7 @@ public class AddTestimonyActivity extends Activity {
         if(addTestimonyEditTexTitle.getText().toString().trim().length()==0){
             Toast.makeText(context, "Title Field still Empty!", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Data Successfully Added ! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Testimony Successfully Added ! ", Toast.LENGTH_SHORT).show();
             saveSuccesNotification();
         }
     }
@@ -53,7 +53,7 @@ public class AddTestimonyActivity extends Activity {
         final AlertDialog.Builder builder;
         builder=  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Added !")
+                .setMessage("Testimony Successfully Added !")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -15,21 +15,32 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddTestimonyActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.TestimonyListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
+import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
+import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class TestimonyFragment extends Fragment {
     private EditText testimonyEditTextSearch;
     private Button testimonyButtonInsert;
     private RecyclerView testimonyRecyclerViewList;
-    private List<TestimonyModel> testimonyModelList =  new ArrayList<>();
+    private List<DataListTestimony> testimonyModelList =  new ArrayList<>();
     private TestimonyListAdapter testimonyListAdapter;
+    private RequestAPIServices apiServices;
     public TestimonyFragment() {
     }
 
@@ -37,6 +48,8 @@ public class TestimonyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view =  inflater.inflate(R.layout.fragment_testimony,container,false);
+        getDataFromAPI();
+
         testimonyRecyclerViewList = (RecyclerView) view.findViewById(R.id.testimonyRecyclerViewList);
         RecyclerView.LayoutManager layoutManager =  new LinearLayoutManager(getContext(),
                 LinearLayout.VERTICAL,
@@ -77,29 +90,46 @@ public class TestimonyFragment extends Fragment {
         tampilkanListTestimony();
         return  view;
     }
+
+    private void getDataFromAPI() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListTestimony().enqueue(new Callback<ModelTestimony>() {
+            @Override
+            public void onResponse(Call<ModelTestimony> call, Response<ModelTestimony> response) {
+                if (response.code() == 200){
+                    List<DataListTestimony> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size();i++){
+                        DataListTestimony data = tmp.get(i);
+                        testimonyModelList.add(data);
+                    }
+                } else{
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelTestimony> call, Throwable t) {
+                Toast.makeText(getContext(), "List Trainer onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public  void filter(String text){
-        ArrayList<TestimonyModel> filteredList = new ArrayList<>();
-        for(TestimonyModel item : testimonyModelList){
-            if (item.getName().toLowerCase().contains(text.toLowerCase())){
+        ArrayList<DataListTestimony> filteredList = new ArrayList<>();
+        for(DataListTestimony item : testimonyModelList){
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }
         testimonyListAdapter.filterList(filteredList);
     }
     public void  tampilkanListTestimony(){
-        addDummyList();
+
         if(testimonyListAdapter==null){
             testimonyListAdapter =  new TestimonyListAdapter(getContext(), testimonyModelList);
             testimonyRecyclerViewList.setAdapter(testimonyListAdapter);
         }
     }
-    public void addDummyList(){
-        int index =1;
-        for(int i =0; i<5; i++){
-            TestimonyModel data = new TestimonyModel();
-            data.setName("Dummy Testy Name"+index);
-            testimonyModelList.add(data);
-            index++;
-        }
-    }
+
+
 }

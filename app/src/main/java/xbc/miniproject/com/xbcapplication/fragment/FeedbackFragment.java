@@ -152,7 +152,7 @@ public class FeedbackFragment extends Fragment {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Submitted!")
+                .setMessage("Testimony Successfully Submitted!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
