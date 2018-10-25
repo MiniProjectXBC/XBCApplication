@@ -8,9 +8,12 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
@@ -23,6 +26,7 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/biodata/name/123")
     Call<ModelBiodata> getListBiodata();
+
 
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
@@ -52,6 +56,9 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/user/name/123")
     Call<ModelUser> getListUsser();
+    @POST("/xbc-ws/api/user/create")
+    Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
+                                  @Body DataList datauser);
 
     //koneksi API di menu trainer
     //get search
@@ -59,10 +66,18 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/trainer/name/123")
     Call<ModelTrainer> getListTrainer();
 
+    //Create data
     //post Create
     @POST("xbc-ws/api/trainer/create")
     Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
                                            @Body DataListTrainer data);
+
+
+    //konek API di menu Batch
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/batch/name/123")
+    Call<ModelBatch> getListBatch();
 
     //GET get_one search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
@@ -80,6 +95,13 @@ public interface RequestAPIServices {
     Call<ModelTrainer> deactivateTrainer(@Header("Content-Type") String contentType,
                                          @Header("Authorization") String authorization,
                                          @Path("id") int id);
+
+
+    //Koneksi API di menu Idle News
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/idlenews/title/a")
+    Call<ModelIdleNews> getListIdleNews();
 
 
 }

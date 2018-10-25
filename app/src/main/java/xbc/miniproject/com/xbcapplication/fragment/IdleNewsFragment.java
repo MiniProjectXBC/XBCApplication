@@ -15,26 +15,38 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddBiodataActivity;
 import xbc.miniproject.com.xbcapplication.AddIdleNewsActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.IdleNewsListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.IdleNewsModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.idleNews.DataList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class IdleNewsFragment extends Fragment {
     private EditText idleNewsEditTextSearch;
     private Button idleNewsButtonInsert;
     private RecyclerView idleNewsRecyclerViewList;
 
-    private List<IdleNewsModel> listIdleNews = new ArrayList<>();
+    private List<DataList> listIdleNews = new ArrayList<>();
     private IdleNewsListAdapter idleNewsListAdapter;
 
-    public IdleNewsFragment(){
+    private RequestAPIServices apiServices;
+
+    public IdleNewsFragment() {
 
     }
 
@@ -42,6 +54,8 @@ public class IdleNewsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_idle_news, container, false);
+
+        getDataFromAPI();
 
         idleNewsRecyclerViewList = (RecyclerView) view.findViewById(R.id.idleNewsRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
@@ -63,9 +77,9 @@ public class IdleNewsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (idleNewsEditTextSearch.getText().toString().trim().length() == 0){
+                if (idleNewsEditTextSearch.getText().toString().trim().length() == 0) {
                     idleNewsRecyclerViewList.setVisibility(View.INVISIBLE);
-                } else{
+                } else {
                     idleNewsRecyclerViewList.setVisibility(View.VISIBLE);
                     filter(editable.toString());
                 }
@@ -87,10 +101,33 @@ public class IdleNewsFragment extends Fragment {
         return view;
     }
 
-    private void filter(String text) {
-        ArrayList<IdleNewsModel> filteredList = new ArrayList<>();
+    private void getDataFromAPI() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListIdleNews().enqueue(new Callback<ModelIdleNews>() {
+            @Override
+            public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
+                if (response.code() == 200){
+                    List<DataList> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size();i++){
+                        DataList data = tmp.get(i);
+                        listIdleNews.add(data);
+                    }
+                } else{
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Idle News: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
 
-        for (IdleNewsModel item : listIdleNews) {
+            @Override
+            public void onFailure(Call<ModelIdleNews> call, Throwable t) {
+                Toast.makeText(getContext(), "List Idle News onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<DataList> filteredList = new ArrayList<>();
+
+        for (DataList item : listIdleNews) {
             if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
@@ -99,21 +136,22 @@ public class IdleNewsFragment extends Fragment {
     }
 
     private void tampilkanListIdleNews() {
-        addDummyList();
+//        addDummyList();
         if (idleNewsListAdapter == null) {
             idleNewsListAdapter = new IdleNewsListAdapter(getContext(), listIdleNews);
             idleNewsRecyclerViewList.setAdapter(idleNewsListAdapter);
         }
     }
-
-    private void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            IdleNewsModel data = new IdleNewsModel();
-            data.setTitle("Dummy Title " + index);
-            data.setCategory("Dummy Category " + index);
-            listIdleNews.add(data);
-            index++;
-        }
-    }
 }
+
+//    private void addDummyList() {
+//        int index = 1;
+//        for (int i = 0; i < 5; i++) {
+//            IdleNewsModel data = new IdleNewsModel();
+//            data.setTitle("Dummy Title " + index);
+//            data.setCategory("Dummy Category " + index);
+//            listIdleNews.add(data);
+//            index++;
+//        }
+//    }
+//}
