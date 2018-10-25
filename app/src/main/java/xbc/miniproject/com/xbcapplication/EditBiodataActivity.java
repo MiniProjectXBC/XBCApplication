@@ -25,6 +25,7 @@ import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class EditBiodataActivity extends Activity {
 
@@ -41,6 +42,8 @@ public class EditBiodataActivity extends Activity {
             editBiodataButtonCancel;
 
     RequestAPIServices apiServices;
+
+    int id;
 
     List<BiodataList> listBiodata = new ArrayList<BiodataList>();
 
@@ -65,7 +68,6 @@ public class EditBiodataActivity extends Activity {
             @Override
             public void onClick(View v) {
                 inputValidation();
-
             }
         });
 
@@ -77,7 +79,7 @@ public class EditBiodataActivity extends Activity {
             }
         });
 
-        int id = getIntent().getIntExtra("id",0);
+        id = getIntent().getIntExtra("id",0);
         getOneBiodataAPI(id);
 
 
@@ -122,15 +124,52 @@ public class EditBiodataActivity extends Activity {
         } else if(editBiodataEditTextGpa.getText().toString().trim().length() == 0){
             Toast.makeText(context,"GPA Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+            inputEditBiodataAPI();
+            //SaveSuccessNotification();
         }
     }
 
-    private void SaveSuccessNotification() {
+    private void inputEditBiodataAPI() {
+        apiServices = APIUtilities.getAPIServices();
+
+        Biodata data = new Biodata();
+        data.setId(id);
+        data.setName(editBiodataEditTextName.getText().toString());
+        data.setLastEducation(editBiodataEditTextLastEducation.getText().toString());
+        data.setEducationalLevel(editBiodataEditTextEducationLevel.getText().toString());
+        data.setGraduationYear(editBiodataEditTextGraduationYear.getText().toString());
+        data.setMajors(editBiodataEditTextMajors.getText().toString());
+        data.setGpa(editBiodataEditTextGpa.getText().toString());
+
+        apiServices.editBiodata(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_BIODATA,
+                data)
+                .enqueue(new Callback<ModelBiodata>() {
+            @Override
+            public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
+                if (response.code() == 200) {
+                    String message = response.body().getMessage();
+                    if (message!=null){
+                        SaveSuccessNotification(message);
+                    } else{
+                        SaveSuccessNotification("Message Gagal Diambil");
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelBiodata> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void SaveSuccessNotification(String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
