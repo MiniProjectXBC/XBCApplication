@@ -8,11 +8,8 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
-=======
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
->>>>>>> f9820bb3ebb6f559c69a2e17523b32b33a0f5da6
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
@@ -30,11 +27,7 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/biodata/name/123")
     Call<ModelBiodata> getListBiodata();
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> f9820bb3ebb6f559c69a2e17523b32b33a0f5da6
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
     Call<ModelBiodata> createNewBiodata(@Header("Content-Type") String contentType,
@@ -73,23 +66,19 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/trainer/name/123")
     Call<ModelTrainer> getListTrainer();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f9820bb3ebb6f559c69a2e17523b32b33a0f5da6
     //Create data
     //post Create
     @POST("xbc-ws/api/trainer/create")
     Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
                                            @Body DataListTrainer data);
 
-<<<<<<< HEAD
+
     //konek API di menu Batch
     //GET Search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/batch/name/123")
     Call<ModelBatch> getListBatch();
-=======
+
     //GET get_one search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/trainer/id/{id}")
@@ -108,6 +97,5 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
 
->>>>>>> f9820bb3ebb6f559c69a2e17523b32b33a0f5da6
 
 }
