@@ -12,9 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
@@ -35,7 +41,8 @@ public class EditBiodataActivity extends Activity {
             editBiodataButtonCancel;
 
     RequestAPIServices apiServices;
-    BiodataList biodataList;
+
+    List<BiodataList> listBiodata = new ArrayList<BiodataList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,6 @@ public class EditBiodataActivity extends Activity {
         ActionBar actionBar = getActionBar();
         ((ActionBar) actionBar).setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Edit Biodata");
-
-        int id = getIntent().getIntExtra("id",0);
-        getOneBiodataAPI(id);
 
         editBiodataEditTextName = (EditText) findViewById(R.id.editBiodataEditTextName);
         editBiodataEditTextLastEducation = (EditText) findViewById(R.id.editBiodataEditTextLastEducation);
@@ -73,6 +77,9 @@ public class EditBiodataActivity extends Activity {
             }
         });
 
+        int id = getIntent().getIntExtra("id",0);
+        getOneBiodataAPI(id);
+
 
     }
 
@@ -82,13 +89,21 @@ public class EditBiodataActivity extends Activity {
             @Override
             public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
                 if (response.code() == 200){
-
+                    Biodata data = response.body().getData();
+                    editBiodataEditTextName.setText(data.getName());
+                    editBiodataEditTextLastEducation.setText(data.getLastEducation().toString());
+                    editBiodataEditTextEducationLevel.setText(data.getEducationalLevel().toString());
+                    editBiodataEditTextGraduationYear.setText(data.getGraduationYear().toString());
+                    editBiodataEditTextMajors.setText(data.getMajors());
+                    editBiodataEditTextGpa.setText(data.getGpa());
+                } else{
+                    Toast.makeText(context, "Gagal Mendapatkan Data Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelBiodata> call, Throwable t) {
-
+                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
