@@ -23,10 +23,14 @@ import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
 public interface RequestAPIServices {
 
     //Koneksi API di menu Biodata
-    //Get Data
+    //GET Search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/biodata/name/123")
     Call<ModelBiodata> getListBiodata();
+    //POST Create
+    @POST("/xbc-ws/api/biodata/create")
+    Call<DataList> createNewBiodata(@Header("Content-Type") String contentType,
+                                    @Body DataList data);
 
     //Koneksi API di menu User
     //Get Data
@@ -40,10 +44,7 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/trainer/name/123")
     Call<ModelTrainer> getListTrainer();
 
-    //Create Data
-    @POST("/xbc-ws/api/biodata/create")
-    Call<DataList> createNewBiodata(@Header("Content-Type") String contentType,
-                                    @Body DataList data);
+
 
     //Create data
     @POST("xbc-ws/api/trainer/create")
