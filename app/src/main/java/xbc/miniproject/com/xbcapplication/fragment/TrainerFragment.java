@@ -30,7 +30,6 @@ import xbc.miniproject.com.xbcapplication.adapter.TechnologyListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.TrainerListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
