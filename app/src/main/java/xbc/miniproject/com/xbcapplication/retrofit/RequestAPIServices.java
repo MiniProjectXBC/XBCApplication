@@ -8,6 +8,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
@@ -36,7 +37,14 @@ public interface RequestAPIServices {
     //PUT edit
     @PUT("/xbc-ws/api/biodata/update")
     Call<ModelBiodata> editBiodata(@Header("Content-Type") String contentType,
-                                   @Header("Authorization") String authorization);
+                                   @Header("Authorization") String authorization,
+                                   @Body Biodata data);
+
+    //PUT deactivate
+    @PUT("/xbc-ws/api/biodata/deactivate/{id}")
+    Call<ModelBiodata> deactivateBiodata(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization,
+                                         @Path("id") int id);
 
 
     //Koneksi API di menu User
