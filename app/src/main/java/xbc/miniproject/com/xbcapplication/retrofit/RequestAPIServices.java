@@ -14,11 +14,8 @@ import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
-=======
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
->>>>>>> 65a1df1a9e9110a6ecafc35f6a101996c3e7844e
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
