@@ -108,13 +108,13 @@ public class TrainerFragment extends Fragment {
                         trainerModelList.add(data);
                     }
                 } else{
-                    Toast.makeText(getContext(), "Gagal Mendapatkan List Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelTrainer> call, Throwable t) {
-                Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "List Trainer onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

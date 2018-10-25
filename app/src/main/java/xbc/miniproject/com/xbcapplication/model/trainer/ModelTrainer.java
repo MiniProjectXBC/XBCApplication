@@ -5,8 +5,13 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
+
 public class ModelTrainer {
 
+    @SerializedName("data")
+    @Expose
+    private Trainer data;
     @SerializedName("dataList")
     @Expose
     private List<DataListTrainer> dataList = null;
@@ -20,6 +25,14 @@ public class ModelTrainer {
 
     public void setDataList(List<DataListTrainer> dataList) {
         this.dataList = dataList;
+    }
+
+    public Trainer getData() {
+        return data;
+    }
+
+    public void setData(Trainer data) {
+        this.data = data;
     }
 
     public String getMessage() {

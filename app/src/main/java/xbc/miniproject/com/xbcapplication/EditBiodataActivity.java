@@ -12,13 +12,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class EditBiodataActivity extends Activity {
 
@@ -35,7 +42,10 @@ public class EditBiodataActivity extends Activity {
             editBiodataButtonCancel;
 
     RequestAPIServices apiServices;
-    BiodataList biodataList;
+
+    int id;
+
+    List<BiodataList> listBiodata = new ArrayList<BiodataList>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +55,6 @@ public class EditBiodataActivity extends Activity {
         ActionBar actionBar = getActionBar();
         ((ActionBar) actionBar).setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Edit Biodata");
-
-        int id = getIntent().getIntExtra("id",0);
-        getOneBiodataAPI(id);
 
         editBiodataEditTextName = (EditText) findViewById(R.id.editBiodataEditTextName);
         editBiodataEditTextLastEducation = (EditText) findViewById(R.id.editBiodataEditTextLastEducation);
@@ -61,7 +68,6 @@ public class EditBiodataActivity extends Activity {
             @Override
             public void onClick(View v) {
                 inputValidation();
-
             }
         });
 
@@ -73,6 +79,9 @@ public class EditBiodataActivity extends Activity {
             }
         });
 
+        id = getIntent().getIntExtra("id",0);
+        getOneBiodataAPI(id);
+
 
     }
 
@@ -82,13 +91,21 @@ public class EditBiodataActivity extends Activity {
             @Override
             public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
                 if (response.code() == 200){
-
+                    Biodata data = response.body().getData();
+                    editBiodataEditTextName.setText(data.getName());
+                    editBiodataEditTextLastEducation.setText(data.getLastEducation().toString());
+                    editBiodataEditTextEducationLevel.setText(data.getEducationalLevel().toString());
+                    editBiodataEditTextGraduationYear.setText(data.getGraduationYear().toString());
+                    editBiodataEditTextMajors.setText(data.getMajors());
+                    editBiodataEditTextGpa.setText(data.getGpa());
+                } else{
+                    Toast.makeText(context, "Gagal Mendapatkan Data Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelBiodata> call, Throwable t) {
-
+                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -107,15 +124,52 @@ public class EditBiodataActivity extends Activity {
         } else if(editBiodataEditTextGpa.getText().toString().trim().length() == 0){
             Toast.makeText(context,"GPA Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+            inputEditBiodataAPI();
+            //SaveSuccessNotification();
         }
     }
 
-    private void SaveSuccessNotification() {
+    private void inputEditBiodataAPI() {
+        apiServices = APIUtilities.getAPIServices();
+
+        Biodata data = new Biodata();
+        data.setId(id);
+        data.setName(editBiodataEditTextName.getText().toString());
+        data.setLastEducation(editBiodataEditTextLastEducation.getText().toString());
+        data.setEducationalLevel(editBiodataEditTextEducationLevel.getText().toString());
+        data.setGraduationYear(editBiodataEditTextGraduationYear.getText().toString());
+        data.setMajors(editBiodataEditTextMajors.getText().toString());
+        data.setGpa(editBiodataEditTextGpa.getText().toString());
+
+        apiServices.editBiodata(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_BIODATA,
+                data)
+                .enqueue(new Callback<ModelBiodata>() {
+            @Override
+            public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
+                if (response.code() == 200) {
+                    String message = response.body().getMessage();
+                    if (message!=null){
+                        SaveSuccessNotification(message);
+                    } else{
+                        SaveSuccessNotification("Message Gagal Diambil");
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelBiodata> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void SaveSuccessNotification(String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
