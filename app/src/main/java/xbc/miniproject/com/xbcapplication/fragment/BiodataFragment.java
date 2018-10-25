@@ -29,7 +29,7 @@ import xbc.miniproject.com.xbcapplication.AddBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
@@ -39,7 +39,7 @@ public class BiodataFragment extends Fragment {
     private Button biodataButtonInsert;
     private RecyclerView biodataRecyclerViewList;
 
-    private List<DataList> listBiodata = new ArrayList<>();
+    private List<BiodataList> listBiodata = new ArrayList<>();
     private BiodataListAdapter biodataListAdapter;
 
     private RequestAPIServices apiServices;
@@ -108,9 +108,9 @@ public class BiodataFragment extends Fragment {
             @Override
             public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
                 if (response.code() == 200){
-                    List<DataList> tmp = response.body().getDataList();
+                    List<BiodataList> tmp = response.body().getDataList();
                     for (int i = 0; i<tmp.size();i++){
-                        DataList data = tmp.get(i);
+                        BiodataList data = tmp.get(i);
                         listBiodata.add(data);
                     }
                 } else{
@@ -126,9 +126,9 @@ public class BiodataFragment extends Fragment {
     }
 
     private void filter(String text) {
-        ArrayList<DataList> filteredList = new ArrayList<>();
+        ArrayList<BiodataList> filteredList = new ArrayList<>();
 
-        for (DataList item : listBiodata) {
+        for (BiodataList item : listBiodata) {
             if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }

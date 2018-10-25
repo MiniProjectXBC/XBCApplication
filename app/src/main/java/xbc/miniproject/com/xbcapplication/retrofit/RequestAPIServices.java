@@ -1,20 +1,13 @@
 package xbc.miniproject.com.xbcapplication.retrofit;
 
-import android.provider.ContactsContract;
-
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import retrofit2.http.Path;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
@@ -29,8 +22,12 @@ public interface RequestAPIServices {
     Call<ModelBiodata> getListBiodata();
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
-    Call<DataList> createNewBiodata(@Header("Content-Type") String contentType,
-                                    @Body DataList data);
+    Call<ModelBiodata> createNewBiodata(@Header("Content-Type") String contentType,
+                                    @Body BiodataList data);
+    //GET get_one
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("/xbc-ws/api/biodata/id/{id}")
+    Call<ModelBiodata> getOneBiodata(@Path("id") int id);
 
     //Koneksi API di menu User
     //Get Data

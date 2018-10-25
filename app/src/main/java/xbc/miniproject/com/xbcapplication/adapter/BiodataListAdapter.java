@@ -13,14 +13,14 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.BiodataViewHolder;
 
 public class BiodataListAdapter extends RecyclerView.Adapter<BiodataViewHolder> {
     private Context context;
-    private List<DataList> biodataList;
+    private List<BiodataList> biodataList;
 
-    public BiodataListAdapter(Context context, List<DataList> biodataList) {
+    public BiodataListAdapter(Context context, List<BiodataList> biodataList) {
         this.context = context;
         this.biodataList = biodataList;
     }
@@ -38,7 +38,7 @@ public class BiodataListAdapter extends RecyclerView.Adapter<BiodataViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull BiodataViewHolder biodataViewHolder, int position) {
-        final DataList user = biodataList.get(position);
+        final BiodataList user = biodataList.get(position);
         biodataViewHolder.setModel(user, position, context);
     }
 
@@ -51,7 +51,7 @@ public class BiodataListAdapter extends RecyclerView.Adapter<BiodataViewHolder> 
         }
     }
 
-    public void filterList(List<DataList> filterList) {
+    public void filterList(List<BiodataList> filterList) {
         biodataList = filterList;
         notifyDataSetChanged();
     }

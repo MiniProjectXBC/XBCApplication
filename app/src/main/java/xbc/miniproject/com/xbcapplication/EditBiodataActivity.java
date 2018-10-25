@@ -12,7 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import xbc.miniproject.com.xbcapplication.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class EditBiodataActivity extends Activity {
 
@@ -28,6 +34,9 @@ public class EditBiodataActivity extends Activity {
     Button editBiodataButtonSave,
             editBiodataButtonCancel;
 
+    RequestAPIServices apiServices;
+    BiodataList biodataList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +45,9 @@ public class EditBiodataActivity extends Activity {
         ActionBar actionBar = getActionBar();
         ((ActionBar) actionBar).setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Edit Biodata");
+
+        int id = getIntent().getIntExtra("id",0);
+        getOneBiodataAPI(id);
 
         editBiodataEditTextName = (EditText) findViewById(R.id.editBiodataEditTextName);
         editBiodataEditTextLastEducation = (EditText) findViewById(R.id.editBiodataEditTextLastEducation);
@@ -62,6 +74,23 @@ public class EditBiodataActivity extends Activity {
         });
 
 
+    }
+
+    private void getOneBiodataAPI(int id) {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getOneBiodata(id).enqueue(new Callback<ModelBiodata>() {
+            @Override
+            public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
+                if (response.code() == 200){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelBiodata> call, Throwable t) {
+
+            }
+        });
     }
 
     private void inputValidation() {
