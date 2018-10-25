@@ -13,12 +13,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class EditTrainerActivity extends Activity {
     private Context context=this;
     private EditText editTrainerEditTextName,
             editTrainerEditTexNote;
     private Button editTrainerButtonSave,
             editTrainerButtonCancel;
+    RequestAPIServices apiServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,30 @@ public class EditTrainerActivity extends Activity {
                 finish();
             }
         });
+        int id = getIntent().getIntExtra("id",0);
+        getOneTrainerAPI(id);
 
+    }
+
+    private void getOneTrainerAPI(int id) {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getOneTrainer(id).enqueue(new Callback<ModelTrainer>() {
+            @Override
+            public void onResponse(Call<ModelTrainer> call, Response<ModelTrainer> response) {
+                if (response.code() == 200){
+                    Trainer data = response.body().getData();
+                    editTrainerEditTextName.setText(data.getName());
+                    editTrainerEditTexNote.setText(data.getNotes().toString());
+                } else{
+                    Toast.makeText(context, "Gagal Mendapatkan Data Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelTrainer> call, Throwable t) {
+                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void editValidation(){
@@ -58,13 +93,36 @@ public class EditTrainerActivity extends Activity {
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
             //hanya pesan
-            saveSuccessfullyNotification();
-            Toast.makeText(context,"Data successfully updated!",Toast.LENGTH_SHORT).show();
+            callAPIEditTrainer();
         }
     }
 
+    private void callAPIEditTrainer(){
 
-    public  void saveSuccessfullyNotification(){
+        apiServices = APIUtilities.getAPIServices();
+        DataListTrainer data = new DataListTrainer();
+        data.setName(editTrainerEditTextName.getText().toString());
+        data.setNotes(editTrainerEditTexNote.getText().toString());
+
+        apiServices.editTrainer("application/json", data)
+                .enqueue(new Callback<DataListTrainer>() {
+                    @Override
+                    public void onResponse(Call<DataListTrainer> call, Response<DataListTrainer> response) {
+                        if (response.code() == 200) {
+                            SaveSuccessNotification();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DataListTrainer> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+
+    public  void SaveSuccessNotification(){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
