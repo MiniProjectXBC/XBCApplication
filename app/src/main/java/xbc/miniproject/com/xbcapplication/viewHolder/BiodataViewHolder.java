@@ -18,7 +18,7 @@ import android.widget.Toast;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 
 public class BiodataViewHolder extends RecyclerView.ViewHolder {
     TextView listBiodataTextViewName,
@@ -37,7 +37,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setModel(final DataList biodataModel, final int position, final Context context) {
+    public void setModel(final BiodataList biodataModel, final int position, final Context context) {
         listBiodataTextViewName.setText(biodataModel.getName());
         listBiodataTextViewMajors.setText(biodataModel.getMajors());
         listBiodataTextViewGpa.setText(biodataModel.getGpa());
@@ -55,6 +55,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                             case R.id.biodataMenuEdit:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, EditBiodataActivity.class);
+                                intent.putExtra("id",biodataModel.getId());
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.biodataMenuDeactivate:
@@ -71,7 +72,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeactiveQuestion(final DataList biodataModel, final int position, final Context context) {
+    private void DeactiveQuestion(final BiodataList biodataModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")

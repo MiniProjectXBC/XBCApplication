@@ -1,24 +1,24 @@
 
-package xbc.miniproject.com.xbcapplication.model.biodata;
+package xbc.miniproject.com.xbcapplication.model.user;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelBiodata {
+public class ModelUser {
 
     @SerializedName("dataList")
     @Expose
-    private List<BiodataList> dataList = null;
+    private List<DataList> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<BiodataList> getDataList() {
+    public List<DataList> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<BiodataList> dataList) {
+    public void setDataList(List<DataList> dataList) {
         this.dataList = dataList;
     }
 

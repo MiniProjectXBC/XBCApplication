@@ -11,12 +11,14 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.UserModel;
+import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.UserViewHolder;
 
 public class UserListAdapter  extends RecyclerView.Adapter<UserViewHolder>{
     private Context context;
-    private List<UserModel> userModelList;
-    public UserListAdapter(Context context, List<UserModel> userModelList) {
+    private List<DataList> userModelList;
+
+    public UserListAdapter(Context context, List<DataList> userModelList) {
         this.context=context;
         this.userModelList=userModelList;
     }
@@ -34,7 +36,7 @@ public class UserListAdapter  extends RecyclerView.Adapter<UserViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int position) {
-        final UserModel user = userModelList.get(position);
+        final DataList user = userModelList.get(position);
         userViewHolder.setModel(user, position, context);
     }
 
@@ -46,7 +48,7 @@ public class UserListAdapter  extends RecyclerView.Adapter<UserViewHolder>{
             return 0;
         }
     }
-    public void filterList (List<UserModel>filterList){
+    public void filterList (List<DataList>filterList){
         userModelList = filterList;
         notifyDataSetChanged();
     }

@@ -6,18 +6,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import xbc.miniproject.com.xbcapplication.model.biodata.DataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
@@ -95,7 +93,7 @@ public class AddBiodataActivity extends Activity {
     private void callAPICreateBiodata() {
         apiServices = APIUtilities.getAPIServices();
 
-        DataList data = new DataList();
+        BiodataList data = new BiodataList();
         data.setName(addBiodataEditTextName.getText().toString());
         data.setLastEducation(addBiodataEditTextLastEducation.getText().toString());
         data.setEducationalLevel(addBiodataEditTextEducationLevel.getText().toString());
@@ -104,26 +102,32 @@ public class AddBiodataActivity extends Activity {
         data.setGpa(addBiodataEditTextGpa.getText().toString());
 
         apiServices.createNewBiodata("application/json", data)
-                .enqueue(new Callback<DataList>() {
+                .enqueue(new Callback<ModelBiodata>() {
                     @Override
-                    public void onResponse(Call<DataList> call, Response<DataList> response) {
+                    public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
                         if (response.code() == 201) {
-                            SaveSuccessNotification();
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                SaveSuccessNotification(message);
+                            } else{
+                                SaveSuccessNotification("Message Gagal Diambil");
+                            }
+
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<DataList> call, Throwable t) {
+                    public void onFailure(Call<ModelBiodata> call, Throwable t) {
                         Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void SaveSuccessNotification() {
+    private void SaveSuccessNotification(String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Added!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
