@@ -10,6 +10,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
@@ -62,8 +63,9 @@ public interface RequestAPIServices {
 
     //PUT edit
     @PUT("/xbc-ws/api/trainer/update")
-    Call<DataListTrainer> editTrainer (@Header("Content-Type") String contentType,
-                                    @Header("Authorization") DataListTrainer authorization);
+    Call<ModelTrainer> editTrainer (@Header("Content-Type") String contentType,
+                                    @Header("Authorization") String authorization,
+                                       @Body Trainer data);
 
 
 }
