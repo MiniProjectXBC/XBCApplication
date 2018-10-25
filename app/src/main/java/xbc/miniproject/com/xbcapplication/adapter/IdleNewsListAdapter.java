@@ -11,13 +11,14 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.IdleNewsModel;
+import xbc.miniproject.com.xbcapplication.model.idleNews.DataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.IdleNewsViewHolder;
 
 public class IdleNewsListAdapter extends RecyclerView.Adapter<IdleNewsViewHolder> {
     private Context context;
-    private List<IdleNewsModel> idleNewsList;
+    private List<DataList> idleNewsList;
 
-    public IdleNewsListAdapter(Context context, List<IdleNewsModel> idleNewsList) {
+    public IdleNewsListAdapter(Context context, List<DataList> idleNewsList) {
         this.context = context;
         this.idleNewsList = idleNewsList;
     }
@@ -35,7 +36,7 @@ public class IdleNewsListAdapter extends RecyclerView.Adapter<IdleNewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull IdleNewsViewHolder idleNewsViewHolder, int i) {
-        final IdleNewsModel user = idleNewsList.get(i);
+        final DataList user = idleNewsList.get(i);
         idleNewsViewHolder.setModelIdle(user, i, context);
     }
 
@@ -48,7 +49,7 @@ public class IdleNewsListAdapter extends RecyclerView.Adapter<IdleNewsViewHolder
             return 0;
         }
     }
-    public void filterList(List<IdleNewsModel> filterList) {
+    public void filterList(List<DataList> filterList) {
         idleNewsList = filterList;
         notifyDataSetChanged();
     }

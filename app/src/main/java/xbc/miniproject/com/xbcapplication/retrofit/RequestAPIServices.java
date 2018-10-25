@@ -11,6 +11,7 @@ import retrofit2.http.Path;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
@@ -63,6 +64,8 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/trainer/name/123")
     Call<ModelTrainer> getListTrainer();
 
+
+    //Create data
     //post Create
     @POST("xbc-ws/api/trainer/create")
     Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
@@ -78,6 +81,13 @@ public interface RequestAPIServices {
     Call<ModelTrainer> editTrainer (@Header("Content-Type") String contentType,
                                     @Header("Authorization") String authorization,
                                        @Body Trainer data);
+
+
+    //Koneksi API di menu Idle News
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/idlenews/title/a")
+    Call<ModelIdleNews> getListIdleNews();
 
 
 }
