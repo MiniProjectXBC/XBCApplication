@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -79,16 +80,16 @@ public class AddTrainerActivity extends Activity {
         data.setNotes(addTrainerEditTexNote.getText().toString());
 
         apiServices.createNewTrainer("application/json", data)
-                .enqueue(new Callback<DataListTrainer>() {
+                .enqueue(new Callback<ModelTrainer>() {
                     @Override
-                    public void onResponse(Call<DataListTrainer> call, Response<DataListTrainer> response) {
+                    public void onResponse(Call<ModelTrainer> call, Response<ModelTrainer> response) {
                         if (response.code() == 201) {
                             SaveSuccessNotification();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<DataListTrainer> call, Throwable t) {
+                    public void onFailure(Call<ModelTrainer> call, Throwable t) {
                         Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });

@@ -107,7 +107,7 @@ public class EditTrainerActivity extends Activity {
         data.setNotes(editTrainerEditTexNote.getText().toString());
 
         apiServices.editTrainer(Constanta.CONTENT_TYPE_API,
-                Constanta.AUTHORIZATION_DEACTIVATED_TRAINER,
+                Constanta.AUTHORIZATION_EDIT_BIODATA,
                 data)
                 .enqueue(new Callback<ModelTrainer>() {
                     @Override

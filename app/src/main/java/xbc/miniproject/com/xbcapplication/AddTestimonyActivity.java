@@ -12,12 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
+import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
+import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class AddTestimonyActivity extends Activity {
     private Context context = this;
     private EditText addTestimonyEditTexTitle,
             addTestimonyEditTexContent;
     private Button addTestimonyButtonSave,
             addTestimonyButtonCancel;
+    private RequestAPIServices apiServices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +55,35 @@ public class AddTestimonyActivity extends Activity {
         if(addTestimonyEditTexTitle.getText().toString().trim().length()==0){
             Toast.makeText(context, "Title Field still Empty!", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Testimony Successfully Added ! ", Toast.LENGTH_SHORT).show();
-            saveSuccesNotification();
+            //Toast.makeText(context, "Testimony Successfully Added ! ", Toast.LENGTH_SHORT).show();
+            //saveSuccesNotification();
+            callAPICreateTestimony();
         }
     }
-    public void saveSuccesNotification(){
+    private void callAPICreateTestimony() {
+        apiServices = APIUtilities.getAPIServices();
+        DataListTestimony data = new DataListTestimony();
+        data.setTitle(addTestimonyEditTexTitle.getText().toString());
+        data.setContent(addTestimonyEditTexContent.getText().toString());
+
+        apiServices.createNewTestimony("application/json", data)
+                .enqueue(new Callback<ModelTestimony>() {
+                    @Override
+                    public void onResponse(Call<ModelTestimony> call, Response<ModelTestimony> response) {
+                        if (response.code() == 201) {
+                            SaveSuccessNotification();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTestimony> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+
+    public void SaveSuccessNotification(){
         final AlertDialog.Builder builder;
         builder=  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")

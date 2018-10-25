@@ -14,7 +14,9 @@ import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
+import xbc.miniproject.com.xbcapplication.model.testimony.Testimony;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
@@ -71,7 +73,7 @@ public interface RequestAPIServices {
     //Create data
     //post Create
     @POST("xbc-ws/api/trainer/create")
-    Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
+    Call<ModelTrainer> createNewTrainer(@Header("Content-Type") String contentType,
                                            @Body DataListTrainer data);
 
     //GET get_one search
@@ -102,6 +104,18 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/testimony/id/{id}")
     Call<ModelTestimony> getOneTestimony(@Path("id") int id);
+
+    //POST CREATEE
+
+    @POST("/xbc-ws/api/testimony/create")
+    Call<ModelTestimony> createNewTestimony(@Header("Content-Type") String contentType,
+                                        @Body DataListTestimony data);
+    //PUT EDIT
+
+    @PUT("/xbc-ws/api/testimony/update")
+    Call<ModelTestimony> editTestimony(@Header("Content-Type") String contentType,
+                                   @Header("Authorization") String authorization,
+                                   @Body Testimony data);
 
 
 
