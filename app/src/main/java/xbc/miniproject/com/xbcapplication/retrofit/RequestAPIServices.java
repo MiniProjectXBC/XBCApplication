@@ -14,7 +14,11 @@ import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
+=======
+import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
+>>>>>>> 2cb416c49586cfa2d8203fc51f24ee333ab37a77
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
 import xbc.miniproject.com.xbcapplication.model.testimony.Testimony;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
@@ -132,5 +136,10 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
 
+    //Koneksi API di menu Class
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/class/batch/101")
+    Call<ModelClass> getListClass();
 
 }
