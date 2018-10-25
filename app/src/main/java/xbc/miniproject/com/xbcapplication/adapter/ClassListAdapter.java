@@ -12,16 +12,18 @@ import java.util.List;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.ClassModel;
+import xbc.miniproject.com.xbcapplication.model.kelas.Batch;
+import xbc.miniproject.com.xbcapplication.model.kelas.DataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.BiodataViewHolder;
 import xbc.miniproject.com.xbcapplication.viewHolder.ClassViewHolder;
 
 public class ClassListAdapter extends RecyclerView.Adapter<ClassViewHolder> {
     private Context context;
-    private List<ClassModel> classlist;
+    private List<DataList> dataList;
 
-    public ClassListAdapter(Context context, List<ClassModel> classlist) {
+    public ClassListAdapter(Context context, List<DataList> dataList) {
         this.context = context;
-        this.classlist = classlist;
+        this.dataList = dataList;
     }
 
     @NonNull
@@ -38,20 +40,20 @@ public class ClassListAdapter extends RecyclerView.Adapter<ClassViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder classViewHolder, int i) {
-        final ClassModel user = classlist.get(i);
+        final DataList user = dataList.get(i);
         classViewHolder.setModel(user, i, context);
     }
 
     @Override
     public int getItemCount() {
-        if (classlist != null) {
-            return classlist.size();
+        if (dataList != null) {
+            return dataList.size();
         } else {
             return 0;
         }
     }
-    public void filterList(List<ClassModel> filterList) {
-        classlist = filterList;
+    public void filterList(List<DataList> filterList) {
+        dataList = filterList;
         notifyDataSetChanged();
     }
 }
