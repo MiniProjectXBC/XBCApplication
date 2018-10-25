@@ -39,9 +39,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         listUserUsername.setText(dataList.getUsername());
 
 
-        //final Role role = new Role();
-
-
         listUserButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
