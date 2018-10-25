@@ -14,9 +14,6 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import xbc.miniproject.com.xbcapplication.EditUserActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.UserModel;
@@ -37,8 +34,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     }
     public void setModel(final DataList dataList, final int position, final Context context){
         listUserUsername.setText(dataList.getUsername());
-
-
+        listUserRole.setText(dataList.getRole().getName());
         listUserButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

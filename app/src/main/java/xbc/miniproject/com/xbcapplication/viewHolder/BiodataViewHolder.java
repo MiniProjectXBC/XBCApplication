@@ -15,10 +15,17 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class BiodataViewHolder extends RecyclerView.ViewHolder {
     TextView listBiodataTextViewName,
@@ -26,6 +33,10 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
             listBiodataTextViewGpa;
 
     ImageView listBiodataButtonAction;
+
+    RequestAPIServices apiServices;
+
+    int id;
 
     public BiodataViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -80,7 +91,8 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DeactiveSuccessNotification(context);
+                        //DeactiveSuccessNotification(context);
+                        deactiveBiodataAPI(biodataModel,position,context);
                         dialog.dismiss();
                     }
                 })
@@ -94,11 +106,38 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                 .show();
     }
 
-    private void DeactiveSuccessNotification(final Context context) {
+    private void deactiveBiodataAPI(BiodataList biodataModel, int position, final Context context) {
+        apiServices = APIUtilities.getAPIServices();
+        id = biodataModel.getId();
+
+        apiServices.deactivateBiodata(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_DEACTIVATED_BIODATA,id)
+                .enqueue(new Callback<ModelBiodata>() {
+                    @Override
+                    public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
+                        if (response.code() == 200){
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                DeactiveSuccessNotification(context,message);
+                            } else{
+                                DeactiveSuccessNotification(context,"Message Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelBiodata> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+    private void DeactiveSuccessNotification(final Context context,String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deactivated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

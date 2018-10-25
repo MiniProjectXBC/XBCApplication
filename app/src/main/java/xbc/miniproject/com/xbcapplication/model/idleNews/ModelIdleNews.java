@@ -1,35 +1,24 @@
 
-package xbc.miniproject.com.xbcapplication.model.biodata;
+package xbc.miniproject.com.xbcapplication.model.idleNews;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelBiodata {
+public class ModelIdleNews {
 
-    @SerializedName("data")
-    @Expose
-    private Biodata data;
     @SerializedName("dataList")
     @Expose
-    private List<BiodataList> dataList = null;
+    private List<DataList> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public Biodata getData() {
-        return data;
-    }
-
-    public void setData(Biodata data) {
-        this.data = data;
-    }
-
-    public List<BiodataList> getDataList() {
+    public List<DataList> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<BiodataList> dataList) {
+    public void setDataList(List<DataList> dataList) {
         this.dataList = dataList;
     }
 
