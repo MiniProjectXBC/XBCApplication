@@ -23,6 +23,7 @@ import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class EditTrainerActivity extends Activity {
     private Context context=this;
@@ -31,6 +32,7 @@ public class EditTrainerActivity extends Activity {
     private Button editTrainerButtonSave,
             editTrainerButtonCancel;
     RequestAPIServices apiServices;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,32 +99,39 @@ public class EditTrainerActivity extends Activity {
         }
     }
 
-    private void callAPIEditTrainer(){
+    private void callAPIEditTrainer(){apiServices = APIUtilities.getAPIServices();
 
-        apiServices = APIUtilities.getAPIServices();
-        DataListTrainer data = new DataListTrainer();
+        Trainer data = new Trainer();
+        data.setId(id);
         data.setName(editTrainerEditTextName.getText().toString());
         data.setNotes(editTrainerEditTexNote.getText().toString());
 
-        apiServices.editTrainer("application/json", data)
-                .enqueue(new Callback<DataListTrainer>() {
+        apiServices.editTrainer(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_BIODATA,
+                data)
+                .enqueue(new Callback<ModelTrainer>() {
                     @Override
-                    public void onResponse(Call<DataListTrainer> call, Response<DataListTrainer> response) {
+                    public void onResponse(Call<ModelTrainer> call, Response<ModelTrainer> response) {
                         if (response.code() == 200) {
-                            SaveSuccessNotification();
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                SaveSuccessNotification(message);
+                            } else{
+                                SaveSuccessNotification("Message Gagal Diambil");
+                            }
+
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<DataListTrainer> call, Throwable t) {
+                    public void onFailure(Call<ModelTrainer> call, Throwable t) {
                         Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 
 
-    public  void SaveSuccessNotification(){
+    public  void SaveSuccessNotification(String message){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
