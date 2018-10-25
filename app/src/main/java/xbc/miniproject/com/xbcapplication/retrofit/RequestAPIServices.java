@@ -53,17 +53,19 @@ public interface RequestAPIServices {
     Call<ModelUser> getListUsser();
 
     //koneksi API di menu trainer
-    //get data
+    //get search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/trainer/name/123")
     Call<ModelTrainer> getListTrainer();
 
 
 
-    //Create data
+    //post Create
     @POST("xbc-ws/api/trainer/create")
     Call<DataListTrainer> createNewTrainer(@Header("Content-Type") String contentType,
                                            @Body DataListTrainer data);
+
+    //
 
 
 }
