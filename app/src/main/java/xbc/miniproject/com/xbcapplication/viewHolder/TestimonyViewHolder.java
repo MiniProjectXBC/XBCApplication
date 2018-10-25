@@ -18,6 +18,8 @@ import xbc.miniproject.com.xbcapplication.EditTestimonyActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
+import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
+
 public class TestimonyViewHolder extends RecyclerView.ViewHolder {
     private TextView listTesimonyTitle;
     private ImageView listTestimonyButtonAction;
@@ -26,8 +28,8 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
         listTesimonyTitle = (TextView)itemView.findViewById(R.id.listTesimonyTitle);
         listTestimonyButtonAction = (ImageView)itemView.findViewById(R.id.listTestimonyButtonAction);
     }
-    public void setModel(final TestimonyModel testimonyModel, final int position, final Context context){
-        listTesimonyTitle.setText(testimonyModel.getName());
+    public void setModel(final DataListTestimony testimonyModel, final int position, final Context context){
+        listTesimonyTitle.setText(testimonyModel.getTitle());
         listTestimonyButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,11 +57,11 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    private void DeleteQuestion(TestimonyModel testimonyModel, final int position, final Context context){
+    private void DeleteQuestion(DataListTestimony testimonyModel, final int position, final Context context){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Delete "+ testimonyModel.getName())
+                .setMessage("Apakah Anda Yakin Akan Delete "+ testimonyModel.getTitle())
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -80,7 +82,7 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deleted!")
+                .setMessage("Testimony Successfully Deleted!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

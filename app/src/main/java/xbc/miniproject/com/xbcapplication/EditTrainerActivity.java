@@ -77,13 +77,13 @@ public class EditTrainerActivity extends Activity {
                     editTrainerEditTextName.setText(data.getName());
                     editTrainerEditTexNote.setText(data.getNotes().toString());
                 } else{
-                    Toast.makeText(context, "Gagal Mendapatkan Data Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Gagal Mendapatkan Testimony Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelTrainer> call, Throwable t) {
-                Toast.makeText(context, "Get Data onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Get Testimony onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -107,7 +107,7 @@ public class EditTrainerActivity extends Activity {
         data.setNotes(editTrainerEditTexNote.getText().toString());
 
         apiServices.editTrainer(Constanta.CONTENT_TYPE_API,
-                Constanta.AUTHORIZATION_EDIT_BIODATA,
+                Constanta.AUTHORIZATION_DEACTIVATED_TRAINER,
                 data)
                 .enqueue(new Callback<ModelTrainer>() {
                     @Override
@@ -135,7 +135,7 @@ public class EditTrainerActivity extends Activity {
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
