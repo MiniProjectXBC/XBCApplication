@@ -108,7 +108,7 @@ public class MonitoringViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deleted!")
+                .setMessage("Testimony Successfully Deleted!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

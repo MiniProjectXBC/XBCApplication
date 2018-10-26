@@ -18,6 +18,12 @@ import android.widget.Toast;
 
 import java.net.PasswordAuthentication;
 import java.util.ArrayList;
+import java.util.List;
+
+import xbc.miniproject.com.xbcapplication.model.user.DataList;
+import xbc.miniproject.com.xbcapplication.model.user.Role;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class AddUserActivity extends Activity {
     private Context context = this;
@@ -27,9 +33,10 @@ public class AddUserActivity extends Activity {
     private AutoCompleteTextView addUserEditTextRole;
     private Button addUserButtonSave;
     private Button addUserButtonCancel;
-    private String[] roles = {"Staff",
-            "Admin"};
+    private String[] roles ;
     private boolean isRoleSelected;
+    private RequestAPIServices apiServices;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,9 @@ public class AddUserActivity extends Activity {
         addUserEditTexPassword = (EditText) findViewById(R.id.addUserEditTexPassword);
         addUserEditTexRetypePassword = (EditText) findViewById(R.id.addUserEditTexRetypePassword);
         addUserEditTextRole =  (AutoCompleteTextView) findViewById(R.id.addUserEditTextRole);
+
+        getRolefromApi();
+
         final ArrayAdapter<String> adapter =  new ArrayAdapter<String>
                 (this, android.R.layout.select_dialog_item, roles);
         addUserEditTextRole.setThreshold(0);
@@ -108,17 +118,32 @@ public class AddUserActivity extends Activity {
             final String pas = addUserEditTexPassword.getText().toString();
             final String repas = addUserEditTexRetypePassword.getText().toString();
             if(pas.equalsIgnoreCase(repas)){
-                saveDataNotification();
+                panggilAPI();
             }else{
                 Toast.makeText(context, "Password Tidak Sama!", Toast.LENGTH_SHORT).show();
             }
         }
     }
+    public void getRolefromApi(){
+//        apiServices =  APIUtilities.getAPIServices();
+//        DataListTestimony data = new DataListTestimony();
+//        Role role = new Role();
+//        for(role.getId()!){
+//
+//        }
+    }
+    public void panggilAPI(){
+        saveDataNotification();
+        DataList dataUser = new DataList();
+        dataUser.setUsername(addUserEditTexUsername.getText().toString());
+        dataUser.setPassword(addUserEditTexPassword.getText().toString());
+        dataUser.setMRoleId(addUserEditTextRole);
+    }
     private void saveDataNotification(){
             final AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(context);
             builder.setTitle("NOTIFICATION !")
-                    .setMessage("Data Successfully added !")
+                    .setMessage("Testimony Successfully added !")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

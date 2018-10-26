@@ -67,7 +67,7 @@ public class AddIdleNewsActivity extends Activity {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Added!").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setMessage("Testimony Successfully Added!").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

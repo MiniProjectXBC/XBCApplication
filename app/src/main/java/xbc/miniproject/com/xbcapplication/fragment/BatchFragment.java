@@ -1,6 +1,5 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
-import android.arch.lifecycle.Lifecycle;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,23 +15,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddBatchActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BatchListAdapter;
-import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
+import xbc.miniproject.com.xbcapplication.model.batch.DataList;
+import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class BatchFragment extends Fragment {
-
     private EditText batchEditTextSearch;
     private Button batchButtonInsert;
     private RecyclerView batchRecyclerViewList;
 
-    private List<BatchModel> listBatch = new ArrayList<>();
+    private List<DataList> listBatch = new ArrayList<>();
     private BatchListAdapter batchListAdapter;
+
+    private RequestAPIServices apiServices;
 
     public BatchFragment() {
 
@@ -45,6 +52,8 @@ public class BatchFragment extends Fragment {
 
         //Cara mendapatkan Context di Fragment dengan menggunakan getActivity() atau getContext()
         //Toast.makeText(getContext(),"Test Context Behasil", Toast.LENGTH_LONG).show();
+
+        getDataFromAPI();
 
         batchRecyclerViewList = (RecyclerView) view.findViewById(R.id.batchRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
@@ -84,19 +93,41 @@ public class BatchFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         tampilkanListBatch();
 
-        return view;
 
+        return view;
+    }
+
+    private void getDataFromAPI(){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListBatch().enqueue(new Callback<ModelBatch>() {
+            @Override
+            public void onResponse(Call<ModelBatch> call, Response<ModelBatch> response) {
+                if (response.code() == 200){
+                    List<DataList> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size();i++){
+                        DataList data = tmp.get(i);
+                        listBatch.add(data);
+                    }
+                } else{
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Batch: " + response.code() + " msg: " + response.message(), Toast.LENGTH_SHORT).show();
+                 }
+            }
+
+            @Override
+            public void onFailure(Call<ModelBatch> call, Throwable t) {
+                Toast.makeText(getContext(), "List Batch onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void  filter(String text) {
-        ArrayList<BatchModel> filteredList = new ArrayList<>();
+        ArrayList<DataList> filteredList = new ArrayList<>();
 
-        for (BatchModel item : listBatch) {
-            if(item.getTechnology().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            } else if(item.getName().toLowerCase().contains(text.toLowerCase())){
+        for(DataList item : listBatch){
+            if (item.getName().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }
@@ -105,22 +136,22 @@ public class BatchFragment extends Fragment {
     }
 
     private void tampilkanListBatch(){
-        addDummyList();
+//        addDummyList();
         if (batchListAdapter == null) {
             batchListAdapter = new BatchListAdapter(getContext(), listBatch);
             batchRecyclerViewList.setAdapter(batchListAdapter);
         }
     }
 
-    private void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            BatchModel data = new BatchModel();
-            data.setTechnology("Dummy Technology " + index);
-            data.setName("Dummy Name " +index);
-            data.setTrainer("Dummy Trainer");
-            listBatch.add(data);
-            index++;
-        }
-    }
+//    private void addDummyList() {
+//        int index = 1;
+//        for (int i = 0; i < 5; i++) {
+//            BatchModel data = new BatchModel();
+//            data.setTechnology("Dummy Technology " + index);
+//            data.setName("Dummy Name " +index);
+//            data.setTrainer("Dummy Trainer");
+//            listBatch.add(data);
+//            index++;
+//        }
+//    }
 }
