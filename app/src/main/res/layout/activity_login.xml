@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/custom_input_login"
+        android:inputType="text"
         android:hint="@string/hintUsername"
         android:padding="10dp"
         android:textColor="@color/ef_white"

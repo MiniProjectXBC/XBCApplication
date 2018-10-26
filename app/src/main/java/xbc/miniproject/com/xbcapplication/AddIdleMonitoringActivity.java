@@ -25,11 +25,23 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.R;
+import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
+import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringBiodata;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class AddIdleMonitoringActivity extends AppCompatActivity {
     private Context context = this;
@@ -43,38 +55,21 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
     private Button addMonitoringButtonSave,
             addMonitoringButtonCancel;
 
-    private String[] names = {"Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Agus",
-            "Bagus",
-            "Cagus",
-            "Dagus",
-            "Eagus"};
+    private List<String> names = new ArrayList<>();
 
     private boolean isNameSelected;
 
     private Calendar calendar;
 
+    private RequestAPIServices apiServices;
+    private List<MonitoringDataList> listMonitoring = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_idle_monitoring);
+
+        getAutoCompleteAPI();
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -161,6 +156,24 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+    }
+
+    private void getAutoCompleteAPI() {
+        apiServices = APIUtilities.getAPIServices();
+
+        apiServices.getAutoCompleteMonitoringList().enqueue(new Callback<MonitoringDataList>() {
+            @Override
+            public void onResponse(Call<MonitoringDataList> call, Response<MonitoringDataList> response) {
+                if (response.code()== 200){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonitoringDataList> call, Throwable t) {
+
             }
         });
     }

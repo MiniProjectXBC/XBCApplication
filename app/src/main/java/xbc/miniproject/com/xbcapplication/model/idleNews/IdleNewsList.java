@@ -4,7 +4,7 @@ package xbc.miniproject.com.xbcapplication.model.idleNews;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DataList {
+public class IdleNewsList {
 
     @SerializedName("id")
     @Expose
