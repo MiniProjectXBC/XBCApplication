@@ -19,8 +19,10 @@ import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.role.ModelRole;
 import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
 import xbc.miniproject.com.xbcapplication.model.technology.DataList;
+import xbc.miniproject.com.xbcapplication.model.technology.Technology;
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
@@ -79,6 +81,7 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/user/name/123")
     Call<ModelUser> getListUsser();
+
     @POST("/xbc-ws/api/user/create")
     Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
                                   @Body xbc.miniproject.com.xbcapplication.model.user.DataList datauser);
@@ -87,10 +90,28 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelTechnology> getListTechnology();
-
+    //Create
     @POST("/xbc-ws/api/technology/create")
     Call<ModelTechnology> createNewTechnology(@Header("Content_Type")String contentType,
                                               @Body DataList data);
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("/xbc-ws/api/technology/id/{id}")
+    Call<ModelTechnology> getOneTechnology(@Path("id") int id);
+    //PUT edit
+    @PUT("/xbc-ws/api/technology/update")
+    Call<ModelTechnology> editTechnology(@Header("Content-Type") String contentType,
+                                   @Header("Authorization") String authorization,
+                                   @Body Technology data);
+    @PUT("/xbc-ws/api/technology/deactivate/{id}")
+    Call<ModelTechnology> deactiveTechnology(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization,
+                                         @Path ("id") int id);
+
+    //koneksi API di menu Role
+    //Get Role
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("/xbc-ws/api/role/key/g")
+    Call<ModelRole> getListRole();
 
     //koneksi API di menu trainer
     //get search

@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ModelTechnology {
 
+    @SerializedName("data")
+    @Expose
+    private Technology data;
     @SerializedName("dataList")
     @Expose
     private List<DataList> dataList = null;
@@ -14,12 +17,15 @@ public class ModelTechnology {
     @Expose
     private String message;
 
-    public List<DataList> getDataList() {
-        return dataList;
+    public Technology getData(){
+        return data;
+    }
+    public void setDataList(Technology data) {
+        this.data = data;
     }
 
-    public void setDataList(List<DataList> dataList) {
-        this.dataList = dataList;
+    public List<DataList> getDataList() {
+        return dataList;
     }
 
     public String getMessage() {
