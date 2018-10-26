@@ -102,7 +102,7 @@ public class IdleNewsFragment extends Fragment {
             @Override
             public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
                 if (response.code() == 200){
-                    List<IdleNewsList> tmp = response.body().getDataList();
+                    List<IdleNewsList> tmp = (List<IdleNewsList>) response.body().getDataList();
                     for (int i = 0; i<tmp.size();i++){
                         IdleNewsList data = tmp.get(i);
                         listIdleNews.add(data);

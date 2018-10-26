@@ -15,8 +15,23 @@ public class APIUtilities {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
 
-<<<<<<< HEAD
-    //generate get idleNews MAP params
+    public static MediaType mediaType() {
+        return okhttp3.MediaType.parse("application/json; charset=utf-8");
+    }
+
+    public static String generateLoginMap(String username, String password){
+        Map<String, String> map = new HashMap<>();
+        if(username != null) map.put("username", username);
+        if(password != null) map.put("password", password);
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
+
+        return json;
+    }
+
+    //generate add idleNews MAP params
     public static String generateIdleNewsMap(String title, String category, String content){
         Map<String, Object> map = new HashMap<>();
         if(title != null) map.put("title", title);
@@ -28,26 +43,11 @@ public class APIUtilities {
 
             map.put("name", unitObj);
         }
-=======
-    public static MediaType mediaType() {
-        return okhttp3.MediaType.parse("application/json; charset=utf-8");
-    }
-
-    public static String generateLoginMap(String username, String password){
-        Map<String, String> map = new HashMap<>();
-        if(username != null) map.put("username", username);
-        if(password != null) map.put("password", password);
->>>>>>> c23790791509d1de2a47bdeb3d3f97870046ed81
-
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.serializeNulls().create();
         String json = gson.toJson(map);
 
         return json;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> c23790791509d1de2a47bdeb3d3f97870046ed81
 }
-
