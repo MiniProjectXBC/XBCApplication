@@ -4,7 +4,7 @@ package xbc.miniproject.com.xbcapplication.model.technology;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DataListTechnology {
+public class DataList {
 
     @SerializedName("id")
     @Expose

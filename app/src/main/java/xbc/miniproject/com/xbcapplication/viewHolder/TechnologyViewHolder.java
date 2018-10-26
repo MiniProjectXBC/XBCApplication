@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.EditTechnologyActivity;
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
+import xbc.miniproject.com.xbcapplication.model.technology.DataList;
 
 public class TechnologyViewHolder extends RecyclerView.ViewHolder{
     private TextView listTecnologyName;
@@ -27,8 +27,9 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
         listTecnologyName = (TextView)itemView.findViewById(R.id.listTecnologyName);
         listTechnologyButtonAction = (ImageView)itemView.findViewById(R.id.listTechnologyButtonAction);
     }
-    public void setModel(final TechnologyModel technologyModel, final int position, final Context context) {
-        listTecnologyName.setText(technologyModel.getName());
+    public void setModel(final DataList dataList, final int position, final Context context) {
+        listTecnologyName.setText(dataList.getName());
+
         listTechnologyButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +46,7 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
                                 return true;
                             case R.id.tchnologyMenuDeactivate:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeactiveQuestion(technologyModel, position, context);
+                                DeactiveQuestion(dataList, position, context);
 //                                DeactiveSuccessNotification(context);
                                 return true;
                             default:
@@ -57,11 +58,11 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
-    private  void  DeactiveQuestion(TechnologyModel technologyModel, final int position, final Context context){
+    private  void  DeactiveQuestion(DataList dataList, final int position, final Context context){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Deactive "+technologyModel.getName())
+                .setMessage("Apakah Anda Yakin Akan Deactive "+ dataList.getName())
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

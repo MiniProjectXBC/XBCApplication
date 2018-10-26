@@ -1,5 +1,6 @@
 package xbc.miniproject.com.xbcapplication.retrofit;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -12,6 +13,7 @@ import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
@@ -57,6 +59,15 @@ public interface RequestAPIServices {
     @POST("/xbc-ws/api/user/create")
     Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
                                   @Body DataList datauser);
+    //Koneksi API di menu Technology
+    //Get Data
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/technology/name/123")
+    Call<ModelTechnology> getListTechnology();
+    @POST("/xbc-ws/api/technology/create")
+    Call<ModelTechnology> createNewTechnology(@Header("Content_Type")String contentType,
+                                              @Header("Authorization") String authorization,
+                                              @Body RequestBody dataTechnology);
 
     //koneksi API di menu trainer
     //get search
