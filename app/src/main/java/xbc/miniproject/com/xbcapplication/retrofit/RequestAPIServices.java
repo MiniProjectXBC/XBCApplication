@@ -14,19 +14,16 @@ import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginInput;
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
-=======
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
 import xbc.miniproject.com.xbcapplication.model.testimony.Testimony;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
->>>>>>> 7a9607e03bd0dce948485334153186a025746acd
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
