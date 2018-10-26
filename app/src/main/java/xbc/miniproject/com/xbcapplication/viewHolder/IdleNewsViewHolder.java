@@ -16,8 +16,7 @@ import android.widget.TextView;
 import xbc.miniproject.com.xbcapplication.EditIdleNewsActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.ShareIdleNewsActivity;
-import xbc.miniproject.com.xbcapplication.dummyModel.IdleNewsModel;
-import xbc.miniproject.com.xbcapplication.model.idleNews.DataList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 
 public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
     TextView listIdleNewsTextViewTitle,
@@ -33,9 +32,9 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
         listIdleNewsTextViewCategory = (TextView) itemView.findViewById(R.id.listIdleNewsTextViewCategory);
     }
 
-    public void setModelIdle(final DataList dataList, final int position, final Context context){
-        listIdleNewsTextViewTitle.setText(dataList.getTitle());
-        listIdleNewsTextViewCategory.setText(dataList.getCategory().getName());
+    public void setModelIdle(final IdleNewsList idleNewsList, final int position, final Context context){
+        listIdleNewsTextViewTitle.setText(idleNewsList.getTitle());
+        listIdleNewsTextViewCategory.setText(idleNewsList.getCategory().getName());
 
         listIdleNewsButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +53,7 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
                                 return true;
                             case R.id.idleNewsMenuPublish:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                PublishQuestion(dataList,position,context);
+                                PublishQuestion(idleNewsList,position,context);
                                 return true;
                             case R.id.idleNewsMenuShare:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
@@ -63,7 +62,7 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
                                 return true;
                             case R.id.idleNewsMenuDelete:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeleteQuestion(dataList,position,context);
+                                DeleteQuestion(idleNewsList,position,context);
                                 return true;
                             default:
                                 return false;
@@ -75,11 +74,11 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeleteQuestion(final DataList dataList, final int position, final Context context) {
+    private void DeleteQuestion(final IdleNewsList idleNewsList, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Menghapus "+ dataList.getTitle()+"?")
+                .setMessage("Apakah Anda Yakin Akan Menghapus "+ idleNewsList.getTitle()+"?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -110,11 +109,11 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
                 .setCancelable(false).show();
     }
 
-    private void PublishQuestion(final DataList dataList, final int position, final Context context) {
+    private void PublishQuestion(final IdleNewsList idleNewsList, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Publish "+ dataList.getTitle()+"?")
+                .setMessage("Apakah Anda Yakin Publish "+ idleNewsList.getTitle()+"?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
