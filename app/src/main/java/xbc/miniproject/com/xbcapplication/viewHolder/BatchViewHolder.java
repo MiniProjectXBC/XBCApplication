@@ -10,12 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import xbc.miniproject.com.xbcapplication.AddParticipantBatchActivity;
 import xbc.miniproject.com.xbcapplication.EditBatchActivity;
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
+import xbc.miniproject.com.xbcapplication.model.batch.DataList;
 
 public class BatchViewHolder extends RecyclerView.ViewHolder {
     TextView listBatchTextViewTechnology,
@@ -34,10 +33,10 @@ public class BatchViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public  void setModel(BatchModel batchModel, final int position , final Context context){
-        listBatchTextViewTechnology.setText(batchModel.getTechnology());
+    public  void setModel(final DataList batchModel, final int position , final Context context){
+        listBatchTextViewTechnology.setText(batchModel.getTechnology().getName());
         listBatchTextViewName.setText(batchModel.getName());
-        listBatchTextViewTrainer.setText(batchModel.getTrainer());
+        listBatchTextViewTrainer.setText(batchModel.getTrainer().getName());
 
         listBatchButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,12 +12,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
+import xbc.miniproject.com.xbcapplication.model.testimony.Testimony;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
+import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+
 public class EditTestimonyActivity extends Activity {
     private Context context = this;
     private EditText editTestimonyEditTextTitle,
             editTestimonyEditTexContent;
     private Button editTestimonyButtonSave,
             editTestimonyButtonCancel;
+    private RequestAPIServices apiServices;
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +55,84 @@ public class EditTestimonyActivity extends Activity {
                 finish();
             }
         });
+
+        int id = getIntent().getIntExtra("id",0);
+        getOneTestimonyAPI(id);
     }
+
+
+    private void getOneTestimonyAPI(int id) {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getOneTestimony(id).enqueue(new Callback<ModelTestimony>() {
+            @Override
+            public void onResponse(Call<ModelTestimony> call, Response<ModelTestimony> response) {
+                if (response.code() == 200){
+                    Testimony data = response.body().getData();
+                    editTestimonyEditTextTitle.setText(data.getTitle());
+                    editTestimonyEditTexContent.setText(data.getContent().toString());
+                } else{
+                    Toast.makeText(context, "Gagal Mendapatkan Testimony Trainer: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelTestimony> call, Throwable t) {
+                Toast.makeText(context, "Get Testimony onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+
+
+
+
     private void inputValidation(){
         if(editTestimonyEditTextTitle.getText().toString().trim().length()==0){
             Toast.makeText(context, "Title Field still Empty!", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Data Successfully Added ! ", Toast.LENGTH_SHORT).show();
-            saveSuccesNotification();
+            //Toast.makeText(context, "Testimony Successfully Added ! ", Toast.LENGTH_SHORT).show();
+            //saveSuccesNotification();
+            callAPIEditTrainer();
         }
     }
-    public  void saveSuccesNotification(){
+
+    private void callAPIEditTrainer(){
+        apiServices = APIUtilities.getAPIServices();
+
+        Testimony data = new Testimony();
+        data.setId(id);
+        data.setTitle(editTestimonyEditTextTitle.getText().toString());
+        data.setContent(editTestimonyEditTexContent.getText().toString());
+
+        apiServices.editTestimony(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_BIODATA, data)
+                .enqueue(new Callback<ModelTestimony>() {
+                    @Override
+                    public void onResponse(Call<ModelTestimony> call, Response<ModelTestimony> response) {
+                        if (response.code() == 200) {
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                SaveSuccessNotification(message);
+                            } else{
+                                SaveSuccessNotification("Message Gagal Diambil");
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTestimony> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    public  void SaveSuccessNotification(String message){
         final AlertDialog.Builder builder;
         builder=  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated !")
+                .setMessage("Testimony Successfully Updated !")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -66,6 +143,9 @@ public class EditTestimonyActivity extends Activity {
                 .setCancelable(false)
                 .show();
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

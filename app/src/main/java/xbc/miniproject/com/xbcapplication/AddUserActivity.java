@@ -126,7 +126,11 @@ public class AddUserActivity extends Activity {
     }
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
+<<<<<<< HEAD
 //        IdleNewsList data = new IdleNewsList();
+=======
+//        DataListTestimony data = new DataListTestimony();
+>>>>>>> c23790791509d1de2a47bdeb3d3f97870046ed81
 //        Role role = new Role();
 //        for(role.getId()!){
 //
@@ -143,7 +147,7 @@ public class AddUserActivity extends Activity {
             final AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(context);
             builder.setTitle("NOTIFICATION !")
-                    .setMessage("Data Successfully added !")
+                    .setMessage("Testimony Successfully added !")
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

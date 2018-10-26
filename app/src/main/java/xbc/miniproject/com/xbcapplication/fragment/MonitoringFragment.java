@@ -18,20 +18,31 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.AddIdleMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.BiodataListAdapter;
 import xbc.miniproject.com.xbcapplication.adapter.MonitoringListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
+import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringData;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class MonitoringFragment extends Fragment {
     private EditText monitoringEditTextSearch;
     private Button monitoringButtonInsert;
     private RecyclerView monitoringRecyclerViewList;
 
-    private List<MonitoringModel> listMonitoring = new ArrayList<>();
+    private List<MonitoringDataList> listMonitoring = new ArrayList<>();
     private MonitoringListAdapter monitoringListAdapter;
+
+    RequestAPIServices apiServices;
 
     public MonitoringFragment() {
 
@@ -41,6 +52,8 @@ public class MonitoringFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_monitoring, container, false);
+
+        getDataFromAPI();
 
         monitoringButtonInsert = (Button) view.findViewById(R.id.monitoringButtonInsert);
         monitoringButtonInsert.setOnClickListener(new View.OnClickListener() {
@@ -85,31 +98,38 @@ public class MonitoringFragment extends Fragment {
         return view;
     }
 
+    private void getDataFromAPI() {
+        apiServices = APIUtilities.getAPIServices();
+
+        apiServices.getMonitoringList().enqueue(new Callback<ModelMonitoring>() {
+            @Override
+            public void onResponse(Call<ModelMonitoring> call, Response<ModelMonitoring> response) {
+                List<MonitoringDataList> tmp = response.body().getMonitoringDataList();
+                for (int i = 0; i<tmp.size();i++) {
+                    MonitoringDataList data = tmp.get(i);
+                    listMonitoring.add(data);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelMonitoring> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void tampilkanListBiodata() {
-        addDummyList();
         if (monitoringListAdapter == null) {
             monitoringListAdapter = new MonitoringListAdapter(getContext(), listMonitoring);
             monitoringRecyclerViewList.setAdapter(monitoringListAdapter);
         }
     }
 
-    private void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            MonitoringModel data = new MonitoringModel();
-            data.setName("Dummy Name " + index);
-            data.setIdleDate("Dummy Idle Date");
-            data.setPlacementDate("Dummy Placement Date");
-            listMonitoring.add(data);
-            index++;
-        }
-    }
-
     private void filter(String text) {
-        ArrayList<MonitoringModel> filteredList = new ArrayList<>();
+        ArrayList<MonitoringDataList> filteredList = new ArrayList<>();
 
-        for (MonitoringModel item : listMonitoring) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+        for (MonitoringDataList item : listMonitoring) {
+            if (item.getMonitoringBiodata().getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }

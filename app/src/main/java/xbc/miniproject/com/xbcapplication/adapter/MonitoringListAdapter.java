@@ -12,14 +12,16 @@ import java.util.List;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
+import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.BiodataViewHolder;
 import xbc.miniproject.com.xbcapplication.viewHolder.MonitoringViewHolder;
 
 public class MonitoringListAdapter extends RecyclerView.Adapter<MonitoringViewHolder> {
     private Context context;
-    private List<MonitoringModel> monitoringList;
+    private List<MonitoringDataList> monitoringList;
 
-    public MonitoringListAdapter(Context context, List<MonitoringModel> monitoringList) {
+    public MonitoringListAdapter(Context context, List<MonitoringDataList> monitoringList) {
         this.context = context;
         this.monitoringList = monitoringList;
     }
@@ -37,7 +39,7 @@ public class MonitoringListAdapter extends RecyclerView.Adapter<MonitoringViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MonitoringViewHolder monitoringViewHolder, int position) {
-        final MonitoringModel user = monitoringList.get(position);
+        final MonitoringDataList user = monitoringList.get(position);
         monitoringViewHolder.setModel(user, position, context);
 
     }
@@ -51,7 +53,7 @@ public class MonitoringListAdapter extends RecyclerView.Adapter<MonitoringViewHo
         }
     }
 
-    public void filterList(List<MonitoringModel> filterList) {
+    public void filterList(List<MonitoringDataList> filterList) {
         monitoringList = filterList;
         notifyDataSetChanged();
     }

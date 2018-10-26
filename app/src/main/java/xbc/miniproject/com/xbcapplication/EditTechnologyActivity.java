@@ -52,14 +52,14 @@ public class EditTechnologyActivity extends Activity {
         }else{
             //hanya pesan
             saveSuccessfullyNotification();
-            Toast.makeText(context,"Data successfully updated!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Testimony successfully updated!",Toast.LENGTH_SHORT).show();
         }
     }
     public  void saveSuccessfullyNotification(){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Updated!")
+                .setMessage("Testimony Successfully Updated!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
