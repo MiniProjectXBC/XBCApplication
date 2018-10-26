@@ -59,7 +59,7 @@ public interface RequestAPIServices {
 
 
     //Koneksi API di menu User
-    //Get Testimony
+    //Get Data User
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/user/name/123")
     Call<ModelUser> getListUsser();
@@ -67,7 +67,7 @@ public interface RequestAPIServices {
     Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
                                   @Body DataList datauser);
     //Koneksi API di menu Technology
-    //Get Data
+    //Get Data Technology
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelTechnology> getListTechnology();
