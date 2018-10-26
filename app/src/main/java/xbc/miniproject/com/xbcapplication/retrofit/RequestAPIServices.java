@@ -2,6 +2,7 @@ package xbc.miniproject.com.xbcapplication.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -117,6 +118,12 @@ public interface RequestAPIServices {
     Call<ModelTestimony> editTestimony(@Header("Content-Type") String contentType,
                                    @Header("Authorization") String authorization,
                                    @Body Testimony data);
+    //DEL delete
+
+    @DELETE("xbc-ws/api/testimony/delete/{id}")
+    Call<ModelTestimony> deleteTestimony(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization,
+                                         @Path("id") int id);
 
 
 

@@ -14,15 +14,26 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.EditTestimonyActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
+import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
+import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
+import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class TestimonyViewHolder extends RecyclerView.ViewHolder {
     private TextView listTesimonyTitle;
     private ImageView listTestimonyButtonAction;
+    private RequestAPIServices apiServices;
+     int id;
     public TestimonyViewHolder(@NonNull View itemView) {
         super(itemView);
         listTesimonyTitle = (TextView)itemView.findViewById(R.id.listTesimonyTitle);
@@ -40,12 +51,12 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case  R.id.testimonyMenuEdit:
-                                Toast.makeText(context,"Anda menekan button edit"+position, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context,"Anda menekan button edit"+position, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, EditTestimonyActivity.class);
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.testimonyMenuDelete:
-                                Toast.makeText(context,"Anda Menekan Delete pada Posisi"+position, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context,"Anda Menekan Delete pada Posisi"+position, Toast.LENGTH_SHORT).show();
                                 DeleteQuestion(testimonyModel, position, context);
                                 return true;
                             default:
@@ -57,7 +68,7 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    private void DeleteQuestion(DataListTestimony testimonyModel, final int position, final Context context){
+    private void DeleteQuestion(final DataListTestimony testimonyModel, final int position, final Context context){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
@@ -65,8 +76,9 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        deleteTestimonyAPI(testimonyModel, position, context);
                         dialog.dismiss();
-                        DeleteSuccessNotification(context);
+                        //DeleteSuccessNotification(context);
                     }
                 })
                 .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
@@ -78,7 +90,35 @@ public class TestimonyViewHolder extends RecyclerView.ViewHolder {
                 .setCancelable(false)
                 .show();
     }
-    private void DeleteSuccessNotification(final Context context) {
+
+    private void deleteTestimonyAPI(DataListTestimony dataListTestimony, int position, final Context context) {
+        apiServices = APIUtilities.getAPIServices();
+        id = dataListTestimony.getId();
+
+        apiServices.deleteTestimony(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_DEACTIVATED_BIODATA,id)
+                .enqueue(new Callback<ModelTestimony>() {
+                    @Override
+                    public void onResponse(Call<ModelTestimony> call, Response<ModelTestimony> response) {
+                        if (response.code() == 200){
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                DeleteSuccessNotification(context,message);
+                            } else{
+                                DeleteSuccessNotification(context,"Message Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTestimony> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+    private void DeleteSuccessNotification(final Context context, String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
