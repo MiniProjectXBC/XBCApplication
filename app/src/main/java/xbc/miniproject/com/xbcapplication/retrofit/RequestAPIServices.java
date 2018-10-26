@@ -14,13 +14,10 @@ import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
 
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginInput;
-=======
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
@@ -180,27 +177,19 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
     Call<ModelIdleNews> createNewIdleNews(@Header("Content-Type") String contentType,
                                         @Body IdleNewsList data);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
     //Koneksi API di menu Class
     //GET Search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
-<<<<<<< HEAD
 
-    
-=======
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
+
+
 }
