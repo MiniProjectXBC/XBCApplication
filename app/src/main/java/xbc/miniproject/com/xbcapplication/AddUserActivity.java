@@ -163,7 +163,6 @@ public class AddUserActivity extends Activity {
     }
 
     public void panggilAPI(final int position){
-
         DataList dataUser = new DataList();
         dataUser.setUsername(addUserEditTexUsername.getText().toString());
         dataUser.setPassword(addUserEditTexPassword.getText().toString());
