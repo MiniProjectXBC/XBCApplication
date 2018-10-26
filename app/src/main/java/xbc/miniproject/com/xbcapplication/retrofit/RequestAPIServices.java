@@ -3,6 +3,7 @@ package xbc.miniproject.com.xbcapplication.retrofit;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -41,7 +42,6 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/biodata/name/123")
     Call<ModelBiodata> getListBiodata();
-
 
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
@@ -121,8 +121,8 @@ public interface RequestAPIServices {
                                          @Header("Authorization") String authorization,
                                          @Path("id") int id);
 
-    //Koneksi api di menu testimony
 
+    //Koneksi api di menu testimony
     //GET SEARCH
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/testimony/title/a")
@@ -133,18 +133,22 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/testimony/id/{id}")
     Call<ModelTestimony> getOneTestimony(@Path("id") int id);
 
-    //POST CREATEE
-
+    //POST CREATE
     @POST("/xbc-ws/api/testimony/create")
     Call<ModelTestimony> createNewTestimony(@Header("Content-Type") String contentType,
                                         @Body DataListTestimony data);
-    //PUT EDIT
 
+    //PUT EDIT
     @PUT("/xbc-ws/api/testimony/update")
     Call<ModelTestimony> editTestimony(@Header("Content-Type") String contentType,
                                    @Header("Authorization") String authorization,
                                    @Body Testimony data);
+    //DEL delete
 
+    @DELETE("xbc-ws/api/testimony/delete/{id}")
+    Call<ModelTestimony> deleteTestimony(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization,
+                                         @Path("id") int id);
 
 
     //konek API di menu Batch
@@ -152,6 +156,16 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/batch/name/123")
     Call<ModelBatch> getListBatch();
+
+    //POST CREATE
+    @POST("xbc-ws/api/batch/create")
+    Call<ModelBatch> createNewBatch(@Header("Content-Type") String contentType,
+                                    @Body xbc.miniproject.com.xbcapplication.model.batch.DataList data);
+
+    //PUT EDIT
+//    @PUT("xbc-ws/api/batch/update") editBatch(@Header("Content-Type") String contentType,
+//                                              @Header("Authorization") String authorization,
+//                                              @Body  data);
 
 
     //Koneksi API di menu Idle News
