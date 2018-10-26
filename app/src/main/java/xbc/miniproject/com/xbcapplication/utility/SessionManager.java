@@ -11,27 +11,21 @@ public class SessionManager {
     protected static SharedPreferences.Editor retieveSharedPreferenceEditor (Context context){
         return retrieveSharedReferences(context).edit();
     }
-    public static void saveregistrationdata(Context context,
-                                            String fullname,
-                                            int age,
-                                            boolean register){
-        SharedPreferences.Editor editor = retieveSharedPreferenceEditor(context);
-        editor.putString(Constanta.KEY_FUULNAME, fullname);
-        editor.putInt(Constanta.KEY_AGE, age);
-        editor.putBoolean(Constanta.KEY_IS_REGISTER, register);
 
+    //simpan data login
+    public static void saveLoginData(Context context,
+                                            String username,
+                                            String token,
+                                            boolean login
+    ){
+        SharedPreferences.Editor editor = retieveSharedPreferenceEditor(context);
+        editor.putString("username", username);
+        editor.putString("token", token);
+        editor.putBoolean("isLogin", login);
         editor.commit();
     }
-    //ambil data
-    public static boolean isRegister(Context context){
-        return retrieveSharedReferences(context).getBoolean(Constanta.KEY_IS_REGISTER, false);
-    }
 
-    public static String getFullname(Context context){
-        return retrieveSharedReferences(context).getString(Constanta.KEY_FUULNAME, "");
-    }
-
-    public static int getAge(Context context){
-        return retrieveSharedReferences(context).getInt(Constanta.KEY_AGE, 0);
+    public static boolean isLogin(Context context){
+        return retrieveSharedReferences(context).getBoolean("isLogin", false);
     }
 }
