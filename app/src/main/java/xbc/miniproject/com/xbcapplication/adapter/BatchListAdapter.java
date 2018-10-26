@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
-import xbc.miniproject.com.xbcapplication.dummyModel.BatchModel;
+import xbc.miniproject.com.xbcapplication.model.batch.DataList;
 import xbc.miniproject.com.xbcapplication.viewHolder.BatchViewHolder;
 
 public class BatchListAdapter extends RecyclerView.Adapter<BatchViewHolder> {
     private Context context;
-    private List<BatchModel> batchList;
+    private List<DataList> dataList;
 
-    public BatchListAdapter(Context context, List<BatchModel> batchList) {
+    public BatchListAdapter(Context context, List<DataList> dataList) {
         this.context = context;
-        this.batchList = batchList;
+        this.dataList = dataList;
     }
 
     @NonNull
@@ -35,22 +35,22 @@ public class BatchListAdapter extends RecyclerView.Adapter<BatchViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BatchViewHolder batchViewHolder, int position) {
-        final BatchModel user = batchList.get(position);
+        final DataList user = dataList.get(position);
         batchViewHolder.setModel(user, position,context);
     }
 
     @Override
     public int getItemCount() {
 
-        if (batchList != null) {
-            return batchList.size();
+        if (dataList != null) {
+            return dataList.size();
         } else {
             return 0;
         }
     }
 
-    public  void filterList(List<BatchModel> filterList) {
-        batchList = filterList;
+    public  void filterList(List<DataList> filterList) {
+        dataList = filterList;
         notifyDataSetChanged();
     }
 }

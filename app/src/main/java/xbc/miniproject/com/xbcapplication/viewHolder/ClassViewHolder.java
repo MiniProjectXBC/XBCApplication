@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.ClassModel;
+import xbc.miniproject.com.xbcapplication.model.kelas.DataList;
 
 public class ClassViewHolder extends RecyclerView.ViewHolder {
     TextView listClassTextViewBatch,
@@ -27,9 +28,9 @@ public class ClassViewHolder extends RecyclerView.ViewHolder {
         listClassButtonAction = (ImageView) itemView.findViewById(R.id.listClassButtonAction);
     }
 
-    public void setModel (final ClassModel classModel, final int position, final Context context){
-        listClassTextViewBatch.setText(classModel.getBatch());
-        listClassTextViewName.setText(classModel.getName());
+    public void setModel (final DataList classModel, final int position, final Context context){
+        listClassTextViewBatch.setText(classModel.getBatch().getName());
+        listClassTextViewName.setText(classModel.getBiodata().getName());
 
         listClassButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +43,7 @@ public class ClassViewHolder extends RecyclerView.ViewHolder {
                         switch (item.getItemId()) {
                             case R.id.classMenuDelete:
                                 //Toast.makeText(context, "Anda Menekan Action Deactive pada Posisi: "+position,Toast.LENGTH_SHORT).show();
-                                DeleteQuestion(classModel,position,context);
+//                                DeleteQuestion(classModel,position,context);
                                 return true;
                             default:
                                 return false;
@@ -80,7 +81,7 @@ public class ClassViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Delete!")
+                .setMessage("Testimony Successfully Delete!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

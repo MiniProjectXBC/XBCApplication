@@ -13,21 +13,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.ClassListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.ClassModel;
+import xbc.miniproject.com.xbcapplication.model.kelas.Batch;
+import xbc.miniproject.com.xbcapplication.model.kelas.DataList;
+import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class ClassFragment extends Fragment {
     private EditText classEditTextSearch;
     private RecyclerView classRecyclerViewList;
 
-    private List<ClassModel> listClass = new ArrayList<>();
+    private List<DataList> listClass = new ArrayList<>();
     private ClassListAdapter classListAdapter;
+
+    private RequestAPIServices apiServices;
 
     public ClassFragment() {
 
@@ -37,6 +48,8 @@ public class ClassFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_class, container, false);
+
+        getDataFromAPI();
 
         classRecyclerViewList = (RecyclerView) view.findViewById(R.id.classRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false);
@@ -71,11 +84,36 @@ public class ClassFragment extends Fragment {
         return view;
     }
 
-    private void filter(String text) {
-        ArrayList<ClassModel> filteredList = new ArrayList<>();
+    private void getDataFromAPI(){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListClass().enqueue(new Callback<ModelClass>() {
+            @Override
+            public void onResponse(Call<ModelClass> call, Response<ModelClass> response) {
+                if(response.code() == 200){
+                    List<DataList> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size(); i++){
+                        DataList data = tmp.get(i);
+                        listClass.add(data);
+                    }
+                } else {
+                    Toast.makeText(getContext(),"Gagal Mendapatkan List Class: " + response.code() + " msg: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        for (ClassModel item : listClass) {
-            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+            @Override
+            public void onFailure(Call<ModelClass> call, Throwable t) {
+                Toast.makeText(getContext(), "List Class onFailure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
+    private void filter(String text) {
+        ArrayList<DataList> filteredList = new ArrayList<>();
+
+        for (DataList item : listClass) {
+            if (item.getClass().toString().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
@@ -84,21 +122,21 @@ public class ClassFragment extends Fragment {
     }
 
     private void tampilkanListClass() {
-        addDummyList();
+//        addDummyList();
         if (classListAdapter == null) {
             classListAdapter = new ClassListAdapter(getContext(), listClass);
             classRecyclerViewList.setAdapter(classListAdapter);
         }
     }
 
-    private void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            ClassModel data = new ClassModel();
-            data.setBatch("Dummy Batch " + index);
-            data.setName("Dummy Name " + index);
-            listClass.add(data);
-            index++;
-        }
-    }
+//    private void addDummyList() {
+//        int index = 1;
+//        for (int i = 0; i < 5; i++) {
+//            ClassModel data = new ClassModel();
+//            data.setBatch("Dummy Batch " + index);
+//            data.setName("Dummy Name " + index);
+//            listClass.add(data);
+//            index++;
+//        }
+//    }
 }

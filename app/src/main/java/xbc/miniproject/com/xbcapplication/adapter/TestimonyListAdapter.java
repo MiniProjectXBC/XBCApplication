@@ -11,12 +11,13 @@ import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
+import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.viewHolder.TestimonyViewHolder;
 
 public class TestimonyListAdapter extends RecyclerView.Adapter<TestimonyViewHolder>{
     private Context context;
-    private List<TestimonyModel> testimonyModelList;
-    public TestimonyListAdapter(Context context, List<TestimonyModel> testimonyModelList) {
+    private List<DataListTestimony> testimonyModelList;
+    public TestimonyListAdapter(Context context, List<DataListTestimony> testimonyModelList) {
         this.context=context;
         this.testimonyModelList=testimonyModelList;
     }
@@ -33,7 +34,7 @@ public class TestimonyListAdapter extends RecyclerView.Adapter<TestimonyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull TestimonyViewHolder testimonyViewHolder, int position) {
-        final TestimonyModel user = testimonyModelList.get(position);
+        final DataListTestimony user = testimonyModelList.get(position);
         testimonyViewHolder.setModel(user, position,context);
     }
 
@@ -45,7 +46,7 @@ public class TestimonyListAdapter extends RecyclerView.Adapter<TestimonyViewHold
             return 0;
         }
     }
-    public void filterList (List<TestimonyModel> filterLst){
+    public void filterList (List<DataListTestimony> filterLst){
         testimonyModelList = filterLst;
         notifyDataSetChanged();
     }

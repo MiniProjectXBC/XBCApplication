@@ -83,7 +83,7 @@ public class TechnologyViewHolder extends RecyclerView.ViewHolder{
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Data Successfully Deactivated!")
+                .setMessage("Testimony Successfully Deactivated!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

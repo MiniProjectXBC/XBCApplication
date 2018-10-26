@@ -87,7 +87,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTOFICATION !")
-                .setMessage("Data Succesfully Deactive !")
+                .setMessage("Testimony Succesfully Deactive !")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
