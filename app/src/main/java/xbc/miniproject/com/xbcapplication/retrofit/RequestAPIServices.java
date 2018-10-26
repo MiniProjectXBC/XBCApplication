@@ -10,19 +10,16 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import xbc.miniproject.com.xbcapplication.dummyModel.TestimonyModel;
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
+import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-=======
-import xbc.miniproject.com.xbcapplication.model.login.ModelLoginInput;
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
->>>>>>> c23790791509d1de2a47bdeb3d3f97870046ed81
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
@@ -33,7 +30,6 @@ import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
-import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public interface RequestAPIServices {
 
@@ -163,18 +159,35 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
 
-<<<<<<< HEAD
+
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
     Call<ModelIdleNews> createNewIdleNews(@Header("Content-Type") String contentType,
                                         @Body IdleNewsList data);
 
-=======
+
     //Koneksi API di menu Class
     //GET Search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
->>>>>>> c23790791509d1de2a47bdeb3d3f97870046ed81
+
+    //KONEKSI API FEEDBACK
+    //get autocomplete
+    @Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
+    @GET("role/key/{keyword}")
+    Call<ModelAutocompleteFeedback> roleautocomplete(@Header("Content-Type") String contentType,
+                                                     @Header("Authorization") String tokenAuthorization,
+                                                     @Path("keyword") String keyword);
+    //get question
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/technology/name/123")
+    Call<ModelQuestionFeedback>  getListQuestionFeedback();
+
+
+
+
+
+
 
 }
