@@ -27,7 +27,7 @@ public class SplashScreenActivity extends Activity {
             @Override
             public void run() {
                 //pindah ke scree berikutnya
-                if (SessionManager.isRegister(context)) {
+                if (SessionManager.isLogin(context)) {
                     //bypass ke main menu
                     Intent intent = new Intent(context, HomeActivity. class);
                     startActivity(intent);

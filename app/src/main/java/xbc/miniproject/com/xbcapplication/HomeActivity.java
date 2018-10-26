@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -34,6 +35,7 @@ import xbc.miniproject.com.xbcapplication.fragment.TechnologyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
 import xbc.miniproject.com.xbcapplication.fragment.UserFragment;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,12 +78,12 @@ public class HomeActivity extends AppCompatActivity
         //Bagian Menu Yang Terkoneksi dengan Fragment
         int id = menuItem.getItemId();
 
-        //Menu Biodata
+        //Menu MonitoringBiodata
         if (id == R.id.menuBiodata) {
             setActionBarTitle("Biodata");
             BiodataFragment biodataFragment = new BiodataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "Biodata");
+            fragmentTransaction.replace(R.id.frame_all_menu, biodataFragment, "MonitoringBiodata");
             fragmentTransaction.commit();
         }
         //Menu Trainer
@@ -187,6 +189,8 @@ public class HomeActivity extends AppCompatActivity
             //slide navigation drawer
             drawerLayout.openDrawer(Gravity.LEFT);
         } else if(id == R.id.homeOptionLogout){
+            SharedPreferences sharedPreferences = getSharedPreferences(Constanta.SHARED_PREFERENCE_NAME,MODE_PRIVATE);
+            sharedPreferences.edit().clear().apply();
             Intent intent = new Intent(context,LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

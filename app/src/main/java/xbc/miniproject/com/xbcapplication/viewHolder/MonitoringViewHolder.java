@@ -19,6 +19,8 @@ import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.EditIdleMonitoringActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
+import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
+import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
 
 public class MonitoringViewHolder extends RecyclerView.ViewHolder {
     TextView listMonitoringTextViewName,
@@ -37,10 +39,14 @@ public class MonitoringViewHolder extends RecyclerView.ViewHolder {
         listMonitoringButtonAction = (ImageView) itemView.findViewById(R.id.listMonitoringButtonAction);
     }
 
-    public void setModel(final MonitoringModel monitoringModel, final int position, final Context context){
-        listMonitoringTextViewName.setText(monitoringModel.getName());
+    public void setModel(final MonitoringDataList monitoringModel, final int position, final Context context){
+        listMonitoringTextViewName.setText(monitoringModel.getMonitoringBiodata().getName());
         listMonitoringTextViewIdleDate.setText(monitoringModel.getIdleDate());
-        listMonitoringTextViewPlacementDate.setText(monitoringModel.getPlacementDate());
+        if (monitoringModel.getPlacementDate() == null){
+            listMonitoringTextViewPlacementDate.setText("");
+        } else{
+            listMonitoringTextViewPlacementDate.setText(monitoringModel.getPlacementDate().toString());
+        }
 
         listMonitoringButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +82,11 @@ public class MonitoringViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeleteQuestion(final MonitoringModel monitoringModel, final int position, final Context context) {
+    private void DeleteQuestion(final MonitoringDataList monitoringModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Delete "+ monitoringModel.getName()+"?")
+                .setMessage("Apakah Anda Yakin Akan Delete "+ monitoringModel.getMonitoringBiodata().getName()+"?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
