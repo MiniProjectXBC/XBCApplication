@@ -9,17 +9,17 @@ public class ModelIdleNews {
 
     @SerializedName("dataList")
     @Expose
-    private List<DataList> dataList = null;
+    private List<IdleNewsList> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<DataList> getDataList() {
+    public List<IdleNewsList> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<DataList> dataList) {
-        this.dataList = dataList;
+    public void setDataList(List<IdleNewsList> idleNewsList) {
+        this.dataList = idleNewsList;
     }
 
     public String getMessage() {

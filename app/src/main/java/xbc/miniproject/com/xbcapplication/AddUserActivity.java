@@ -126,7 +126,7 @@ public class AddUserActivity extends Activity {
     }
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
-//        DataList data = new DataList();
+//        IdleNewsList data = new IdleNewsList();
 //        Role role = new Role();
 //        for(role.getId()!){
 //

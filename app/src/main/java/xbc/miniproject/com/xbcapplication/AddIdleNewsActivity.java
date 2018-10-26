@@ -5,13 +5,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class AddIdleNewsActivity extends Activity {
     private Context context = this;
@@ -22,6 +29,7 @@ public class AddIdleNewsActivity extends Activity {
 
     Button addIdleNewsButtonSave,
             addIdleNewsButtonCancel;
+    RequestAPIServices apiServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +67,39 @@ public class AddIdleNewsActivity extends Activity {
         } else if(addIdleNewsEditTextCategory.getText().toString().trim().length() == 0){
             Toast.makeText(context,"Category Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+//            SaveSuccessNotification();
+            callAPICreateIdleNews();
         }
+    }
+
+    private void callAPICreateIdleNews() {
+        apiServices = APIUtilities.getAPIServices();
+
+        IdleNewsList data = new IdleNewsList();
+        data.setTitle(addIdleNewsEditTextTitle.getText().toString());
+        data.setContent(addIdleNewsEditTextContent.getText().toString());
+        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
+
+        apiServices.createNewIdleNews("application/json", data)
+                .enqueue(new Callback<ModelIdleNews>() {
+                    @Override
+                    public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
+                        if (response.code() == 201) {
+                            String message = response.body().getMessage();
+                            if (message!=null){
+                                SaveSuccessNotification();
+                            } else{
+                                Toast.makeText(context,"Message Gagal Diambil", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelIdleNews> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     public void SaveSuccessNotification(){

@@ -11,6 +11,7 @@ import retrofit2.http.Path;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
@@ -88,6 +89,11 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
+
+    //POST Create
+    @POST("/xbc-ws/api/biodata/create")
+    Call<ModelIdleNews> createNewIdleNews(@Header("Content-Type") String contentType,
+                                        @Body IdleNewsList data);
 
 
 }

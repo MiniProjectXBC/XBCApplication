@@ -23,15 +23,10 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import xbc.miniproject.com.xbcapplication.AddBiodataActivity;
 import xbc.miniproject.com.xbcapplication.AddIdleNewsActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.IdleNewsListAdapter;
-import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
-import xbc.miniproject.com.xbcapplication.dummyModel.IdleNewsModel;
-import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
-import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-import xbc.miniproject.com.xbcapplication.model.idleNews.DataList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
@@ -41,7 +36,7 @@ public class IdleNewsFragment extends Fragment {
     private Button idleNewsButtonInsert;
     private RecyclerView idleNewsRecyclerViewList;
 
-    private List<DataList> listIdleNews = new ArrayList<>();
+    private List<IdleNewsList> listIdleNews = new ArrayList<>();
     private IdleNewsListAdapter idleNewsListAdapter;
 
     private RequestAPIServices apiServices;
@@ -107,9 +102,9 @@ public class IdleNewsFragment extends Fragment {
             @Override
             public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
                 if (response.code() == 200){
-                    List<DataList> tmp = response.body().getDataList();
+                    List<IdleNewsList> tmp = response.body().getDataList();
                     for (int i = 0; i<tmp.size();i++){
-                        DataList data = tmp.get(i);
+                        IdleNewsList data = tmp.get(i);
                         listIdleNews.add(data);
                     }
                 } else{
@@ -125,9 +120,9 @@ public class IdleNewsFragment extends Fragment {
     }
 
     private void filter(String text) {
-        ArrayList<DataList> filteredList = new ArrayList<>();
+        ArrayList<IdleNewsList> filteredList = new ArrayList<>();
 
-        for (DataList item : listIdleNews) {
+        for (IdleNewsList item : listIdleNews) {
             if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
