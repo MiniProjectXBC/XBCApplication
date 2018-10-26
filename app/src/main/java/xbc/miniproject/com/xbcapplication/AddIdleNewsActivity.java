@@ -78,7 +78,7 @@ public class AddIdleNewsActivity extends Activity {
         IdleNewsList data = new IdleNewsList();
         data.setTitle(addIdleNewsEditTextTitle.getText().toString());
         data.setContent(addIdleNewsEditTextContent.getText().toString());
-//        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
+        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
 
         apiServices.createNewIdleNews("application/json", data)
                 .enqueue(new Callback<ModelIdleNews>() {
