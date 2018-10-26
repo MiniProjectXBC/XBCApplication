@@ -21,9 +21,14 @@ public class APIUtilities {
 
     public static String generateLoginMap(String username, String password) {
         Map<String, String> map = new HashMap<>();
+<<<<<<< HEAD
         if (username != null) map.put("username", username);
         if (password != null) map.put("password", password);
 
+=======
+        if(username != null) map.put("username", username);
+        if(password != null) map.put("password", password);
+>>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
 
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.serializeNulls().create();
@@ -41,6 +46,19 @@ public class APIUtilities {
         if (category != null) {
             Map<String, String> unitObj = new HashMap<>();
             unitObj.put("name", category);
+<<<<<<< HEAD
+=======
+
+            map.put("name", unitObj);
+        }
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
+
+        return json;
+    }
+}
+>>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
 
             map.put("name", unitObj);
         }
