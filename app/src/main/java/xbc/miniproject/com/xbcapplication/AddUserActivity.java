@@ -20,6 +20,9 @@ import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.user.Role;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
@@ -33,7 +36,8 @@ public class AddUserActivity extends Activity {
     private AutoCompleteTextView addUserEditTextRole;
     private Button addUserButtonSave;
     private Button addUserButtonCancel;
-    private String[] roles ;
+    private String[] rroles= {"Admin",
+    "Admin1"};
     private boolean isRoleSelected;
     private RequestAPIServices apiServices;
 
@@ -45,11 +49,8 @@ public class AddUserActivity extends Activity {
         addUserEditTexPassword = (EditText) findViewById(R.id.addUserEditTexPassword);
         addUserEditTexRetypePassword = (EditText) findViewById(R.id.addUserEditTexRetypePassword);
         addUserEditTextRole =  (AutoCompleteTextView) findViewById(R.id.addUserEditTextRole);
-
-        getRolefromApi();
-
         final ArrayAdapter<String> adapter =  new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, roles);
+                (this, android.R.layout.select_dialog_item, rroles);
         addUserEditTextRole.setThreshold(0);
         addUserEditTextRole.setAdapter(adapter);
         addUserEditTextRole.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +125,7 @@ public class AddUserActivity extends Activity {
             }
         }
     }
+<<<<<<< HEAD
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
 
@@ -134,7 +136,15 @@ public class AddUserActivity extends Activity {
 //        for(role.getId()!){
 //
 //        }
+=======
+<<<<<<< HEAD
+    public void getRolefromApi(){
+
+>>>>>>> 990d0f2138f4915fffdfc540acb51e47521c1d30
     }
+=======
+
+>>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
     public void panggilAPI(){
         saveDataNotification();
         DataList dataUser = new DataList();

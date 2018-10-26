@@ -106,7 +106,7 @@ public class UserFragment extends Fragment{
 
             @Override
             public void onFailure(Call<ModelUser> call, Throwable t) {
-                Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "List User onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -20,6 +20,16 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.batch.DataList;
+import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
+import xbc.miniproject.com.xbcapplication.model.batch.Technology;
+import xbc.miniproject.com.xbcapplication.model.batch.Trainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class AddBatchActivity extends Activity {
     Context context = this;
 
@@ -27,11 +37,15 @@ public class AddBatchActivity extends Activity {
             addBatchEditTextName, addBatchEditTextPeriodForm,
             addBatchEditTextPeriodTo, addBatchEditTextRoom,
             addBatchEditTextNotes;
+
     Spinner spinnerBatchType;
+
     Button addBatchButtonSave, addBatchButtonCancel;
 
+    RequestAPIServices apiServices;
+
     String[] arrayType = {
-            "- Pilih Type -","Gratis","Berbayar"
+            "- Pilih Type -","Gratis","Reguler"
     };
 
     @Override
@@ -147,15 +161,54 @@ public class AddBatchActivity extends Activity {
         } else if (addBatchEditTextNotes.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Notes Field still empty!", Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+//            SaveSuccessNotification();
+            callAPICreateBatch();
         }
     }
 
-    private void SaveSuccessNotification() {
+    private void callAPICreateBatch(){
+        apiServices = APIUtilities.getAPIServices();
+
+        DataList data = new DataList();
+        Technology data2 = new Technology();
+        Trainer data3 = new Trainer();
+        data2.setName(addBatchEditTextTechnology.getText().toString());
+        data3.setName(addBatchEditTextTrainer.getText().toString());
+        data.setName(addBatchEditTextName.getText().toString());
+        data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
+        data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
+        data.setRoom(addBatchEditTextRoom.getText().toString());
+        data.setBootcampType(spinnerBatchType.toString()); //Belum ada getText
+        data.setNotes(addBatchEditTextNotes.getText().toString());
+
+
+
+        apiServices.createNewBatch("application/json", data)
+                .enqueue(new Callback<ModelBatch>() {
+                    @Override
+                    public void onResponse(Call<ModelBatch> call, Response<ModelBatch> response) {
+                        if(response.code() == 201){
+                            String message = response.body().getMessage();
+                            if(message!=null){
+                                SaveSuccessNotification(message);
+                            } else {
+                                SaveSuccessNotification("Message Gagal Ditambahkan");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelBatch> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void SaveSuccessNotification(String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Added!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -12,13 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
+import xbc.miniproject.com.xbcapplication.model.technology.DataList;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+
 public class AddTechnologyActivity extends Activity {
     private Context context =this;
     private EditText addTechnologyEditTextName
             ,addTechnologyEditTexNote;
     private Button addTechnologyButtonSave,
             addTechnologyButtonCancel;
-
+    private RequestAPIServices apiServices;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +62,40 @@ public class AddTechnologyActivity extends Activity {
         }else if (addTechnologyEditTexNote.getText().toString().trim().length()==0){
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
-
-            saveSuccesNotification();
+            panggilAPICreateTechnology();
         }
     }
-    public void saveSuccesNotification(){
+    private void panggilAPICreateTechnology(){
+        apiServices = APIUtilities.getAPIServices();
+        DataList data = new DataList();
+        data.setName(addTechnologyEditTextName.getText().toString());
+        data.setNotes(addTechnologyEditTexNote.getText().toString());
+
+        apiServices.createNewTechnology("application/json", data)
+                .enqueue(new Callback<ModelTechnology>() {
+                    @Override
+                    public void onResponse(Call<ModelTechnology> call, Response<ModelTechnology> response) {
+                        if(response.code()==201){
+                            String message =  response.body().getMessage();
+                            if(message!=null){
+                                saveSuccesNotification(message);
+                            }else{
+                                saveSuccesNotification("Massage Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTechnology> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+    public void saveSuccesNotification(String message){
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Added! ")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
