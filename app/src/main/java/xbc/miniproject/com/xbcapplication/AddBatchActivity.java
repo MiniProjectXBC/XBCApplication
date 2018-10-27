@@ -178,7 +178,7 @@ public class AddBatchActivity extends Activity {
         data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
         data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
         data.setRoom(addBatchEditTextRoom.getText().toString());
-        data.setBootcampType(spinnerBatchType.toString()); //Belum ada getText
+        data.setBootcampType(spinnerBatchType.getAdapter().toString()); //Belum ada getText
         data.setNotes(addBatchEditTextNotes.getText().toString());
 
 

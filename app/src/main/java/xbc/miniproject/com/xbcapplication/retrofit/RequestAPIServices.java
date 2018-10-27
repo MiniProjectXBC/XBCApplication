@@ -232,9 +232,10 @@ public interface RequestAPIServices {
     Call<ModelClass> getListClass();
     //KONEKSI API FEEDBACK
     //get autocomplete
-    @Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
-    @GET("role/key/{keyword}")
-    Call<ModelAutocompleteFeedback> roleautocomplete(@Header("Content-Type") String contentType,
+    //@Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
+    @GET("xbc-ws/role/key/{keyword}")
+    Call<ModelAutocompleteFeedback> roleautocomplete(
+            @Header("Content-Type") String contentType,
                                                      @Header("Authorization") String tokenAuthorization,
                                                      @Path("keyword") String keyword);
     //get question
