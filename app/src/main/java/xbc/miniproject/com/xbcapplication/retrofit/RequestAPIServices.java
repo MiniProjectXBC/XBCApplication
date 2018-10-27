@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
+import xbc.miniproject.com.xbcapplication.model.batch.Technology;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
@@ -146,8 +147,8 @@ public interface RequestAPIServices {
     Call<ModelTestimony> editTestimony(@Header("Content-Type") String contentType,
                                    @Header("Authorization") String authorization,
                                    @Body Testimony data);
-    //DEL delete
 
+    //DEL delete
     @DELETE("xbc-ws/api/testimony/delete/{id}")
     Call<ModelTestimony> deleteTestimony(@Header("Content-Type") String contentType,
                                          @Header("Authorization") String authorization,
@@ -166,9 +167,15 @@ public interface RequestAPIServices {
                                     @Body xbc.miniproject.com.xbcapplication.model.batch.DataList data);
 
     //PUT EDIT
-//    @PUT("xbc-ws/api/batch/update") editBatch(@Header("Content-Type") String contentType,
-//                                              @Header("Authorization") String authorization,
-//                                              @Body  data);
+    @PUT("xbc-ws/api/batch/update")
+    Call<ModelBatch> editBatch(@Header("Content-Type") String contentType,
+                               @Header("Authorization") String authorization,
+                               @Body xbc.miniproject.com.xbcapplication.model.batch.DataList data);
+
+    //GET get_one
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("/xbc-ws/api/batch/id/{id}")
+    Call<ModelBatch> getOneBatch(@Path("id") int id);
 
 
     //Koneksi API di menu Idle News

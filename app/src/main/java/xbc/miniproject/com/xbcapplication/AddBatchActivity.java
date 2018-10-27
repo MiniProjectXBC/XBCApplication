@@ -192,7 +192,7 @@ public class AddBatchActivity extends Activity {
                             if(message!=null){
                                 SaveSuccessNotification(message);
                             } else {
-                                SaveSuccessNotification("Message Gagal Ditambahkan");
+                                SaveSuccessNotification("Data Gagal Ditambahkan");
                             }
                         }
                     }

@@ -125,13 +125,11 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-<<<<<<< HEAD
+
     public void getRolefromApi(){
 
     }
-=======
 
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
     public void panggilAPI(){
         saveDataNotification();
         DataList dataUser = new DataList();
