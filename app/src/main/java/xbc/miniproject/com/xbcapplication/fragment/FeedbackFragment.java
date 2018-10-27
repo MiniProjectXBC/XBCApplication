@@ -2,7 +2,6 @@ package xbc.miniproject.com.xbcapplication.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,27 +17,29 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import xbc.miniproject.com.xbcapplication.AddTechnologyActivity;
-import xbc.miniproject.com.xbcapplication.HomeActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.adapter.FeedbackListAdapter;
-import xbc.miniproject.com.xbcapplication.adapter.TrainerListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.FeedbackModel;
-import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.DataListAutocompleteFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
-public class FeedbackFragment extends Fragment {
+public class FeedbackFragment extends Fragment  {
     private RecyclerView feedbackRecyclerView;
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
+    RequestAPIServices requestAPIServices;
 
     private List<FeedbackModel> feedbackModelList = new ArrayList<>();
 
@@ -61,6 +62,9 @@ public class FeedbackFragment extends Fragment {
                 false);
         feedbackRecyclerView.setLayoutManager(layoutManager);
         feedbackRecyclerView.setVisibility(View.GONE);
+
+
+        tampil_auto_complete();
 
 
         feedbackButtonSave = (Button) view.findViewById(R.id.feedbackButtonSave);
@@ -138,6 +142,35 @@ public class FeedbackFragment extends Fragment {
 
     }
 
+    public void tampil_auto_complete(){
+        String contentType = "aplication/jsom";
+        String token = "MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA";
+        requestAPIServices = APIUtilities.getAPIServices();
+        requestAPIServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
+            @Override
+            public void onResponse(Call<ModelAutocompleteFeedback> call, Response<ModelAutocompleteFeedback> response) {
+                if (response.code() == 200){
+                    if (response.body().getMessage() != null){
+                        List<String> str = new ArrayList<String>();
+                        for (DataListAutocompleteFeedback s : response.body().getDataList()){
+                            str.add(s.getName());
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
+                        feedbackTextName.setThreshold(1);
+                        feedbackTextName.setAdapter(adapter);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelAutocompleteFeedback> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     private void inputValidation() {
         if (feedbackTextName.getText().toString().trim().length() == 0) {
             Toast.makeText(getActivity(), "Test Field still empty!", Toast.LENGTH_SHORT).show();
@@ -165,11 +198,12 @@ public class FeedbackFragment extends Fragment {
 
 
     public void tampilkanListQuestion() {
-        addDummyList();
+        //addDummyList();
         if (feedbackListAdapter == null) {
             feedbackListAdapter = new FeedbackListAdapter(getContext(), feedbackModelList);
             feedbackRecyclerView.setAdapter(feedbackListAdapter);
         }
+        getListQuestionFeedback();
     }
 
     public void filter(String text) {
@@ -185,22 +219,26 @@ public class FeedbackFragment extends Fragment {
     }
 
 
-    public void addDummyList() {
-        int index = 1;
-        for (int i = 0; i < 5; i++) {
-            FeedbackModel data = new FeedbackModel();
-            data.setTest("Android");
-            data.setQuestion("Dummy Name" + index);
-            feedbackModelList.add(data);
-            index++;
-        }
-        for (int i = 0; i < 3; i++) {
-            FeedbackModel data = new FeedbackModel();
-            data.setTest("Java");
-            data.setQuestion("Dummy Name" + index);
-            feedbackModelList.add(data);
-            index++;
-        }
+    public void getListQuestionFeedback(){
 
     }
+
+//    public void addDummyList() {
+//        int index = 1;
+//        for (int i = 0; i < 5; i++) {
+//            FeedbackModel data = new FeedbackModel();
+//            data.setTest("Android");
+//            data.setQuestion("Dummy Name" + index);
+//            feedbackModelList.add(data);
+//            index++;
+//        }
+//        for (int i = 0; i < 3; i++) {
+//            FeedbackModel data = new FeedbackModel();
+//            data.setTest("Java");
+//            data.setQuestion("Dummy Name" + index);
+//            feedbackModelList.add(data);
+//            index++;
+//        }
+//
+//    }
 }

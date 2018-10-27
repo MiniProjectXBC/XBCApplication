@@ -12,19 +12,36 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.technology.DataList;
+import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
+import xbc.miniproject.com.xbcapplication.model.technology.Technology;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+
 public class EditTechnologyActivity extends Activity {
     private Context context=this;
     private EditText editTechnologyEditTextName,
             editTechnologyEditTexNote;
     private Button editTechnologyButtonSave,
             editTechnologyButtonCancel;
+    private RequestAPIServices apiServices;
+    int id;
+    List<DataList> listTechnology = new ArrayList<DataList>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_technology);
 
         ActionBar actionBar =  getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Edit Technology");
 
         editTechnologyEditTextName = (EditText)findViewById(R.id.editTechnologyEditTextName);
@@ -43,6 +60,28 @@ public class EditTechnologyActivity extends Activity {
                 finish();
             }
         });
+        id= getIntent().getIntExtra("id", 0);
+        getOneTechnologyAPI(id);
+    }
+    private void getOneTechnologyAPI(int id){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getOneTechnology(id).enqueue(new Callback<ModelTechnology>() {
+            @Override
+            public void onResponse(Call<ModelTechnology> call, Response<ModelTechnology> response) {
+                if(response.code()==200){
+                    Technology data = response.body().getData();
+                    editTechnologyEditTextName.setText(data.getName());
+                    editTechnologyEditTexNote.setText(data.getNotes());
+                }else {
+                    Toast.makeText(context, "Gagal Mendapatkan Testimony Technology: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelTechnology> call, Throwable t) {
+                Toast.makeText(context, "Get Testimony Technology onFailure"+t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
     public void editValidation(){
         if(editTechnologyEditTextName.getText().toString().trim().length()==0){
@@ -50,16 +89,48 @@ public class EditTechnologyActivity extends Activity {
         }else if(editTechnologyEditTexNote.getText().toString().trim().length()==0){
             Toast.makeText(context,"Note Field still empty!",Toast.LENGTH_SHORT).show();
         }else{
+            inputEditTechnologyAPI();
             //hanya pesan
-            saveSuccessfullyNotification();
+            //saveSuccessfullyNotification();
             Toast.makeText(context,"Testimony successfully updated!",Toast.LENGTH_SHORT).show();
         }
     }
-    public  void saveSuccessfullyNotification(){
+    private void inputEditTechnologyAPI(){
+        apiServices =  APIUtilities.getAPIServices();
+
+        Technology data = new Technology();
+        data.setId(id);
+        data.setName(editTechnologyEditTextName.getText().toString());
+        data.setNotes(editTechnologyEditTexNote.getText().toString());
+
+        apiServices.editTechnology(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_TECHNOLOGY,
+                data)
+                .enqueue(new Callback<ModelTechnology>() {
+                    @Override
+                    public void onResponse(Call<ModelTechnology> call, Response<ModelTechnology> response) {
+                        if(response.code()==200){
+                            String message = response.body().getMessage();
+                            if(message!=null){
+                                saveSuccessfullyNotification(message);
+                            }else {
+                                saveSuccessfullyNotification("Message Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTechnology> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    public  void saveSuccessfullyNotification(String message){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Updated!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

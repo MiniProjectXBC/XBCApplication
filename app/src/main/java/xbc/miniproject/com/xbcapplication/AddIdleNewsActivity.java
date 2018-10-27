@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,19 +69,23 @@ public class AddIdleNewsActivity extends Activity {
             Toast.makeText(context,"Category Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
 //            SaveSuccessNotification();
-            callAPICreateIdleNews();
+            callAPICreateIdleNews(addIdleNewsEditTextTitle.getText().toString(), addIdleNewsEditTextCategory.getText().toString(), addIdleNewsEditTextContent.getText().toString());
         }
     }
 
-    private void callAPICreateIdleNews() {
+    private void callAPICreateIdleNews(String title, String category, String content) {
+
+        String contentType = "application/json";
+        String json = APIUtilities.generateIdleNewsMap(title, category, content);
+        RequestBody bodyRequest = RequestBody.create(APIUtilities.mediaType(), json);
         apiServices = APIUtilities.getAPIServices();
 
         IdleNewsList data = new IdleNewsList();
-        data.setTitle(addIdleNewsEditTextTitle.getText().toString());
-        data.setContent(addIdleNewsEditTextContent.getText().toString());
-        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
+//        data.setTitle(addIdleNewsEditTextTitle.getText().toString());
+//        data.setContent(addIdleNewsEditTextContent.getText().toString());
+//        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
 
-        apiServices.createNewIdleNews("application/json", data)
+        apiServices.createNewIdleNews("application/json", bodyRequest)
                 .enqueue(new Callback<ModelIdleNews>() {
                     @Override
                     public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
@@ -106,7 +111,7 @@ public class AddIdleNewsActivity extends Activity {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Added!").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setMessage("Data Successfully Added!").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
