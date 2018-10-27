@@ -11,7 +11,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
-import xbc.miniproject.com.xbcapplication.model.batch.Technology;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
@@ -110,7 +109,7 @@ public interface RequestAPIServices {
     @PUT("/xbc-ws/api/technology/update")
     Call<ModelTechnology> editTechnology(@Header("Content-Type") String contentType,
                                    @Header("Authorization") String authorization,
-                                   @Body Technology data);
+                                   @Body xbc.miniproject.com.xbcapplication.model.technology.Technology data);
     @PUT("/xbc-ws/api/technology/deactivate/{id}")
     Call<ModelTechnology> deactiveTechnology(@Header("Content-Type") String contentType,
                                          @Header("Authorization") String authorization,

@@ -161,18 +161,15 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-<<<<<<< HEAD
+
 
     public void getRolefromApi(){
 
     }
 
-    public void panggilAPI(){
-        saveDataNotification();
-=======
+
 
     public void panggilAPI(final int position){
->>>>>>> 2cd1cf09f7524f90dd928f749c0370a8b82fe12c
         DataList dataUser = new DataList();
         dataUser.setUsername(addUserEditTexUsername.getText().toString());
         dataUser.setPassword(addUserEditTexPassword.getText().toString());
