@@ -102,7 +102,7 @@ public class EditUserActivity extends Activity {
         editUserButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editValidation();
+               // editValidation();
             }
         });
         editUserButtonCancel =  (Button) findViewById(R.id.editUserButtonCancel);

@@ -170,10 +170,10 @@ public class AddBatchActivity extends Activity {
         apiServices = APIUtilities.getAPIServices();
 
         DataList data = new DataList();
-        Technology data2 = new Technology();
-        Trainer data3 = new Trainer();
-        data2.setName(addBatchEditTextTechnology.getText().toString());
-        data3.setName(addBatchEditTextTrainer.getText().toString());
+//        Technology data2 = new Technology();
+//        Trainer data3 = new Trainer();
+        data.getTechnology().setName(addBatchEditTextTechnology.getText().toString());
+        data.getTrainer().setName(addBatchEditTextTrainer.getText().toString());
         data.setName(addBatchEditTextName.getText().toString());
         data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
         data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
