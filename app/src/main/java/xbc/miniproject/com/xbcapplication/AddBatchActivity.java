@@ -170,15 +170,15 @@ public class AddBatchActivity extends Activity {
         apiServices = APIUtilities.getAPIServices();
 
         DataList data = new DataList();
-        Technology data2 = new Technology();
-        Trainer data3 = new Trainer();
-        data2.setName(addBatchEditTextTechnology.getText().toString());
-        data3.setName(addBatchEditTextTrainer.getText().toString());
+//        Technology data2 = new Technology();
+//        Trainer data3 = new Trainer();
+        data.getTechnology().setName(addBatchEditTextTechnology.getText().toString());
+        data.getTrainer().setName(addBatchEditTextTrainer.getText().toString());
         data.setName(addBatchEditTextName.getText().toString());
         data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
         data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
         data.setRoom(addBatchEditTextRoom.getText().toString());
-        data.setBootcampType(spinnerBatchType.toString()); //Belum ada getText
+        data.setBootcampType(spinnerBatchType.getAdapter().toString()); //Belum ada getText
         data.setNotes(addBatchEditTextNotes.getText().toString());
 
 
@@ -192,7 +192,7 @@ public class AddBatchActivity extends Activity {
                             if(message!=null){
                                 SaveSuccessNotification(message);
                             } else {
-                                SaveSuccessNotification("Message Gagal Ditambahkan");
+                                SaveSuccessNotification("Data Gagal Ditambahkan");
                             }
                         }
                     }

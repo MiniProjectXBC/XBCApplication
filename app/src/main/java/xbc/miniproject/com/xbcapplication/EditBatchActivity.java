@@ -20,6 +20,17 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.batch.DataList;
+import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
+import xbc.miniproject.com.xbcapplication.model.batch.Technology;
+import xbc.miniproject.com.xbcapplication.model.batch.Trainer;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+
 public class EditBatchActivity extends Activity {
     private Context context = this;
 
@@ -29,6 +40,10 @@ public class EditBatchActivity extends Activity {
             editBatchEditTextNotes;
     private Spinner spinnerBatchType;
     private Button editBatchButtonSave, editBatchButtonCancel;
+
+    RequestAPIServices apiServices;
+
+    int id;
 
     String[] arrayType = {
             "- Pilih Type -","Gratis","Berbayar"
@@ -130,6 +145,29 @@ public class EditBatchActivity extends Activity {
                 finish();
             }
         });
+
+        id = getIntent().getIntExtra("id",0);
+        getOneBatchAPI(id);
+    }
+
+    private void getOneBatchAPI(int id){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getOneBatch(id).enqueue(new Callback<ModelBatch>() {
+            @Override
+            public void onResponse(Call<ModelBatch> call, Response<ModelBatch> response) {
+                if(response.code() == 200){
+                    DataList data = (DataList) response.body().getDataList();
+                    editBatchEditTextTechnology.setText(data.getTechnology().getName());
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelBatch> call, Throwable t) {
+
+            }
+        });
     }
 
     private void inputValidation() {
@@ -148,15 +186,54 @@ public class EditBatchActivity extends Activity {
         } else if (editBatchEditTextNotes.getText().toString().trim().length() == 0) {
             Toast.makeText(context, "Notes Field still empty!", Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+//            SaveSuccessNotification();
+            inputEditBatchAPI();
         }
     }
 
-    private void SaveSuccessNotification() {
+    private void inputEditBatchAPI(){
+        apiServices = APIUtilities.getAPIServices();
+
+        DataList data = new DataList();
+        Technology data2 = new Technology();
+        Trainer data3 = new Trainer();
+        data2.setName(editBatchEditTextTechnology.getText().toString());
+        data3.setName(editBatchEditTextTrainer.getText().toString());
+        data.setName(editBatchEditTextName.getText().toString());
+        data.setPeriodFrom(editBatchEditTextPeriodForm.getText().toString());
+        data.setPeriodTo(editBatchEditTextPeriodTo.getText().toString());
+        data.setRoom(editBatchEditTextRoom.getText().toString());
+        data.setBootcampType(spinnerBatchType.toString()); //Belum ada getText
+        data.setNotes(editBatchEditTextNotes.getText().toString());
+
+        apiServices.editBatch(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_EDIT_BATCH,
+                data)
+                .enqueue(new Callback<ModelBatch>() {
+                    @Override
+                    public void onResponse(Call<ModelBatch> call, Response<ModelBatch> response) {
+                        if(response.code() == 200){
+                            String message = response.body().getMessage();
+                            if(message!=null){
+                                SaveSuccessNotification(message);
+                            }else{
+                                SaveSuccessNotification("Data Gagal DiUpdate");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelBatch> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void SaveSuccessNotification(String message) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Edited!")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
