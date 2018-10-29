@@ -12,6 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
+
 public class ShareIdleNewsActivity extends Activity {
     private Context context = this;
 
@@ -19,6 +29,10 @@ public class ShareIdleNewsActivity extends Activity {
 
     Button shareIdleNewsButtonSend,
             shareIdleNewsButtonCancel;
+
+    RequestAPIServices apiServices;
+
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +64,8 @@ public class ShareIdleNewsActivity extends Activity {
         if (shareIdleNewsEditTextEmail.getText().toString().trim().length() == 0){
             Toast.makeText(context,"Email Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
-            SaveSuccessNotification();
+//            SaveSuccessNotification();
+            ShareIdleNewsAPI();
         }
     }
 
@@ -67,6 +82,46 @@ public class ShareIdleNewsActivity extends Activity {
         })
                 .setCancelable(false).show();
     }
+
+    private void ShareIdleNewsAPI() {
+        apiServices = APIUtilities.getAPIServices();
+
+        apiServices.shareNewIdleNews("application/json", SessionManager.getToken(context))
+                .enqueue(new Callback<ModelIdleNews>() {
+                    @Override
+                    public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
+                        if (response.code()==200){
+                            String message = response.body().getMessage();
+                            if (message != null){
+                                ShareSuccessNotification(context, message);
+                            }
+                            else {
+                                ShareSuccessNotification(context, "Message Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelIdleNews> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    private void ShareSuccessNotification(final Context context, String message) {
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(context);
+        builder.setTitle("NOTIFICATION !")
+                .setMessage(message+"!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false).show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
