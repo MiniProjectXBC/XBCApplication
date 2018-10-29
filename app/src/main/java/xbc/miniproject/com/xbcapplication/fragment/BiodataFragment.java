@@ -1,6 +1,5 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -35,12 +33,10 @@ import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
-import xbc.miniproject.com.xbcapplication.utility.LoadingClass;
-import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class BiodataFragment extends Fragment {
-    public EditText biodataEditTextSearch;
-    private ImageView biodataButtonInsert, biodataButtonSearch;
+    private EditText biodataEditTextSearch;
+    private Button biodataButtonInsert;
     private RecyclerView biodataRecyclerViewList;
 
     private List<BiodataList> listBiodata = new ArrayList<>();
@@ -60,7 +56,7 @@ public class BiodataFragment extends Fragment {
         //Cara mendapatkan Context di Fragment dengan menggunakan getActivity() atau getContext()
         //Toast.makeText(getContext(),"Test Context Behasil", Toast.LENGTH_LONG).show();
 
-
+        getDataFromAPI();
 
         biodataRecyclerViewList = (RecyclerView) view.findViewById(R.id.biodataRecyclerViewList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
@@ -68,30 +64,30 @@ public class BiodataFragment extends Fragment {
         biodataRecyclerViewList.setLayoutManager(layoutManager);
 
         biodataEditTextSearch = (EditText) view.findViewById(R.id.biodataEditTextSearch);
-//        biodataRecyclerViewList.setVisibility(View.INVISIBLE);
-//        biodataEditTextSearch.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (biodataEditTextSearch.getText().toString().trim().length() == 0){
-//                    biodataRecyclerViewList.setVisibility(View.INVISIBLE);
-//                } else{
-//                    biodataRecyclerViewList.setVisibility(View.VISIBLE);
-//                    filter(s.toString());
-//                }
-//            }
-//        });
+        biodataRecyclerViewList.setVisibility(View.INVISIBLE);
+        biodataEditTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        biodataButtonInsert = (ImageView) view.findViewById(R.id.biodataButtonInsert);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (biodataEditTextSearch.getText().toString().trim().length() == 0){
+                    biodataRecyclerViewList.setVisibility(View.INVISIBLE);
+                } else{
+                    biodataRecyclerViewList.setVisibility(View.VISIBLE);
+                    filter(s.toString());
+                }
+            }
+        });
+
+        biodataButtonInsert = (Button) view.findViewById(R.id.biodataButtonInsert);
         biodataButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,46 +96,23 @@ public class BiodataFragment extends Fragment {
             }
         });
 
-        biodataButtonSearch = (ImageView) view.findViewById(R.id.biodataButtonSearch);
-        biodataButtonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (biodataEditTextSearch.getText().toString().trim().length() == 0){
-
-                } else{
-
-                    String keyword = biodataEditTextSearch.getText().toString().trim();
-                    listBiodata = new ArrayList<>();
-                    getDataFromAPI(keyword);
-                }
-            }
-        });
-
-
+        tampilkanListBiodata();
 
 
         return view;
     }
 
-    private void getDataFromAPI(String keyword) {
-
-        final ProgressDialog loading = LoadingClass.loadingAnimationAndText(getContext(),
-                "Sedang Memuat Data . . .");
-        loading.show();
-
+    private void getDataFromAPI() {
         apiServices = APIUtilities.getAPIServices();
-        apiServices.getListBiodata(SessionManager.getToken(getContext()),keyword).enqueue(new Callback<ModelBiodata>() {
+        apiServices.getListBiodata().enqueue(new Callback<ModelBiodata>() {
             @Override
             public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
-                loading.dismiss();
                 if (response.code() == 200){
                     List<BiodataList> tmp = response.body().getDataList();
                     for (int i = 0; i<tmp.size();i++){
                         BiodataList data = tmp.get(i);
                         listBiodata.add(data);
                     }
-                    biodataRecyclerViewList.setVisibility(View.VISIBLE);
-                    tampilkanListBiodata();
                 } else{
                     Toast.makeText(getContext(), "Gagal Mendapatkan List Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -147,7 +120,6 @@ public class BiodataFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ModelBiodata> call, Throwable t) {
-                loading.dismiss();
                 Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
@@ -173,19 +145,7 @@ public class BiodataFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        clearSearch();
-        super.onResume();
-    }
-
-    public void clearSearch(){
-        biodataEditTextSearch.setText("");
-        biodataRecyclerViewList.setVisibility(View.INVISIBLE);
-
-    }
-
-    //    private void addDummyList() {
+//    private void addDummyList() {
 //        int index = 1;
 //        for (int i = 0; i < 5; i++) {
 //            BiodataModel data = new BiodataModel();
