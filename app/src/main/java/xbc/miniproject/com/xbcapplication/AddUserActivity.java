@@ -161,14 +161,9 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-<<<<<<< HEAD
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
-=======
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
 
-
-<<<<<<< HEAD
 //        DataListTestimony data = new DataListTestimony();
 //        Role role = new Role();
 //        for(role.getId()!){
@@ -177,17 +172,12 @@ public class AddUserActivity extends Activity {
 
 
 
-    public void panggilAPI(){
-        saveDataNotification();
-=======
-    public void getRolefromApi(){
 
-    }
+
 
 
 
     public void panggilAPI(final int position){
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
         DataList dataUser = new DataList();
         dataUser.setUsername(addUserEditTexUsername.getText().toString());
         dataUser.setPassword(addUserEditTexPassword.getText().toString());
