@@ -17,6 +17,7 @@ import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.postCreate.ModelCreateFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
@@ -286,6 +287,12 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelQuestionFeedback>  getListQuestionFeedback();
+
+    //post create
+    @POST("xbc-ws/api/feedback/create")
+    Call<ModelCreateFeedback> createFeedback(@Header("Content-Type") String contentType,
+                                             @Header("Authorization") String tokenAuthorization,
+                                             @Body RequestBody data);
 
 
 

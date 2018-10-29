@@ -59,13 +59,18 @@ public class APIUtilities {
 
             return json;
         }
-    public static String generateFeedbak (String test, String feedback){
+    public static String generateFeedback (String test, String feedback){
         Map<String, Object> map = new HashMap<>();
 
         if (test != null) {
             Map<String, String> unitObj = new HashMap<>();
             unitObj.put("id", test);
             map.put("test", unitObj);
+        }
+        if (feedback != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("questionId", feedback);
+            map.put("feedback", unitObj);
         }
 
         GsonBuilder builder = new GsonBuilder();
