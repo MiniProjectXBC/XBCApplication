@@ -76,11 +76,16 @@
                     android:id="@+id/editBiodataButtonSave"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_login"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="5dp"
                     android:text="Save"/>
 
                 <Button
                     android:id="@+id/editBiodataButtonCancel"
                     android:layout_width="100dp"
+                    android:background="@drawable/custom_button_login"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:text="Cancel"/>
 
