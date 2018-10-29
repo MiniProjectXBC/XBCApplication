@@ -48,6 +48,4 @@ public class APIUtilities {
 
         return json;
     }
-
-
 }
