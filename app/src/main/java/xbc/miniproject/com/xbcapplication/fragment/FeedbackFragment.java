@@ -33,8 +33,6 @@ import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.DataListAu
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
-import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -129,9 +127,6 @@ public class FeedbackFragment extends Fragment  {
                 //feedbackRecyclerView.setVisibility(View.VISIBLE);
             }
         });
-        tampilkanListQuestion();
-
-
 
         feedbackTextName.addTextChangedListener(new TextWatcher() {
 
@@ -158,7 +153,6 @@ public class FeedbackFragment extends Fragment  {
         });
 
 
-
         //tampilkanListQuestion();
         return view;
 
@@ -167,8 +161,8 @@ public class FeedbackFragment extends Fragment  {
     public void tampil_auto_complete(){
         String contentType = "aplication/json";
         String token = "MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA";
-        apiServices = APIUtilities.getAPIServices();
-        apiServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
+        requestAPIServices = APIUtilities.getAPIServices();
+        requestAPIServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
             @Override
             public void onResponse(Call<ModelAutocompleteFeedback> call, Response<ModelAutocompleteFeedback> response) {
                 if (response.code() == 200){
@@ -183,7 +177,6 @@ public class FeedbackFragment extends Fragment  {
 
                     }
                 }
-
             }
 
             @Override
@@ -290,33 +283,9 @@ public class FeedbackFragment extends Fragment  {
 //        feedbackListAdapter.filterList(filteredList);
 //    }
 
+    public void getListQuestionFeedback(){
 
-
-
-
-//    public void getListQuestionFeedback(){
-//        apiServices = APIUtilities.getAPIServices();
-//        apiServices.getListQuestionFeedback().enqueue(new Callback<ModelQuestionFeedback>() {
-//            @Override
-//            public void onResponse(Call<ModelQuestionFeedback> call, Response<ModelQuestionFeedback> response) {
-//                if (response.code() == 200){
-//                    List<DataListQuestionFeedback> tmp = response.body().getDataList();
-//                    for (int i = 0; i<tmp.size();i++){
-//                        DataListQuestionFeedback data = tmp.get(i);
-//                        dataListQuestionFeedbacks.add(data);
-//                    }
-//                } else{
-//                    Toast.makeText(getContext(), "Gagal Mendapatkan List Question: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ModelQuestionFeedback> call, Throwable t) {
-//                Toast.makeText(getContext(), "List Question onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//    }
+    }
 
 //    public void addDummyList() {
 //        int index = 1;
