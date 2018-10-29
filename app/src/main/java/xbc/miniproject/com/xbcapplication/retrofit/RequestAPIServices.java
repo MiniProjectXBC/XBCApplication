@@ -19,7 +19,6 @@ import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutoc
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 
-
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
@@ -257,6 +256,10 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
 
+
+    //KONEKSI API FEEDBACK
+    //get autocomplete
+
     //KONEKSI API FEEDBACK
     //get autocomplete
     //@Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
@@ -269,8 +272,18 @@ public interface RequestAPIServices {
 
     //get question
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/technology/name/123")
+    Call<ModelQuestionFeedback>  getListQuestionFeedback();
+
+
+
+
+
+
+
     @GET("xbc-ws/api/technology/name/{keyword}")
     Call<ModelQuestionFeedback> getListQuestionFeedback(@Header("Content-Type") String contentType,
                                                         @Header("Authorization") String tokenAuthorization,
                                                         @Path("keyword") String keyword);
+
 }

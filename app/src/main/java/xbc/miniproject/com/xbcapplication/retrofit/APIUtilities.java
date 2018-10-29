@@ -14,7 +14,6 @@ public class APIUtilities {
     public static RequestAPIServices getAPIServices() {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
-
     public static MediaType mediaType() {
         return okhttp3.MediaType.parse("application/json; charset=utf-8");
     }
@@ -42,14 +41,16 @@ public class APIUtilities {
             unitObj.put("name", category);
             map.put("name", unitObj);
         }
-
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.serializeNulls().create();
         String json = gson.toJson(map);
 
         return json;
     }
+
 }
+
+
 
 
 
