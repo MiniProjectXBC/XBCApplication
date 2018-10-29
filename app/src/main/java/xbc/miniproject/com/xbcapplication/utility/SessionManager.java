@@ -28,4 +28,8 @@ public class SessionManager {
     public static boolean isLogin(Context context){
         return retrieveSharedReferences(context).getBoolean("isLogin", false);
     }
+
+    public static String getUsername(Context context){
+        return retrieveSharedReferences(context).getString("username", "User");
+    }
 }
