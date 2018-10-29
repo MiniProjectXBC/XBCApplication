@@ -45,14 +45,21 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac4a461920a9b5ed124f8384e3f73293cd4647e1
 
     private RequestAPIServices apiServices;
 
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
+<<<<<<< HEAD
 
 
 
+=======
+    
+>>>>>>> ac4a461920a9b5ed124f8384e3f73293cd4647e1
     private RequestAPIServices requestAPIServices;
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
@@ -101,8 +108,13 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
+<<<<<<< HEAD
 
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+=======
+        //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+
+>>>>>>> ac4a461920a9b5ed124f8384e3f73293cd4647e1
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
@@ -127,8 +139,11 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ac4a461920a9b5ed124f8384e3f73293cd4647e1
                 isTestSelected = true;
                 feedbackTextName.setError(null);
                 filter(feedbackTextName.getText().toString());
