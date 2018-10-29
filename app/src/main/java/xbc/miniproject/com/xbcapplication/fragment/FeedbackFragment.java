@@ -51,9 +51,12 @@ public class FeedbackFragment extends Fragment  {
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
 
 
+<<<<<<< HEAD
 
 
     private RequestAPIServices requestAPIServices;
+=======
+>>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
 
@@ -101,6 +104,7 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
+<<<<<<< HEAD
 
 
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
@@ -108,6 +112,10 @@ public class FeedbackFragment extends Fragment  {
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
 
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+=======
+
+        //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+>>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
 //        feedbackTextName.setThreshold(0);
@@ -131,17 +139,28 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
                 isTestSelected = true;
                 feedbackTextName.setError(null);
                 filter(feedbackTextName.getText().toString());
                 feedbackRecyclerView.setVisibility(View.VISIBLE);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
                 //filter(feedbackTextName.getText().toString().trim());
                 //feedbackRecyclerView.setVisibility(View.VISIBLE);
             }
         });
+        tampilkanListQuestion();
+
+
 
         feedbackTextName.addTextChangedListener(new TextWatcher() {
 
@@ -168,6 +187,10 @@ public class FeedbackFragment extends Fragment  {
         });
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
         //tampilkanListQuestion();
         return view;
 
@@ -176,8 +199,8 @@ public class FeedbackFragment extends Fragment  {
     public void tampil_auto_complete(){
         String contentType = "aplication/json";
         String token = "MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA";
-        requestAPIServices = APIUtilities.getAPIServices();
-        requestAPIServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
             @Override
             public void onResponse(Call<ModelAutocompleteFeedback> call, Response<ModelAutocompleteFeedback> response) {
                 if (response.code() == 200){
@@ -192,6 +215,7 @@ public class FeedbackFragment extends Fragment  {
 
                     }
                 }
+
             }
 
             @Override
@@ -291,9 +315,33 @@ public class FeedbackFragment extends Fragment  {
 //        feedbackListAdapter.filterList(filteredList);
 //    }
 
-    public void getListQuestionFeedback(){
 
-    }
+
+
+
+//    public void getListQuestionFeedback(){
+//        apiServices = APIUtilities.getAPIServices();
+//        apiServices.getListQuestionFeedback().enqueue(new Callback<ModelQuestionFeedback>() {
+//            @Override
+//            public void onResponse(Call<ModelQuestionFeedback> call, Response<ModelQuestionFeedback> response) {
+//                if (response.code() == 200){
+//                    List<DataListQuestionFeedback> tmp = response.body().getDataList();
+//                    for (int i = 0; i<tmp.size();i++){
+//                        DataListQuestionFeedback data = tmp.get(i);
+//                        dataListQuestionFeedbacks.add(data);
+//                    }
+//                } else{
+//                    Toast.makeText(getContext(), "Gagal Mendapatkan List Question: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ModelQuestionFeedback> call, Throwable t) {
+//                Toast.makeText(getContext(), "List Question onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
 
 //    public void addDummyList() {
 //        int index = 1;
