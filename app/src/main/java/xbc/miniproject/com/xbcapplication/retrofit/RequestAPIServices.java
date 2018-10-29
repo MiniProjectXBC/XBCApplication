@@ -84,19 +84,25 @@ public interface RequestAPIServices {
     Call<MonitoringDataList> getAutoCompleteMonitoringList();
 
     //Koneksi API di menu User
-    //Get Data User
+    //Get Data User (Create)
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/user/name/123")
     Call<ModelUser> getListUsser();
-
+    //Post Data User(Create)
     @POST("/xbc-ws/api/user/create")
     Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
                                   @Body xbc.miniproject.com.xbcapplication.model.user.DataList datauser);
-    //PUT Deactivate
+    //PUT Data User (Deactivate)
     @PUT("/xbc-ws/api/user/deactivate/{id}")
     Call<ModelTrainer> deactivateUser(@Header("Content-Type") String contentType,
                                          @Header("Authorization") String authorization,
                                          @Path("id") int id);
+    //Get One Data User
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("/xbc-ws/api/user/id/{id}")
+    Call<ModelUser> getOneUser(@Path("id") int id);
+
+
     //Koneksi API di menu Technology
     //Get Data Technology
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
