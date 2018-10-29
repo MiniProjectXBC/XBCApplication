@@ -15,6 +15,9 @@ public class APIUtilities {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
 
+
+
+
     public static MediaType mediaType() {
         return okhttp3.MediaType.parse("application/json; charset=utf-8");
     }
@@ -30,6 +33,9 @@ public class APIUtilities {
 
         return json;
     }
+
+
+
 
         //generate get idleNews MAP params
         public static String generateIdleNewsMap (String title, String category, String content){
@@ -72,6 +78,28 @@ public class APIUtilities {
 
             return json;
         }
+
+    public static String generateFeedback (String test, String feedback){
+        Map<String, Object> map = new HashMap<>();
+
+        if (test != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("id", test);
+            map.put("test", unitObj);
+        }
+        if (feedback != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("questionId", feedback);
+            map.put("feedback", unitObj);
+        }
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
+
+        return json;
+    }
+
 }
 
 
