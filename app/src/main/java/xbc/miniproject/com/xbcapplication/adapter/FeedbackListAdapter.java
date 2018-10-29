@@ -14,6 +14,8 @@ import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.FeedbackModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TechnologyModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.viewHolder.FeedbackViewHolder;
 import xbc.miniproject.com.xbcapplication.viewHolder.TechnologyViewHolder;
 import xbc.miniproject.com.xbcapplication.viewHolder.TrainerViewHolder;
@@ -21,11 +23,11 @@ import xbc.miniproject.com.xbcapplication.viewHolder.TrainerViewHolder;
 public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackViewHolder> {
 
     private Context context;
-    private List<FeedbackModel> feedbackModelList;
+    private List<DataListQuestionFeedback> dataListQuestionFeedback;
 
-    public FeedbackListAdapter(Context context, List<FeedbackModel> feedbackModelList) {
+    public FeedbackListAdapter(Context context, List<DataListQuestionFeedback> dataListQuestionFeedback) {
         this.context = context;
-        this.feedbackModelList = feedbackModelList;
+        this.dataListQuestionFeedback = dataListQuestionFeedback;
     }
 
     @NonNull
@@ -41,7 +43,7 @@ public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FeedbackViewHolder feedbackViewHolder, int i) {
-        final FeedbackModel user= feedbackModelList.get(i);
+        final DataListQuestionFeedback user= dataListQuestionFeedback.get(i);
         feedbackViewHolder.setModel(user, i, context);
 
 
@@ -50,15 +52,15 @@ public class FeedbackListAdapter extends RecyclerView.Adapter<FeedbackViewHolder
 
     @Override
     public int getItemCount() {
-        if(feedbackModelList!=null){
-            return feedbackModelList.size();
+        if(dataListQuestionFeedback!=null){
+            return dataListQuestionFeedback.size();
         }else {
             return 0;
         }
     }
 
-    public  void filterList(ArrayList<FeedbackModel> filterList){
-        feedbackModelList = filterList;
+    public  void filterList(List<DataListQuestionFeedback> filterList){
+        dataListQuestionFeedback = filterList;
         notifyDataSetChanged();
     }
 

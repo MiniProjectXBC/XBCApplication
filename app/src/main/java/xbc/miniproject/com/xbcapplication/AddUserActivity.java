@@ -125,7 +125,6 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-<<<<<<< HEAD
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
 
@@ -135,16 +134,10 @@ public class AddUserActivity extends Activity {
 //        Role role = new Role();
 //        for(role.getId()!){
 //
-//        }
-=======
-<<<<<<< HEAD
-    public void getRolefromApi(){
+        }
 
->>>>>>> 990d0f2138f4915fffdfc540acb51e47521c1d30
-    }
-=======
 
->>>>>>> 61f09d6f44765ee9cdb81395e8b58af3808ce25d
+
     public void panggilAPI(){
         saveDataNotification();
         DataList dataUser = new DataList();
