@@ -32,4 +32,8 @@ public class SessionManager {
     public static String getUsername(Context context){
         return retrieveSharedReferences(context).getString("username", "User");
     }
+
+    public static String getToken(Context context){
+        return retrieveSharedReferences(context).getString("token", "");
+    }
 }
