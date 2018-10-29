@@ -170,17 +170,9 @@ public class AddUserActivity extends Activity {
 //
         }
 
-<<<<<<< HEAD
     public void panggilAPI() {
 //        saveDataNotification();
     }
-=======
-
-
-
-
-
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
 
     public void panggilAPI(final int position){

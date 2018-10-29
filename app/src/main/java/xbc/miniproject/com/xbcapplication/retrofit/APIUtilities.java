@@ -14,11 +14,6 @@ public class APIUtilities {
     public static RequestAPIServices getAPIServices() {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
 
 
@@ -39,35 +34,13 @@ public class APIUtilities {
         return json;
     }
 
-<<<<<<< HEAD
-=======
-
-
-    //generate get idleNews MAP params
-    public static String generateIdleNewsMap(String title, String category, String content) {
-        Map<String, Object> map = new HashMap<>();
-        if (title != null) map.put("title", title);
-        if (content != null) map.put("content", content);
-
-        if (category != null) {
-            Map<String, String> unitObj = new HashMap<>();
-            unitObj.put("name", category);
-            map.put("name", unitObj);
-        }
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.serializeNulls().create();
-        String json = gson.toJson(map);
-
-        return json;
-    }
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
 
 
 
 
 
-<<<<<<< HEAD
+
         //generate get idleNews MAP params
         public static String generateIdleNewsMap (String title, String category, String content){
             Map<String, Object> map = new HashMap<>();
@@ -85,9 +58,24 @@ public class APIUtilities {
             String json = gson.toJson(map);
 
             return json;
-        }}
+        }
+    public static String generateFeedbak (String test, String feedback){
+        Map<String, Object> map = new HashMap<>();
+
+        if (test != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("id", test);
+            map.put("test", unitObj);
+        }
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
+
+        return json;
+    }
+
+}
 
 
 
-=======
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication

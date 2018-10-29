@@ -14,19 +14,11 @@ import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
@@ -42,6 +34,7 @@ import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.role.ModelRole;
 import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
 import xbc.miniproject.com.xbcapplication.model.technology.DataList;
+import xbc.miniproject.com.xbcapplication.model.technology.Technology;
 import xbc.miniproject.com.xbcapplication.model.testimony.DataListTestimony;
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
 import xbc.miniproject.com.xbcapplication.model.testimony.ModelTestimony;
@@ -66,14 +59,12 @@ public interface RequestAPIServices {
 
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
-<<<<<<< HEAD
     Call<ModelBiodata> createNewBiodata(@Header("Authorization") String auth,
                                         @Header("Content-Type") String contentType,
                                         @Body BiodataList data);
-=======
+
     Call<ModelBiodata> createNewBiodata(@Header("Content-Type") String contentType,
                                     @Body BiodataList data);
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
     //GET get_one
     //@Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
@@ -116,14 +107,11 @@ public interface RequestAPIServices {
     //PUT Data User (Deactivate)
     @PUT("/xbc-ws/api/user/deactivate/{id}")
     Call<ModelTrainer> deactivateUser(@Header("Content-Type") String contentType,
-<<<<<<< HEAD
+
                                       @Header("Authorization") String authorization,
                                       @Path("id") int id);
 
-=======
-                                         @Header("Authorization") String authorization,
-                                         @Path("id") int id);
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
+
     //Get One Data User
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("/xbc-ws/api/user/id/{id}")
@@ -148,14 +136,10 @@ public interface RequestAPIServices {
     //PUT edit
     @PUT("/xbc-ws/api/technology/update")
     Call<ModelTechnology> editTechnology(@Header("Content-Type") String contentType,
-<<<<<<< HEAD
-                                         @Header("Authorization") String authorization,
-                                         @Body xbc.miniproject.com.xbcapplication.model.technology.Technology data);
 
-=======
-                                   @Header("Authorization") String authorization,
-                                   @Body xbc.miniproject.com.xbcapplication.model.technology.Technology data);
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
+                                         @Header("Authorization") String authorization,
+                                         @Body Technology data);
+
     @PUT("/xbc-ws/api/technology/deactivate/{id}")
     Call<ModelTechnology> deactiveTechnology(@Header("Content-Type") String contentType,
                                          @Header("Authorization") String authorization,
@@ -279,10 +263,8 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
 
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
+
 
     //KONEKSI API FEEDBACK
     //get autocomplete
@@ -311,8 +293,4 @@ public interface RequestAPIServices {
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 }

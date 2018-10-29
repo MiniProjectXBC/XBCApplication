@@ -51,12 +51,10 @@ public class FeedbackFragment extends Fragment  {
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
 
 
-<<<<<<< HEAD
+
 
 
     private RequestAPIServices requestAPIServices;
-=======
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
 
@@ -104,7 +102,6 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
-<<<<<<< HEAD
 
 
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
@@ -112,10 +109,9 @@ public class FeedbackFragment extends Fragment  {
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
 
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
-=======
+
 
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
 //        feedbackTextName.setThreshold(0);
@@ -139,19 +135,13 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
                 isTestSelected = true;
                 feedbackTextName.setError(null);
                 filter(feedbackTextName.getText().toString());
                 feedbackRecyclerView.setVisibility(View.VISIBLE);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
+
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
                 //filter(feedbackTextName.getText().toString().trim());
@@ -187,10 +177,8 @@ public class FeedbackFragment extends Fragment  {
         });
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 72ecf8b... Merge branch 'master' of https://github.com/MiniProjectXBC/XBCApplication
+
         //tampilkanListQuestion();
         return view;
 
