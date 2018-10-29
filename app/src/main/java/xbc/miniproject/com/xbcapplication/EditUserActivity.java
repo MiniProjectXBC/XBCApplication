@@ -1,5 +1,6 @@
 package xbc.miniproject.com.xbcapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +16,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.CheckedOutputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import xbc.miniproject.com.xbcapplication.model.role.DataListRole;
+import xbc.miniproject.com.xbcapplication.model.role.ModelRole;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class EditUserActivity extends Activity {
     private Context context =  this;
@@ -25,20 +36,30 @@ public class EditUserActivity extends Activity {
     private AutoCompleteTextView editUserEditTextRole;
     private Button editUserButtonSave;
     private  Button editUserButtonCancel;
-    private String[] roles = {"Staff",
-            "Admin"};
+    private ArrayList<String> listRole = new ArrayList<String>();
+    private List<DataListRole> dataListRoles =  new ArrayList<>();
+    private RequestAPIServices apiServices;
+    int id;
     private boolean isRoleSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
+
+        ActionBar actionBar =  getActionBar();
+        ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Edit User");
+
         editUserEditTexUsername = (EditText) findViewById(R.id.editUserEditTexUsername);
         editUserEditTexPassword = (EditText) findViewById(R.id.editUserEditTexPassword);
         editUserEditTexRetypePassword = (EditText) findViewById(R.id.editUserEditTexRetypePassword);
         editUserEditTextRole = (AutoCompleteTextView) findViewById(R.id.editUserEditTextRole);
+
+        getRole();
+
         final ArrayAdapter<String> adapter=  new ArrayAdapter<String>(this,
-                android.R.layout.select_dialog_item, roles);
+                android.R.layout.select_dialog_item, listRole);
         editUserEditTextRole.setThreshold(0);
         editUserEditTextRole.setAdapter(adapter);
         editUserEditTextRole.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +80,7 @@ public class EditUserActivity extends Activity {
         editUserEditTextRole.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                //Value Role get one
             }
 
             @Override
@@ -81,7 +102,7 @@ public class EditUserActivity extends Activity {
         editUserButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveValidation();
+               // editValidation();
             }
         });
         editUserButtonCancel =  (Button) findViewById(R.id.editUserButtonCancel);
@@ -91,6 +112,37 @@ public class EditUserActivity extends Activity {
                 finish();
             }
         });
+        id = getIntent().getIntExtra("id",0);
+        getOneUserAPI();
+    }
+    private void getRole(){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListRole().enqueue(new Callback<ModelRole>() {
+            @Override
+            public void onResponse(Call<ModelRole> call, Response<ModelRole> response) {
+                List<DataListRole> tmp = response.body().getDataList();
+
+                if(response.code()==200){
+                    for(int i=0; i<tmp.size(); i++){
+                        DataListRole data = tmp.get(i);
+                        dataListRoles.add(data);
+                        listRole.add(data.getName());
+                        System.out.println(dataListRoles);
+                    }
+
+                }else{
+                    Toast.makeText(context, "Gagal Mendapatkan List Role"+response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ModelRole> call, Throwable t) {
+                Toast.makeText(context, "List User onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private  void getOneUserAPI(){
+     apiServices = APIUtilities.getAPIServices();
     }
     private  void saveValidation(){
         if(editUserEditTextRole.getText().toString().trim().length()==0){

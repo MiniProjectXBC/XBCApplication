@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -36,6 +38,7 @@ import xbc.miniproject.com.xbcapplication.fragment.TestimonyFragment;
 import xbc.miniproject.com.xbcapplication.fragment.TrainerFragment;
 import xbc.miniproject.com.xbcapplication.fragment.UserFragment;
 import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,10 +47,13 @@ public class HomeActivity extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
+    private TextView headerNamaUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +71,9 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_menu);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        headerNamaUser = headerView.findViewById(R.id.headerNamaUser);
+        headerNamaUser.setText(SessionManager.getUsername(context));
 
         setTitle("XBC MOBILE APPS");
         HomeFragment homeFragment= new HomeFragment();

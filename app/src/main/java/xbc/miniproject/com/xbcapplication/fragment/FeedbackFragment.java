@@ -39,9 +39,9 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
-    RequestAPIServices requestAPIServices;
+    private RequestAPIServices requestAPIServices;
 
-    private List<FeedbackModel> feedbackModelList = new ArrayList<>();
+    private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
 
     private boolean isTestSelected;
     private String[] test = {"Android", "Java"
@@ -56,14 +56,14 @@ public class FeedbackFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-        feedbackRecyclerView = (RecyclerView) view.findViewById(R.id.feedbackRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
-                LinearLayout.VERTICAL,
-                false);
-        feedbackRecyclerView.setLayoutManager(layoutManager);
-        feedbackRecyclerView.setVisibility(View.GONE);
+//        feedbackRecyclerView = (RecyclerView) view.findViewById(R.id.feedbackRecyclerView);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
+//                LinearLayout.VERTICAL,
+//                false);
+//        feedbackRecyclerView.setLayoutManager(layoutManager);
+//        feedbackRecyclerView.setVisibility(View.GONE);
 
-
+        feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
         tampil_auto_complete();
 
 
@@ -87,28 +87,29 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
-        feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (getContext(), android.R.layout.select_dialog_item, test);
-        feedbackTextName.setThreshold(0);
-        feedbackTextName.setAdapter(adapter);
 
-        feedbackTextName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (feedbackTextName.getText().toString().trim().length() == 0) {
-                    feedbackTextName.showDropDown();
-                }
-            }
-        });
+
+//        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+//                (getContext(), android.R.layout.select_dialog_item, test);
+//        feedbackTextName.setThreshold(0);
+//        feedbackTextName.setAdapter(adapter);
+//
+//        feedbackTextName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (feedbackTextName.getText().toString().trim().length() == 0) {
+//                    feedbackTextName.showDropDown();
+//                }
+//            }
+//        });
 
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                isTestSelected = true;
-                feedbackTextName.setError(null);
-                filter(feedbackTextName.getText().toString().trim());
-                feedbackRecyclerView.setVisibility(View.VISIBLE);
+                //isTestSelected = true;
+                //feedbackTextName.setError(null);
+                //filter(feedbackTextName.getText().toString().trim());
+                //feedbackRecyclerView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -123,27 +124,27 @@ public class FeedbackFragment extends Fragment  {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                isTestSelected = false;
-                feedbackTextName.setError("Test must from the list!");
-                feedbackRecyclerView.setVisibility(View.GONE);
+//                isTestSelected = false;
+//                feedbackTextName.setError("Test must from the list!");
+//                feedbackRecyclerView.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (feedbackTextName.getText().toString().trim().length() == 0) {
-                    feedbackRecyclerView.setVisibility(View.GONE);
-                }
+//                if (feedbackTextName.getText().toString().trim().length() == 0) {
+//                    feedbackRecyclerView.setVisibility(View.GONE);
+//                }
             }
         });
 
 
-        tampilkanListQuestion();
+        //tampilkanListQuestion();
         return view;
 
     }
 
     public void tampil_auto_complete(){
-        String contentType = "aplication/jsom";
+        String contentType = "aplication/json";
         String token = "MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA";
         requestAPIServices = APIUtilities.getAPIServices();
         requestAPIServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
@@ -155,7 +156,7 @@ public class FeedbackFragment extends Fragment  {
                         for (DataListAutocompleteFeedback s : response.body().getDataList()){
                             str.add(s.getName());
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
+                        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
                         feedbackTextName.setThreshold(1);
                         feedbackTextName.setAdapter(adapter);
 
@@ -185,7 +186,7 @@ public class FeedbackFragment extends Fragment  {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Submitted!")
+                .setMessage("Data Successfully Submitted!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -197,26 +198,26 @@ public class FeedbackFragment extends Fragment  {
     }
 
 
-    public void tampilkanListQuestion() {
-        //addDummyList();
-        if (feedbackListAdapter == null) {
-            feedbackListAdapter = new FeedbackListAdapter(getContext(), feedbackModelList);
-            feedbackRecyclerView.setAdapter(feedbackListAdapter);
-        }
-        getListQuestionFeedback();
-    }
-
-    public void filter(String text) {
-        ArrayList<FeedbackModel> filteredList = new ArrayList<>();
-
-        for (FeedbackModel item : feedbackModelList) {
-            if (item.getTest().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }
-
-        }
-        feedbackListAdapter.filterList(filteredList);
-    }
+//    public void tampilkanListQuestion() {
+//        //addDummyList();
+//        if (feedbackListAdapter == null) {
+//            feedbackListAdapter = new FeedbackListAdapter(getContext(), feedbackModelList);
+//            feedbackRecyclerView.setAdapter(feedbackListAdapter);
+//        }
+//        getListQuestionFeedback();
+//    }
+//
+//    public void filter(String text) {
+//        ArrayList<FeedbackModel> filteredList = new ArrayList<>();
+//
+//        for (FeedbackModel item : feedbackModelList) {
+//            if (item.getTest().toLowerCase().contains(text.toLowerCase())) {
+//                filteredList.add(item);
+//            }
+//
+//        }
+//        feedbackListAdapter.filterList(filteredList);
+//    }
 
 
     public void getListQuestionFeedback(){

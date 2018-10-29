@@ -31,24 +31,25 @@ public class APIUtilities {
         return json;
     }
 
-    //generate get idleNews MAP params
-    public static String generateIdleNewsMap(String title, String category, String content) {
-        Map<String, Object> map = new HashMap<>();
-        if (title != null) map.put("title", title);
-        if (content != null) map.put("content", content);
+        //generate get idleNews MAP params
+        public static String generateIdleNewsMap (String title, String category, String content){
+            Map<String, Object> map = new HashMap<>();
+            if (title != null) map.put("title", title);
+            if (content != null) map.put("content", content);
 
-        if (category != null) {
-            Map<String, String> unitObj = new HashMap<>();
-            unitObj.put("name", category);
+            if (category != null) {
+                Map<String, String> unitObj = new HashMap<>();
+                unitObj.put("name", category);
+                map.put("name", unitObj);
+            }
 
-            map.put("name", unitObj);
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.serializeNulls().create();
+            String json = gson.toJson(map);
+
+            return json;
         }
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.serializeNulls().create();
-        String json = gson.toJson(map);
-
-        return json;
-    }
 }
+
 
 
