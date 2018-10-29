@@ -49,6 +49,9 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
                             case R.id.idleNewsMenuEdit:
                                 //Toast.makeText(context, "Anda Menekan Action Edit pada Posisi: "+position,Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(context, EditIdleNewsActivity.class);
+                                intent.putExtra("title", idleNewsList.getTitle().toString());
+                                intent.putExtra("category", idleNewsList.getCategory().getName().toString());
+//                                intent.putExtra("content", idleNewsList.getContent().toString());
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.idleNewsMenuPublish:

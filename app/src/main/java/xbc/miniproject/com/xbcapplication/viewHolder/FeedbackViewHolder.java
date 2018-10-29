@@ -10,6 +10,7 @@ import android.widget.TextView;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.FeedbackModel;
 import xbc.miniproject.com.xbcapplication.dummyModel.TrainerModel;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
 
 public class FeedbackViewHolder extends RecyclerView.ViewHolder {
     private TextView question;
@@ -20,8 +21,8 @@ public class FeedbackViewHolder extends RecyclerView.ViewHolder {
         customListFeedback = (EditText) itemView.findViewById(R.id.customListFeedback);
     }
 
-    public void setModel(FeedbackModel feedbackModel, final int position, final Context context) {
-        question.setText(feedbackModel.getQuestion());
+    public void setModel(DataListQuestionFeedback dataListQuestionFeedback, final int position, final Context context) {
+        question.setText(dataListQuestionFeedback.getId());
 
     }
 }
