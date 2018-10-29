@@ -33,7 +33,7 @@
                 android:text="Welcome,"/>
 
             <TextView
-                android:id="@+id/namaUser"
+                android:id="@+id/homeFragmentNamaUser"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_width="wrap_content"

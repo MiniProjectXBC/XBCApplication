@@ -83,7 +83,8 @@ public class LoginActivity extends Activity {
                         finish();
                     }
                 } else {
-                    Toast.makeText(context, "Login User Gagal : " + response.code(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Login User Gagal : " + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Login User Gagal : Pastikan username & password yang anda masukkan benar", Toast.LENGTH_LONG).show();
                 }
             }
 

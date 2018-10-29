@@ -13,18 +13,28 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.EditUserActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.UserModel;
+import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
 import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.user.Role;
+import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
+import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
     private TextView listUserUsername;
     private TextView listUserRole;
     private TextView listUserStatus;
     private ImageView listUserButtonAction;
+    private RequestAPIServices apiServices;
+    int id;
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
         listUserUsername =  (TextView)itemView.findViewById(R.id.listUserUsername);
@@ -53,6 +63,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                         switch (item.getItemId()){
                             case R.id.userMenuEdit:
                                 Intent intent = new Intent(context, EditUserActivity.class);
+                                intent.putExtra("id", dataList.getId());
                                 ((Activity)context).startActivity(intent);
                                 return true;
                             case R.id.userMenuDeactivate:
@@ -67,7 +78,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    private void DeactiveQuestion(DataList dataList, final int position, final Context context){
+    private void DeactiveQuestion(final DataList dataList,final int position, final Context context){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("Warning !")
@@ -76,7 +87,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        DeactiveNotification(context);
+                        DeactiveUSerAPI(dataList, position, context);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -88,11 +99,36 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                 .setCancelable(false)
                 .show();
     }
-    private void DeactiveNotification(final Context context){
+    private void DeactiveUSerAPI(DataList dataList, final int position, final Context context){
+        apiServices = APIUtilities.getAPIServices();
+        id = dataList.getId();
+
+        apiServices.deactivateUser(Constanta.CONTENT_TYPE_API,
+                Constanta.AUTHORIZATION_DEACTIVATED_USER, id)
+                .enqueue(new Callback<ModelTrainer>() {
+                    @Override
+                    public void onResponse(Call<ModelTrainer> call, Response<ModelTrainer> response) {
+                        if(response.code()==200){
+                            String message = response.body().getMessage();
+                            if(message!=null){
+                                DeactiveNotification(context, message);
+                            }else {
+                                DeactiveNotification(context, "Message Gagal Diambil");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ModelTrainer> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+    private void DeactiveNotification(final Context context, String message){
         final AlertDialog.Builder builder;
         builder =  new AlertDialog.Builder(context);
         builder.setTitle("NOTOFICATION !")
-                .setMessage("Testimony Succesfully Deactive !")
+                .setMessage(message+"!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
