@@ -170,12 +170,6 @@ public class AddUserActivity extends Activity {
 //
         }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> ac4a461920a9b5ed124f8384e3f73293cd4647e1
     public void panggilAPI() {
 //        saveDataNotification();
     }
