@@ -31,6 +31,8 @@ import xbc.miniproject.com.xbcapplication.adapter.FeedbackListAdapter;
 import xbc.miniproject.com.xbcapplication.dummyModel.FeedbackModel;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.DataListAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
+import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -39,6 +41,9 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
+    private RequestAPIServices apiServices;
+
+    private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
     private RequestAPIServices requestAPIServices;
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
@@ -87,6 +92,11 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
+        feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+//        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+//                (getContext(), android.R.layout.select_dialog_item, test);
+//        feedbackTextName.setThreshold(0);
+//        feedbackTextName.setAdapter(adapter);
 
 
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -106,6 +116,11 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                isTestSelected = true;
+                feedbackTextName.setError(null);
+                filter(feedbackTextName.getText().toString().trim());
+                feedbackRecyclerView.setVisibility(View.VISIBLE);
+
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
                 //filter(feedbackTextName.getText().toString().trim());
@@ -198,6 +213,55 @@ public class FeedbackFragment extends Fragment  {
     }
 
 
+    public void tampilkanListQuestion() {
+        //addDummyList();
+
+
+        String contentType = "aplication/json";
+        String token = "JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP";
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.getListQuestionFeedback(contentType, token, "123").enqueue(new Callback<ModelQuestionFeedback>() {
+            @Override
+            public void onResponse(Call<ModelQuestionFeedback> call, Response<ModelQuestionFeedback> response) {
+                if (response.code() == 200){
+                    if (response.body().getMessage() != null){
+                        List<String> str = new ArrayList<String>();
+                        for (DataListQuestionFeedback s : response.body().getDataList()){
+                            str.add(s.getId().toString());
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
+                        feedbackTextName.setThreshold(1);
+                        feedbackTextName.setAdapter(adapter);
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ModelQuestionFeedback> call, Throwable t) {
+
+            }
+        });
+
+        if (feedbackListAdapter == null) {
+            feedbackListAdapter = new FeedbackListAdapter(getContext(), dataListQuestionFeedbacks);
+            feedbackRecyclerView.setAdapter(feedbackListAdapter);
+        }
+
+    }
+
+    public void filter(String text) {
+        ArrayList<DataListQuestionFeedback> filteredList = new ArrayList<>();
+
+        for (DataListQuestionFeedback item : dataListQuestionFeedbacks) {
+            if (item.getId().toString().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+
+        }
+        feedbackListAdapter.filterList(filteredList);
+    }
 //    public void tampilkanListQuestion() {
 //        //addDummyList();
 //        if (feedbackListAdapter == null) {
@@ -218,7 +282,6 @@ public class FeedbackFragment extends Fragment  {
 //        }
 //        feedbackListAdapter.filterList(filteredList);
 //    }
-
 
     public void getListQuestionFeedback(){
 

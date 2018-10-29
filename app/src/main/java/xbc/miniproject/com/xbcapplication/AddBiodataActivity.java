@@ -44,7 +44,7 @@ public class AddBiodataActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Input MonitoringBiodata");
+        actionBar.setTitle("Input Biodata");
 
         addBiodataEditTextName = (EditText) findViewById(R.id.addBiodataEditTextName);
         addBiodataEditTextLastEducation = (EditText) findViewById(R.id.addBiodataEditTextLastEducation);

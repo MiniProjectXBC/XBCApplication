@@ -161,12 +161,20 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-
-
     public void getRolefromApi(){
+//        apiServices =  APIUtilities.getAPIServices();
 
+//        DataListTestimony data = new DataListTestimony();
+//        Role role = new Role();
+//        for(role.getId()!){
+//
+        }
+
+
+
+    public void panggilAPI() {
+//        saveDataNotification();
     }
-
 
 
     public void panggilAPI(final int position){
