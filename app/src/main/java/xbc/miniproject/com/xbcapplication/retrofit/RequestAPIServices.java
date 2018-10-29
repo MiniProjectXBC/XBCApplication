@@ -14,21 +14,14 @@ import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-=======
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-=======
-
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
->>>>>>> 50d05114962429262146b4a3c38fac96f77dfc70
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginInput;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
->>>>>>> 990d0f2138f4915fffdfc540acb51e47521c1d30
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
@@ -188,10 +181,6 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/idlenews/title/a")
     Call<ModelIdleNews> getListIdleNews();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 50d05114962429262146b4a3c38fac96f77dfc70
     //POST Create
     @POST("xbc-ws/api/idlenews/create")
     Call<ModelIdleNews> createNewIdleNews(@Header("Content-Type") String contentType,
@@ -200,7 +189,8 @@ public interface RequestAPIServices {
     //GET get_one
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("/xbc-ws/api/idlenews/id/{id}")
-    Call<ModelIdleNews> getOneIdleNews(@Path("id") int id);
+    Call<ModelIdleNews> getOneIdleNews(@Header("Content-Type") String contentType,
+                                       @Path("id") int id);
 
     //PUT edit
     @PUT("/xbc-ws/api/idlenews/update")
@@ -209,19 +199,12 @@ public interface RequestAPIServices {
                                    @Body IdleNews data);
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 50d05114962429262146b4a3c38fac96f77dfc70
     //Koneksi API di menu Class
     //GET Search
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
     //KONEKSI API FEEDBACK
     //get autocomplete
     @Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
@@ -233,14 +216,5 @@ public interface RequestAPIServices {
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelQuestionFeedback>  getListQuestionFeedback();
-
-
-
-
-
-=======
->>>>>>> 990d0f2138f4915fffdfc540acb51e47521c1d30
-
->>>>>>> 50d05114962429262146b4a3c38fac96f77dfc70
 
 }

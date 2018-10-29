@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import xbc.miniproject.com.xbcapplication.model.idleNews.Category;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.idleNews.getOne.ModelIdleNewsGetOne;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 import xbc.miniproject.com.xbcapplication.utility.Constanta;
@@ -50,6 +52,8 @@ public class EditIdleNewsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_idle_news);
 
+        String title, category, content;
+
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Edit Idle News");
@@ -73,29 +77,20 @@ public class EditIdleNewsActivity extends Activity {
             }
         });
 
-        id = getIntent().getIntExtra("id", 0);
-        getOneIdleNewsAPI(id);
-    }
-
-    private void getOneIdleNewsAPI(int id) {
-        apiServices = APIUtilities.getAPIServices();
-        apiServices.getOneIdleNews(id).enqueue(new Callback<ModelIdleNews>() {
-            @Override
-            public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
-                if (response.code() == 200){
-//                    IdleNewsList data = response.body().getDataList();
-//                    editIdleNewsEditTextTitle.setText(data.getTitle());
-//                    editIdleNewsEditTextCategory.setText(data.getCategory().getName());
-//                    editIdleNewsEditTextContent.setText(data.getContent().toString());
-                } else{
-                    Toast.makeText(context, "Gagal Mendapatkan Testimony Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<ModelIdleNews> call, Throwable t) {
-                Toast.makeText(context, "Get Testimony onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        Bundle data = getIntent().getExtras();
+        if (data == null){
+            title = null;
+            category = null;
+//            content = null;
+        }
+        else {
+            title = data.getString("title");
+            category = data.getString("category");
+//            content = data.getString("content");
+        }
+        editIdleNewsEditTextTitle.setText(title);
+        editIdleNewsEditTextCategory.setText(category);
+//        editIdleNewsEditTextContent.setText(content);
     }
 
     private void inputValidation() {
