@@ -1,25 +1,25 @@
 
-package xbc.miniproject.com.xbcapplication.model.idleNews;
+package xbc.miniproject.com.xbcapplication.model.feedback.getQuestion;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelIdleNews {
+public class ModelQuestionFeedback {
 
     @SerializedName("dataList")
     @Expose
-    private List<IdleNewsList> dataList = null;
+    private List<DataListQuestionFeedback> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<IdleNewsList> getDataList() {
+    public List<DataListQuestionFeedback> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<IdleNewsList> idleNewsList) {
-        this.dataList = idleNewsList;
+    public void setDataList(List<DataListQuestionFeedback> dataList) {
+        this.dataList = dataList;
     }
 
     public String getMessage() {

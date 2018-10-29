@@ -35,6 +35,13 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     public void setModel(final DataList dataList, final int position, final Context context){
         listUserUsername.setText(dataList.getUsername());
         listUserRole.setText(dataList.getRole().getName());
+        if(dataList.getIsDelete()==false){
+            listUserStatus.setText("Active");
+        }else {
+            listUserStatus.setText("Deactive");
+        }
+
+
         listUserButtonAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
