@@ -21,15 +21,26 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:inputType="text"
-            android:hint="Searh by Name"
-            android:layout_marginRight="20dp"/>
+            android:hint="Searh by Name" />
 
-        <Button
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/biodataButtonSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_button_login"
+            android:src="@android:drawable/ic_menu_search" />
+
+        <ImageView
+            android:layout_gravity="center_vertical"
             android:id="@+id/biodataButtonInsert"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/baseline_add_black_24"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_login"
+            android:src="@android:drawable/ic_menu_add" />
 
     </LinearLayout>
 
@@ -90,8 +101,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/biodataRecyclerViewList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
