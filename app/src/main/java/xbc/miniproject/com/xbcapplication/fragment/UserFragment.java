@@ -73,7 +73,8 @@ public class UserFragment extends Fragment{
                     userRecyclerViewList.setVisibility(view.INVISIBLE);
                 }else{
                     userRecyclerViewList.setVisibility(view.VISIBLE);
-                    filter(s.toString());
+                    filter();
+//                    filter(s.toString());
                 }
             }
         });
@@ -110,11 +111,22 @@ public class UserFragment extends Fragment{
             }
         });
     }
-    public void filter(String text){
+//    public void filter(String text){
+//        ArrayList<DataList> filteredList = new ArrayList<>();
+//
+//        for(DataList item: userModelList){
+//            if(item.getUsername().toLowerCase().contains(text.toLowerCase())){
+//                filteredList.add(item);
+//            }
+//        }
+//        userListAdapter.filterList(filteredList);
+//    }
+
+    public void filter(){
         ArrayList<DataList> filteredList = new ArrayList<>();
 
         for(DataList item: userModelList){
-            if(item.getUsername().toLowerCase().contains(text.toLowerCase())){
+            if(userEditTextSearch.getText()!=null){
                 filteredList.add(item);
             }
         }
