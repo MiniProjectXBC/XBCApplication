@@ -84,7 +84,7 @@ public interface RequestAPIServices {
     Call<MonitoringDataList> getAutoCompleteMonitoringList();
 
     //Koneksi API di menu User
-    //Get Data User (Create)
+    //Get Data User (Search)
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/user/name/123")
     Call<ModelUser> getListUsser();

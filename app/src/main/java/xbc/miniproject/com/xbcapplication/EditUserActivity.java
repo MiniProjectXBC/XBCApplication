@@ -25,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.model.role.DataListRole;
 import xbc.miniproject.com.xbcapplication.model.role.ModelRole;
+import xbc.miniproject.com.xbcapplication.model.user.DataList;
+import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -102,7 +104,7 @@ public class EditUserActivity extends Activity {
         editUserButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // editValidation();
+                editValidation();
             }
         });
         editUserButtonCancel =  (Button) findViewById(R.id.editUserButtonCancel);
@@ -113,7 +115,7 @@ public class EditUserActivity extends Activity {
             }
         });
         id = getIntent().getIntExtra("id",0);
-        getOneUserAPI();
+        getOneUserAPI(id);
     }
     private void getRole(){
         apiServices = APIUtilities.getAPIServices();
@@ -141,10 +143,24 @@ public class EditUserActivity extends Activity {
             }
         });
     }
-    private  void getOneUserAPI(){
+    private  void getOneUserAPI(int id){
      apiServices = APIUtilities.getAPIServices();
+     apiServices.getOneUser(id).enqueue(new Callback<ModelUser>() {
+         @Override
+         public void onResponse(Call<ModelUser> call, Response<ModelUser> response) {
+             if(response.code()==200){
+                // DataList data = response.body().;
+
+             }
+         }
+
+         @Override
+         public void onFailure(Call<ModelUser> call, Throwable t) {
+
+         }
+     });
     }
-    private  void saveValidation(){
+    private  void editValidation(){
         if(editUserEditTextRole.getText().toString().trim().length()==0){
             Toast.makeText(context,  "Role field still empty !", Toast.LENGTH_SHORT).show();
         }else if(editUserEditTexUsername.getText().toString().trim().length()==0){
@@ -159,11 +175,14 @@ public class EditUserActivity extends Activity {
             final String pas = editUserEditTexPassword.getText().toString();
             final String repas = editUserEditTexRetypePassword.getText().toString();
             if(pas.equalsIgnoreCase(repas)){
-                saveDataNotification();
+                inputEditValidation();
             }else{
                 Toast.makeText(context, "Pasword tidak sama!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void inputEditValidation(){
+
     }
     private void saveDataNotification(){
         final AlertDialog.Builder builder;

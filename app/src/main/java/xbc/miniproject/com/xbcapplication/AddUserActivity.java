@@ -59,22 +59,22 @@ public class AddUserActivity extends Activity {
                 (this, android.R.layout.select_dialog_item, listRole);
         addUserEditTextRole.setThreshold(0);
         addUserEditTextRole.setAdapter(adapter);
-        addUserEditTextRole.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(addUserEditTextRole.getText().toString().trim().length()==0){
-                    addUserEditTextRole.showDropDown();
-                }
-            }
-        });
-        addUserEditTextRole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                isRoleSelected =  true;
-                banyak =  position;
-                addUserEditTextRole.setError(null);
-            }
-        });
+//        addUserEditTextRole.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(addUserEditTextRole.getText().toString().trim().length()==0){
+//                    addUserEditTextRole.showDropDown();
+//                }
+//            }
+//        });
+//        addUserEditTextRole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                isRoleSelected =  true;
+//                banyak =  position;
+//                addUserEditTextRole.setError(null);
+//            }
+//        });
         addUserEditTextRole.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,12 +83,21 @@ public class AddUserActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(addUserEditTextRole.getText().toString().trim().length()==0){
-                    addUserEditTextRole.setError(null);
-                }else{
-                    isRoleSelected =  false;
-                    addUserEditTextRole.setError("Role Must from the list !");
+                if(addUserEditTextRole.getText().toString().trim().length()!=0){
+                    addUserEditTextRole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            isRoleSelected =  true;
+
+                        }
+                    });
                 }
+//                if(addUserEditTextRole.getText().toString().trim().length()==0){
+//                    addUserEditTextRole.setError(null);
+//                }else{
+                    //isRoleSelected =  false;
+                    //addUserEditTextRole.setError("Role Must from the list !");
+               // }
             }
 
             @Override
