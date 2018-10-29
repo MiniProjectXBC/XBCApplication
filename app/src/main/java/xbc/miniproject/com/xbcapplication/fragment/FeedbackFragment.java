@@ -33,13 +33,10 @@ import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.DataListAu
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
-<<<<<<< HEAD
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
 import xbc.miniproject.com.xbcapplication.model.kelas.DataList;
 import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
-=======
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -48,19 +45,15 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
-<<<<<<< HEAD
+
 
     private RequestAPIServices apiServices;
 
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
 
 
-=======
-    private RequestAPIServices apiServices;
 
-    private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
     private RequestAPIServices requestAPIServices;
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
 
@@ -108,12 +101,9 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
-<<<<<<< HEAD
 
         //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
-=======
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
 //        feedbackTextName.setThreshold(0);
@@ -137,19 +127,13 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
 
-=======
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
+
                 isTestSelected = true;
                 feedbackTextName.setError(null);
                 filter(feedbackTextName.getText().toString());
                 feedbackRecyclerView.setVisibility(View.VISIBLE);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
                 //filter(feedbackTextName.getText().toString().trim());
@@ -182,10 +166,6 @@ public class FeedbackFragment extends Fragment  {
         });
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
         //tampilkanListQuestion();
         return view;
 

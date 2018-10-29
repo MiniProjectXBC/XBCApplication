@@ -172,14 +172,10 @@ public class AddUserActivity extends Activity {
 
 
 
-<<<<<<< HEAD
 
-
-=======
     public void panggilAPI() {
 //        saveDataNotification();
     }
->>>>>>> cad5da487ab37253f135a9cca6e62e478f1bf51b
 
 
     public void panggilAPI(final int position){
