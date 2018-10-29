@@ -43,10 +43,6 @@ public class EditIdleNewsActivity extends Activity {
 
     RequestAPIServices apiServices;
 
-    int id;
-
-    List<IdleNewsList> listIdleNews = new ArrayList<IdleNewsList>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +95,7 @@ public class EditIdleNewsActivity extends Activity {
         } else if(editIdleNewsEditTextCategory.getText().toString().trim().length() == 0){
             Toast.makeText(context,"Category Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
-            inputEditIdleNewsAPI("title", "category", "content");
+            inputEditIdleNewsAPI(editIdleNewsEditTextTitle.getText().toString(), editIdleNewsEditTextCategory.getText().toString(), editIdleNewsEditTextContent.getText().toString());
         }
     }
 
@@ -108,27 +104,23 @@ public class EditIdleNewsActivity extends Activity {
         String contentType = "application/json";
         String json = APIUtilities.generateIdleNewsMap(title, category, content);
         RequestBody bodyRequest = RequestBody.create(APIUtilities.mediaType(), json);
-
         apiServices = APIUtilities.getAPIServices();
 
-        IdleNews data = new IdleNews();
-//        data.setId(id);
-//        data.setTitle(editIdleNewsEditTextTitle.getText().toString());
-//        data.getCategory().setName(editIdleNewsEditTextCategory.getText().toString());
-//        data.setContent(editIdleNewsEditTextContent.getText().toString());
+        IdleNewsList data = new IdleNewsList();
+//        data.setTitle(addIdleNewsEditTextTitle.getText().toString());
+//        data.setContent(addIdleNewsEditTextContent.getText().toString());
+//        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
 
-        apiServices.editIdleNews(Constanta.CONTENT_TYPE_API,
-                Constanta.AUTHORIZATION_EDIT_IDLE_NEWS,
-                data)
+        apiServices.createNewIdleNews("application/json", bodyRequest)
                 .enqueue(new Callback<ModelIdleNews>() {
                     @Override
                     public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
-                        if (response.code() == 200) {
+                        if (response.code() == 201) {
                             String message = response.body().getMessage();
                             if (message!=null){
                                 SaveSuccessNotification();
                             } else{
-                                SaveSuccessNotification();
+                                Toast.makeText(context,"Message Gagal Diambil", Toast.LENGTH_SHORT).show();
                             }
 
                         }
