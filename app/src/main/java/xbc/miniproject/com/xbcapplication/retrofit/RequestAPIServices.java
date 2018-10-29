@@ -48,9 +48,10 @@ public interface RequestAPIServices {
 
     //Koneksi API di menu Biodata
     //GET Search
-    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("xbc-ws/api/biodata/name/123")
-    Call<ModelBiodata> getListBiodata();
+    //@Headers("Authorization: JCZXSHTUOIW5PAAGXIYTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/biodata/name/{keyword}")
+    Call<ModelBiodata> getListBiodata(@Header("Authorization") String authorization,
+                                      @Path("keyword") String keyword);
 
     //POST Create
     @POST("/xbc-ws/api/biodata/create")
