@@ -43,15 +43,12 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
-<<<<<<< HEAD
     private RequestAPIServices apiServices;
 
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
-=======
     private RequestAPIServices requestAPIServices;
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
 
     private boolean isTestSelected;
     private String[] test = {"Android", "Java"
@@ -97,14 +94,11 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
-<<<<<<< HEAD
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
 //        feedbackTextName.setThreshold(0);
 //        feedbackTextName.setAdapter(adapter);
-=======
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
 
 
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -124,18 +118,15 @@ public class FeedbackFragment extends Fragment  {
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
                 isTestSelected = true;
                 feedbackTextName.setError(null);
                 filter(feedbackTextName.getText().toString().trim());
                 feedbackRecyclerView.setVisibility(View.VISIBLE);
 
-=======
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
                 //filter(feedbackTextName.getText().toString().trim());
                 //feedbackRecyclerView.setVisibility(View.VISIBLE);
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
             }
         });
         tampilkanListQuestion();
@@ -167,11 +158,8 @@ public class FeedbackFragment extends Fragment  {
         });
 
 
-<<<<<<< HEAD
 
-=======
         //tampilkanListQuestion();
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
         return view;
 
     }
@@ -232,7 +220,6 @@ public class FeedbackFragment extends Fragment  {
     }
 
 
-<<<<<<< HEAD
     public void tampilkanListQuestion() {
         //addDummyList();
 
@@ -282,7 +269,6 @@ public class FeedbackFragment extends Fragment  {
         }
         feedbackListAdapter.filterList(filteredList);
     }
-=======
 //    public void tampilkanListQuestion() {
 //        //addDummyList();
 //        if (feedbackListAdapter == null) {
@@ -303,7 +289,6 @@ public class FeedbackFragment extends Fragment  {
 //        }
 //        feedbackListAdapter.filterList(filteredList);
 //    }
->>>>>>> a132499e6799e450e3d5fd3dd9a2b49c18af3ef8
 
 
 
