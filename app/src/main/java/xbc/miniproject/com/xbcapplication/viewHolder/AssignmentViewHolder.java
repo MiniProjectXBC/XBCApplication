@@ -17,6 +17,7 @@ import xbc.miniproject.com.xbcapplication.DoneAssignmentActivity;
 import xbc.miniproject.com.xbcapplication.EditAssignmnetActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.AssignmentModel;
+import xbc.miniproject.com.xbcapplication.model.assignment.AssignmentList;
 
 public class AssignmentViewHolder extends RecyclerView.ViewHolder {
     TextView listAssignmentTextViewName,
@@ -35,8 +36,8 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
         listAssignmentButtonAction = (ImageView) itemView.findViewById(R.id.listAssignmentButtonAction);
     }
 
-    public void setModel(final AssignmentModel assignmentModel, final int position, final Context context) {
-        listAssignmentTextViewName.setText(assignmentModel.getName());
+    public void setModel(final AssignmentList assignmentModel, final int position, final Context context) {
+        listAssignmentTextViewName.setText(assignmentModel.getBiodata().getName());
         listAssignmentTextViewStartDate.setText(assignmentModel.getStartDate());
         listAssignmentTextViewEndDate.setText(assignmentModel.getEndDate());
 
@@ -78,11 +79,11 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void DeleteQuestion(final AssignmentModel assignmentModel, final int position, final Context context) {
+    private void DeleteQuestion(final AssignmentList assignmentModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Menghapus " + assignmentModel.getName() + "?")
+                .setMessage("Apakah Anda Yakin Akan Menghapus " + assignmentModel.getBiodata().getName() + "?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -115,11 +116,11 @@ public class AssignmentViewHolder extends RecyclerView.ViewHolder {
                 .show();
     }
 
-    private void HoldQuestion(final AssignmentModel assignmentModel, final int position, final Context context) {
+    private void HoldQuestion(final AssignmentList assignmentModel, final int position, final Context context) {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
         builder.setTitle("Warning!")
-                .setMessage("Apakah Anda Yakin Akan Hold " + assignmentModel.getName() + "?")
+                .setMessage("Apakah Anda Yakin Akan Hold " + assignmentModel.getBiodata().getName() + "?")
                 .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

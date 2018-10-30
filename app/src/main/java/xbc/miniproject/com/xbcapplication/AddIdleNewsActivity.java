@@ -8,9 +8,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -18,15 +23,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.idleNews.autoComplete.DataList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.autoComplete.ModelAutoCompleteIdleNews;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class AddIdleNewsActivity extends Activity {
     private Context context = this;
 
     EditText addIdleNewsEditTextTitle,
-            addIdleNewsEditTextCategory,
             addIdleNewsEditTextContent;
+
+    AutoCompleteTextView addIdleNewsEditTextCategory;
 
     Button addIdleNewsButtonSave,
             addIdleNewsButtonCancel;
@@ -42,8 +51,10 @@ public class AddIdleNewsActivity extends Activity {
         actionBar.setTitle("Input Idle News");
 
         addIdleNewsEditTextTitle = (EditText) findViewById(R.id.addIdleNewsEditTextTitle);
-        addIdleNewsEditTextCategory = (EditText) findViewById(R.id.addIdleNewsEditTextCategory);
         addIdleNewsEditTextContent = (EditText) findViewById(R.id.addIdleNewsEditTextContent);
+
+        addIdleNewsEditTextCategory = (AutoCompleteTextView) findViewById(R.id.addIdleNewsEditTextCategory);
+        autoCompleteIdleNewsAPI();
 
         addIdleNewsButtonSave =(Button) findViewById(R.id.addIdleNewsButtonSave);
         addIdleNewsButtonSave.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +71,31 @@ public class AddIdleNewsActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    private void autoCompleteIdleNewsAPI(){
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.idleNewsAutoComplete("application/json", SessionManager.getToken(context), "g")
+                .enqueue(new Callback<ModelAutoCompleteIdleNews>() {
+                    @Override
+                    public void onResponse(Call<ModelAutoCompleteIdleNews> call, Response<ModelAutoCompleteIdleNews> response) {
+                        if (response.code() == 201) {
+                            List<String> str = new ArrayList<String>();
+                            for (DataList s : response.body().getDataList()){
+                                str.add(s.getName());
+                            }
+                            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.select_dialog_item,str.toArray(new String[0]));
+                            addIdleNewsEditTextCategory.setThreshold(1);
+                            addIdleNewsEditTextCategory.setAdapter(adapter);
+                            }
+                        }
+
+                    @Override
+                    public void onFailure(Call<ModelAutoCompleteIdleNews> call, Throwable t) {
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void inputValidation() {

@@ -10,24 +10,20 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import xbc.miniproject.com.xbcapplication.model.assignment.ModelAssignment;
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.postCreate.ModelCreateFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
-import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
-import xbc.miniproject.com.xbcapplication.model.login.ModelLoginInput;
-import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.autoComplete.ModelAutoCompleteIdleNews;
 import xbc.miniproject.com.xbcapplication.model.login.ModelLoginMessage;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
@@ -255,7 +251,32 @@ public interface RequestAPIServices {
     @PUT("/xbc-ws/api/idlenews/update")
     Call<ModelIdleNews> editIdleNews(@Header("Content-Type") String contentType,
                                    @Header("Authorization") String authorization,
-                                   @Body IdleNews data);
+                                   @Body RequestBody  data);
+
+    //GET AutoComplete
+    @GET("xbc-ws/api/idlenews/key/{keyword}")
+    Call<ModelAutoCompleteIdleNews> idleNewsAutoComplete(@Header("Content-Type") String contentType,
+                                                         @Header("Authorization") String tokenAuthorization,
+                                                         @Path("keyword") String keyword);
+
+    //Delete Idle News
+    @DELETE ("/xbc-ws/api/idlenews/delete/{id}")
+    Call<ModelIdleNews> deleteIdleNews(@Header("Content-Type") String contentType,
+                                       @Header("Authorization") String authorization,
+                                       @Path("id") int id);
+
+    //PUT Publish
+    @PUT ("/xbc-ws/api/idlenews/publish/{id}")
+    Call<ModelIdleNews> publishIdleNews(@Header("Content-Type") String contentType,
+                                        @Header("Authorization") String authorization,
+                                        @Path("id") int id);
+
+    //POST Share to email
+    @POST ("/xbc-ws/api/idlenews/share-to-email")
+    Call<ModelIdleNews> shareNewIdleNews(@Header("Content-Type") String contentType,
+                                         @Header("Authorization") String authorization);
+
+
 
 
     //Koneksi API di menu Class
@@ -288,15 +309,20 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelQuestionFeedback>  getListQuestionFeedback();
 
+
+
+
+    //Koneksi API di menu Idle News
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/assignment/biodataname/a")
+    Call<ModelAssignment> getListAssignment();
+
     //post create
     @POST("xbc-ws/api/feedback/create")
     Call<ModelCreateFeedback> createFeedback(@Header("Content-Type") String contentType,
                                              @Header("Authorization") String tokenAuthorization,
                                              @Body RequestBody data);
-
-
-
-
 
 
 
