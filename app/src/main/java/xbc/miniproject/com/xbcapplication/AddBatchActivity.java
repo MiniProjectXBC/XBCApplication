@@ -98,6 +98,7 @@ public class AddBatchActivity extends Activity {
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBatchType.setAdapter(adapterType);
 
+
         addBatchEditTextPeriodTo = (EditText) findViewById(R.id.addBatchEditTextPeriodTo);
         addBatchEditTextPeriodTo.setFocusable(false);
         addBatchEditTextPeriodTo.setClickable(true);

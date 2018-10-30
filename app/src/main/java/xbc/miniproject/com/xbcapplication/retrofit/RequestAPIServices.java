@@ -296,9 +296,15 @@ public interface RequestAPIServices {
 
     //Koneksi API di menu Class
     //GET Search
-    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("xbc-ws/api/class/batch/101")
-    Call<ModelClass> getListClass();
+    @GET("xbc-ws/api/class/batch/{keyword}")
+    Call<ModelClass> getListClass(@Header("Content-Type") String contentType,
+                                  @Header("Authorization") String authorization,
+                                  @Path("keyword") String keyword);
+    //Delete
+    @PUT("xbc-ws/api/class/participant/delete/{id}")
+    Call<ModelClass> deleteClass(@Header("Content-Type") String contentType,
+                                 @Header("Authorization") String authorization,
+                                 @Path ("id") int id);
 
     //KONEKSI API FEEDBACK
     //get autocomplete
