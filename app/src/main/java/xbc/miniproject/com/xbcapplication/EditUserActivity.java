@@ -29,6 +29,8 @@ import xbc.miniproject.com.xbcapplication.model.user.DataList;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class EditUserActivity extends Activity {
     private Context context =  this;
@@ -59,6 +61,7 @@ public class EditUserActivity extends Activity {
         editUserEditTextRole = (AutoCompleteTextView) findViewById(R.id.editUserEditTextRole);
 
         getRole();
+//        getRole(editUserEditTextRole.getText().toString().trim());
 
         final ArrayAdapter<String> adapter=  new ArrayAdapter<String>(this,
                 android.R.layout.select_dialog_item, listRole);
@@ -118,6 +121,7 @@ public class EditUserActivity extends Activity {
         getOneUserAPI(id);
     }
     private void getRole(){
+
         apiServices = APIUtilities.getAPIServices();
         apiServices.getListRole().enqueue(new Callback<ModelRole>() {
             @Override

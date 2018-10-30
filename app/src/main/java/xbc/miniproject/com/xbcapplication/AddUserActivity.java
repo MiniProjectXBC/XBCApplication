@@ -31,6 +31,8 @@ import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.user.Role;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class AddUserActivity extends Activity {
     private Context context = this;
@@ -49,6 +51,10 @@ public class AddUserActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
+
+        ActionBar actionBar = getActionBar();
+        ((ActionBar)actionBar).setDisplayHomeAsUpEnabled(true);
+
         addUserEditTexUsername = (EditText) findViewById(R.id.addUserEditTexUsername);
         addUserEditTexPassword = (EditText) findViewById(R.id.addUserEditTexPassword);
         addUserEditTexRetypePassword = (EditText) findViewById(R.id.addUserEditTexRetypePassword);
@@ -56,7 +62,7 @@ public class AddUserActivity extends Activity {
 
         getRole();
         final ArrayAdapter<String> adapter =  new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, listRole);
+                (this,android.R.layout.select_dialog_item, listRole);
         addUserEditTextRole.setThreshold(0);
         addUserEditTextRole.setAdapter(adapter);
 //        addUserEditTextRole.setOnClickListener(new View.OnClickListener() {
@@ -117,17 +123,17 @@ public class AddUserActivity extends Activity {
             @Override
             public void onResponse(Call<ModelRole> call, Response<ModelRole> response) {
                 List<DataListRole> tmp = response.body().getDataList();
-
                 if(response.code()==200){
-                    for(int i=0; i<tmp.size(); i++){
-                        DataListRole data = tmp.get(i);
-                        dataListRoles.add(data);
-                        listRole.add(data.getName());
-                        System.out.println(dataListRoles);
-
-
+                    if(response.body().getDataList().size()>0){
+                        for(int i=0; i<tmp.size(); i++){
+                            DataListRole data = tmp.get(i);
+                            dataListRoles.add(data);
+                            listRole.add(data.getName());
+                            System.out.println(dataListRoles);
+                        }
+                    }else{
+                        Toast.makeText(context, "Role Tdak Tersedia", Toast.LENGTH_LONG).show();
                     }
-
                 }else{
                     Toast.makeText(context, "Gagal Mendapatkan List Role"+response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -160,20 +166,6 @@ public class AddUserActivity extends Activity {
                 Toast.makeText(context, "Password Tidak Sama!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-    public void getRolefromApi(){
-//        apiServices =  APIUtilities.getAPIServices();
-
-//        DataListTestimony data = new DataListTestimony();
-//        Role role = new Role();
-//        for(role.getId()!){
-//
-        }
-
-
-
-    public void panggilAPI() {
-//        saveDataNotification();
     }
 
 

@@ -14,15 +14,12 @@ import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
-<<<<<<< HEAD
-=======
 
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 
 
->>>>>>> b8ffe321c917e368223e8670fc5fe5cff062da5e
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNews;
 import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
@@ -46,6 +43,7 @@ import xbc.miniproject.com.xbcapplication.model.trainer.Trainer;
 import xbc.miniproject.com.xbcapplication.model.user.ModelUser;
 import xbc.miniproject.com.xbcapplication.model.trainer.DataListTrainer;
 import xbc.miniproject.com.xbcapplication.model.trainer.ModelTrainer;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public interface RequestAPIServices {
 
@@ -93,9 +91,10 @@ public interface RequestAPIServices {
 
     //Koneksi API di menu User
     //Get Data User (Search)
-    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("xbc-ws/api/user/name/123")
-    Call<ModelUser> getListUsser();
+   @GET("xbc-ws/api/user/name/{keyword}")
+    Call<ModelUser> getListUsser(@Header("Content-Type") String contentType,
+                                 @Header("Authorization") String authorization,
+                                 @Path("keyword") String keyword);
     //Post Data User(Create)
     @POST("/xbc-ws/api/user/create")
     Call<ModelUser> createNewUser(@Header("Content-Type")String contentTypeUser,
@@ -113,14 +112,16 @@ public interface RequestAPIServices {
 
     //Koneksi API di menu Technology
     //Get Data Technology
-    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("xbc-ws/api/technology/name/123")
-    Call<ModelTechnology> getListTechnology();
+    @GET("xbc-ws/api/technology/name/{keyword}")
+    Call<ModelTechnology> getListTechnology(@Header("Content-Type") String contentType,
+                                            @Header("Authorization") String authorization,
+                                            @Path("keyword") String keyword);
     //Create
     @POST("/xbc-ws/api/technology/create")
     Call<ModelTechnology> createNewTechnology(@Header("Content_Type")String contentType,
                                               @Body DataList data);
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    //GET one user
     @GET("/xbc-ws/api/technology/id/{id}")
     Call<ModelTechnology> getOneTechnology(@Path("id") int id);
     //PUT edit
@@ -136,7 +137,7 @@ public interface RequestAPIServices {
     //koneksi API di menu Role
     //Get Role
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("/xbc-ws/api/role/key/g")
+    @GET("/xbc-ws/api/role/key/{keyword}")
     Call<ModelRole> getListRole();
 
     //koneksi API di menu trainer
@@ -251,17 +252,12 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/class/batch/101")
     Call<ModelClass> getListClass();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b8ffe321c917e368223e8670fc5fe5cff062da5e
     //KONEKSI API FEEDBACK
     //get autocomplete
     //@Headers("Authorization: MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA")
     @GET("xbc-ws/role/key/{keyword}")
     Call<ModelAutocompleteFeedback> roleautocomplete(
             @Header("Content-Type") String contentType,
-<<<<<<< HEAD
             @Header("Authorization") String tokenAuthorization,
             @Path("keyword") String keyword);
     //get question
@@ -269,10 +265,9 @@ public interface RequestAPIServices {
     @GET("xbc-ws/api/technology/name/123")
     Call<ModelQuestionFeedback>  getListQuestionFeedback();
 
-}
-=======
-                                                     @Header("Authorization") String tokenAuthorization,
-                                                     @Path("keyword") String keyword);
+
+/////
+
     //get question
     @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
     @GET("xbc-ws/api/technology/name/{keyword}")
@@ -280,4 +275,3 @@ public interface RequestAPIServices {
                                                          @Header("Authorization") String tokenAuthorization,
                                                          @Path("keyword") String keyword);
 }
->>>>>>> b8ffe321c917e368223e8670fc5fe5cff062da5e

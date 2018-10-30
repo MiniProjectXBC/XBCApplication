@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class BiodataFragment extends Fragment {
     private EditText biodataEditTextSearch;
-    private Button biodataButtonInsert;
+    private ImageView biodataButtonInsert;
     private RecyclerView biodataRecyclerViewList;
 
     private List<BiodataList> listBiodata = new ArrayList<>();
@@ -87,7 +88,7 @@ public class BiodataFragment extends Fragment {
             }
         });
 
-        biodataButtonInsert = (Button) view.findViewById(R.id.biodataButtonInsert);
+        biodataButtonInsert = (ImageView) view.findViewById(R.id.biodataButtonInsert);
         biodataButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
