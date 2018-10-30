@@ -22,7 +22,7 @@ public class FeedbackViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setModel(DataListQuestionFeedback dataListQuestionFeedback, final int position, final Context context) {
-        question.setText(dataListQuestionFeedback.getName());
-        //customListFeedback.setText(dataListQuestionFeedback.getNotes().toString());
+        question.setText(dataListQuestionFeedback.getId());
+
     }
 }
