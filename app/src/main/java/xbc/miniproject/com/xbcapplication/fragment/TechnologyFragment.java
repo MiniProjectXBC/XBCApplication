@@ -1,6 +1,8 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -30,10 +33,14 @@ import xbc.miniproject.com.xbcapplication.model.technology.DataList;
 import xbc.miniproject.com.xbcapplication.model.technology.ModelTechnology;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class TechnologyFragment extends Fragment {
+   // private Context context;
     private EditText technologyEditTextSearch;
-    private Button technologyButtonInsert;
+    private ImageView technologyButtonInsert;
+    private ImageView technologyButtonSearch;
     private RecyclerView technologyRecyclerViewList;
     private List<DataList> technologyModelList =  new ArrayList<>();
     private TechnologyListAdapter technologyListAdapter;
@@ -45,8 +52,6 @@ public class TechnologyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
      final View view = inflater.inflate(R.layout.fragment_technology, container, false);
-
-     getDataFromApi();
 
      technologyRecyclerViewList = (RecyclerView)view.findViewById(R.id.technologyRecyclerViewList);
      RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
@@ -70,13 +75,21 @@ public class TechnologyFragment extends Fragment {
          public void afterTextChanged(Editable s) {
             if(technologyEditTextSearch.getText().toString().trim().length()==0){
                 technologyRecyclerViewList.setVisibility(view.INVISIBLE);
-            }else{
-                technologyRecyclerViewList.setVisibility(view.VISIBLE);
-                filter(s.toString());
             }
          }
      });
-     technologyButtonInsert = (Button) view.findViewById(R.id.technologyButtonInsert);
+     technologyButtonSearch = (ImageView) view.findViewById(R.id.technologyButtonSearch);
+     technologyButtonSearch.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             if(technologyEditTextSearch.getText().toString().trim().length()==0){
+                 Toast.makeText(getContext(), "Empty Keyword !", Toast.LENGTH_SHORT).show();
+             }else{
+                 getDataFromApi(technologyEditTextSearch.getText().toString().trim());
+             }
+         }
+     });
+     technologyButtonInsert = (ImageView) view.findViewById(R.id.technologyButtonInsert);
      technologyButtonInsert.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -84,19 +97,20 @@ public class TechnologyFragment extends Fragment {
              startActivity(intent);
          }
      });
-        tampilkanListTechnology();
         return  view;
     }
-    private void getDataFromApi(){
+    private void getDataFromApi(String keyword){
+        String contentType = Constanta.CONTENT_TYPE_API;
+        String token = SessionManager.getToken(getContext());
+
         apiServices = APIUtilities.getAPIServices();
-        apiServices.getListTechnology().enqueue(new Callback<ModelTechnology>() {
+        apiServices.getListTechnology(contentType, token, keyword).enqueue(new Callback<ModelTechnology>() {
             @Override
             public void onResponse(Call<ModelTechnology> call, Response<ModelTechnology> response) {
                 if(response.code()==200){
-                    List<DataList> tmp =  response.body().getDataList();
-                    for(int i=0; i<tmp.size(); i++){
-                        DataList data =  tmp.get(i);
-                        technologyModelList.add(data);
+                    if(response.body().getDataList().size()>0){
+                        technologyRecyclerViewList.setVisibility(View.VISIBLE);
+                        tampilkanListTechnology(response.body().getDataList());
                     }
                 }else{
                     Toast.makeText(getContext(), "Gagal Mendapatkan List Technology :"+response.code()+"msg: "+response.message(), Toast.LENGTH_SHORT).show();
@@ -109,23 +123,23 @@ public class TechnologyFragment extends Fragment {
             }
         });
     }
-    public void filter(String text){
-        ArrayList<DataList> filteredList = new ArrayList<>();
+//    public void filter(String text){
+//        ArrayList<DataList> filteredList = new ArrayList<>();
+//
+//        for(DataList item: technologyModelList){
+//            if(item.getName().toLowerCase().contains(text.toLowerCase())){
+//                filteredList.add(item);
+//            }
+//
+//        }
+//        technologyListAdapter.filterList(filteredList);
+//    }
+    public void tampilkanListTechnology(List<DataList> dataLists){
 
-        for(DataList item: technologyModelList){
-            if(item.getName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
-            }
-
-        }
-        technologyListAdapter.filterList(filteredList);
-    }
-    public void tampilkanListTechnology(){
-
-        if(technologyListAdapter==null){
-            technologyListAdapter = new TechnologyListAdapter(getContext(), technologyModelList);
+            technologyListAdapter = new TechnologyListAdapter(getContext(), dataLists);
             technologyRecyclerViewList.setAdapter(technologyListAdapter);
-        }
+            technologyListAdapter.notifyDataSetChanged();
+
     }
 //    public void addDummyList(){
 //        int index =1;
