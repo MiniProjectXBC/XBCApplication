@@ -133,6 +133,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
                     }
                 })
                 .setCancelable(false)
