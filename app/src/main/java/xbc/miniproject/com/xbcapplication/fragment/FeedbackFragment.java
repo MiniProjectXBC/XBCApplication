@@ -33,6 +33,10 @@ import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.DataListAu
 import xbc.miniproject.com.xbcapplication.model.feedback.autoComplete.ModelAutocompleteFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.DataListQuestionFeedback;
 import xbc.miniproject.com.xbcapplication.model.feedback.getQuestion.ModelQuestionFeedback;
+import xbc.miniproject.com.xbcapplication.model.idleNews.IdleNewsList;
+import xbc.miniproject.com.xbcapplication.model.idleNews.ModelIdleNews;
+import xbc.miniproject.com.xbcapplication.model.kelas.DataList;
+import xbc.miniproject.com.xbcapplication.model.kelas.ModelClass;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
@@ -41,9 +45,15 @@ public class FeedbackFragment extends Fragment  {
     private AutoCompleteTextView feedbackTextName;
     private Button feedbackButtonSave, feedbackButtonCancel;
     private FeedbackListAdapter feedbackListAdapter;
+
     private RequestAPIServices apiServices;
 
     private List<DataListQuestionFeedback> dataListQuestionFeedbacks = new ArrayList<>();
+
+
+
+
+
     private RequestAPIServices requestAPIServices;
 
     private List<DataListAutocompleteFeedback> feedbackModelList = new ArrayList<>();
@@ -61,12 +71,12 @@ public class FeedbackFragment extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-//        feedbackRecyclerView = (RecyclerView) view.findViewById(R.id.feedbackRecyclerView);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
-//                LinearLayout.VERTICAL,
-//                false);
-//        feedbackRecyclerView.setLayoutManager(layoutManager);
-//        feedbackRecyclerView.setVisibility(View.GONE);
+        feedbackRecyclerView = (RecyclerView) view.findViewById(R.id.feedbackRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
+                LinearLayout.VERTICAL,
+                false);
+        feedbackRecyclerView.setLayoutManager(layoutManager);
+        feedbackRecyclerView.setVisibility(View.GONE);
 
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
         tampil_auto_complete();
@@ -92,7 +102,16 @@ public class FeedbackFragment extends Fragment  {
             }
         });
 
+
+
+        //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+
+        //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+
         feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
+
+
+        //feedbackTextName = (AutoCompleteTextView) view.findViewById(R.id.feedbackTextName);
 //        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
 //                (getContext(), android.R.layout.select_dialog_item, test);
 //        feedbackTextName.setThreshold(0);
@@ -104,22 +123,24 @@ public class FeedbackFragment extends Fragment  {
 //        feedbackTextName.setThreshold(0);
 //        feedbackTextName.setAdapter(adapter);
 //
-//        feedbackTextName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (feedbackTextName.getText().toString().trim().length() == 0) {
-//                    feedbackTextName.showDropDown();
-//                }
-//            }
-//        });
+        feedbackTextName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (feedbackTextName.getText().toString().trim().length() == 0) {
+                    //feedbackTextName.showDropDown();
+                }
+            }
+        });
 
         feedbackTextName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isTestSelected = true;
                 feedbackTextName.setError(null);
-                filter(feedbackTextName.getText().toString().trim());
+                filter(feedbackTextName.getText().toString());
                 feedbackRecyclerView.setVisibility(View.VISIBLE);
+
+
 
                 //isTestSelected = true;
                 //feedbackTextName.setError(null);
@@ -127,6 +148,9 @@ public class FeedbackFragment extends Fragment  {
                 //feedbackRecyclerView.setVisibility(View.VISIBLE);
             }
         });
+        tampilkanListQuestion();
+
+
 
         feedbackTextName.addTextChangedListener(new TextWatcher() {
 
@@ -139,18 +163,20 @@ public class FeedbackFragment extends Fragment  {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                isTestSelected = false;
-//                feedbackTextName.setError("Test must from the list!");
-//                feedbackRecyclerView.setVisibility(View.GONE);
+                isTestSelected = false;
+                feedbackTextName.setError("Test must from the list!");
+                feedbackRecyclerView.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-//                if (feedbackTextName.getText().toString().trim().length() == 0) {
-//                    feedbackRecyclerView.setVisibility(View.GONE);
-//                }
+                if (feedbackTextName.getText().toString().trim().length() == 0) {
+                    feedbackRecyclerView.setVisibility(View.GONE);
+                }
             }
         });
+
+
 
 
         //tampilkanListQuestion();
@@ -161,15 +187,15 @@ public class FeedbackFragment extends Fragment  {
     public void tampil_auto_complete(){
         String contentType = "aplication/json";
         String token = "MOGLK40NEYLUFKIORVFAFE5OCO60T4R140VTW35L9T72LRSRWKJIZXWTCD1HQKPZURKJPNYHIX0SO6SX672HASCKVAHPV6VHRXOKVV7KEQVZNETUBXRXM7CEKR5ZQJDA";
-        requestAPIServices = APIUtilities.getAPIServices();
-        requestAPIServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
+        apiServices = APIUtilities.getAPIServices();
+        apiServices.roleautocomplete(contentType, token, "g").enqueue(new Callback<ModelAutocompleteFeedback>() {
             @Override
             public void onResponse(Call<ModelAutocompleteFeedback> call, Response<ModelAutocompleteFeedback> response) {
                 if (response.code() == 200){
                     if (response.body().getMessage() != null){
                         List<String> str = new ArrayList<String>();
                         for (DataListAutocompleteFeedback s : response.body().getDataList()){
-                            str.add(s.getName());
+                            str.add(s.getId().toString());
                         }
                         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
                         feedbackTextName.setThreshold(1);
@@ -177,6 +203,7 @@ public class FeedbackFragment extends Fragment  {
 
                     }
                 }
+
             }
 
             @Override
@@ -217,33 +244,26 @@ public class FeedbackFragment extends Fragment  {
         //addDummyList();
 
 
-        String contentType = "aplication/json";
-        String token = "JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP";
         apiServices = APIUtilities.getAPIServices();
-        apiServices.getListQuestionFeedback(contentType, token, "123").enqueue(new Callback<ModelQuestionFeedback>() {
+        apiServices.getListQuestionFeedback().enqueue(new Callback<ModelQuestionFeedback>() {
             @Override
             public void onResponse(Call<ModelQuestionFeedback> call, Response<ModelQuestionFeedback> response) {
-                if (response.code() == 200){
-                    if (response.body().getMessage() != null){
-                        List<String> str = new ArrayList<String>();
-                        for (DataListQuestionFeedback s : response.body().getDataList()){
-                            str.add(s.getId().toString());
-                        }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.select_dialog_item,str.toArray(new String[0]));
-                        feedbackTextName.setThreshold(1);
-                        feedbackTextName.setAdapter(adapter);
-
+                if(response.code() == 200){
+                    List<DataListQuestionFeedback> tmp = response.body().getDataList();
+                    for (int i = 0; i<tmp.size(); i++){
+                        DataListQuestionFeedback data = tmp.get(i);
+                        dataListQuestionFeedbacks.add(data);
                     }
+                } else {
+                    Toast.makeText(getContext(),"Gagal Mendapatkan List Question: " + response.code() + " msg: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onFailure(Call<ModelQuestionFeedback> call, Throwable t) {
-
+                Toast.makeText(getContext(), "List Question onFailure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         if (feedbackListAdapter == null) {
             feedbackListAdapter = new FeedbackListAdapter(getContext(), dataListQuestionFeedbacks);
             feedbackRecyclerView.setAdapter(feedbackListAdapter);
@@ -262,6 +282,11 @@ public class FeedbackFragment extends Fragment  {
         }
         feedbackListAdapter.filterList(filteredList);
     }
+
+    
+
+
+
 //    public void tampilkanListQuestion() {
 //        //addDummyList();
 //        if (feedbackListAdapter == null) {
@@ -283,9 +308,33 @@ public class FeedbackFragment extends Fragment  {
 //        feedbackListAdapter.filterList(filteredList);
 //    }
 
-    public void getListQuestionFeedback(){
 
-    }
+
+
+
+//    public void getListQuestionFeedback(){
+//        apiServices = APIUtilities.getAPIServices();
+//        apiServices.getListQuestionFeedback().enqueue(new Callback<ModelQuestionFeedback>() {
+//            @Override
+//            public void onResponse(Call<ModelQuestionFeedback> call, Response<ModelQuestionFeedback> response) {
+//                if (response.code() == 200){
+//                    List<DataListQuestionFeedback> tmp = response.body().getDataList();
+//                    for (int i = 0; i<tmp.size();i++){
+//                        DataListQuestionFeedback data = tmp.get(i);
+//                        dataListQuestionFeedbacks.add(data);
+//                    }
+//                } else{
+//                    Toast.makeText(getContext(), "Gagal Mendapatkan List Question: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ModelQuestionFeedback> call, Throwable t) {
+//                Toast.makeText(getContext(), "List Question onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
 
 //    public void addDummyList() {
 //        int index = 1;

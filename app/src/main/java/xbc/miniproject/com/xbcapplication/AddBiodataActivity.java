@@ -19,6 +19,7 @@ import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class AddBiodataActivity extends Activity {
     Context context = this;
@@ -44,7 +45,7 @@ public class AddBiodataActivity extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Input Biodata");
+        actionBar.setTitle("Input MonitoringBiodata");
 
         addBiodataEditTextName = (EditText) findViewById(R.id.addBiodataEditTextName);
         addBiodataEditTextLastEducation = (EditText) findViewById(R.id.addBiodataEditTextLastEducation);
@@ -101,7 +102,7 @@ public class AddBiodataActivity extends Activity {
         data.setMajors(addBiodataEditTextMajors.getText().toString());
         data.setGpa(addBiodataEditTextGpa.getText().toString());
 
-        apiServices.createNewBiodata("application/json", data)
+        apiServices.createNewBiodata(SessionManager.getToken(context),"application/json", data)
                 .enqueue(new Callback<ModelBiodata>() {
                     @Override
                     public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {

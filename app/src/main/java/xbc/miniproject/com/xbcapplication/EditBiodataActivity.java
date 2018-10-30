@@ -26,6 +26,7 @@ import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class EditBiodataActivity extends Activity {
 
@@ -87,7 +88,7 @@ public class EditBiodataActivity extends Activity {
 
     private void getOneBiodataAPI(int id) {
         apiServices = APIUtilities.getAPIServices();
-        apiServices.getOneBiodata(id).enqueue(new Callback<ModelBiodata>() {
+        apiServices.getOneBiodata(SessionManager.getToken(context),id).enqueue(new Callback<ModelBiodata>() {
             @Override
             public void onResponse(Call<ModelBiodata> call, Response<ModelBiodata> response) {
                 if (response.code() == 200){

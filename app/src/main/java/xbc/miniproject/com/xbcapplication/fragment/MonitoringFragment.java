@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 
 public class MonitoringFragment extends Fragment {
     private EditText monitoringEditTextSearch;
-    private Button monitoringButtonInsert;
+    private ImageView monitoringButtonInsert, monitoringButtonSearch;
     private RecyclerView monitoringRecyclerViewList;
 
     private List<MonitoringDataList> listMonitoring = new ArrayList<>();
@@ -55,12 +56,20 @@ public class MonitoringFragment extends Fragment {
 
         getDataFromAPI();
 
-        monitoringButtonInsert = (Button) view.findViewById(R.id.monitoringButtonInsert);
+        monitoringButtonInsert = (ImageView) view.findViewById(R.id.monitoringButtonInsert);
         monitoringButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),AddIdleMonitoringActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        monitoringButtonSearch = (ImageView) view.findViewById(R.id.monitoringButtonSearch);
+        monitoringButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

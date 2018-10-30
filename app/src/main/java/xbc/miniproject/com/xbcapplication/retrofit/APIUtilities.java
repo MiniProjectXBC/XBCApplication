@@ -14,9 +14,13 @@ public class APIUtilities {
     public static RequestAPIServices getAPIServices() {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
-        public static MediaType mediaType () {
-            return okhttp3.MediaType.parse("application/json; charset=utf-8");
-        }
+
+
+
+
+    public static MediaType mediaType() {
+        return okhttp3.MediaType.parse("application/json; charset=utf-8");
+    }
 
     public static String generateLoginMap(String username, String password) {
         Map<String, String> map = new HashMap<>();
@@ -29,6 +33,9 @@ public class APIUtilities {
 
         return json;
     }
+
+
+
 
         //generate get idleNews MAP params
         public static String generateIdleNewsMap (String title, String category, String content){
@@ -47,7 +54,53 @@ public class APIUtilities {
             String json = gson.toJson(map);
 
             return json;
-        }}
+        }
+
+
+
+        //generated get assignment MAP param
+        public static String generateAssignmentMap (String name, String title, String startDate, String endDate, String description){
+            Map<String, Object> map = new HashMap<>();
+            if (title != null) map.put("title", title);
+            if (description != null) map.put("content", description);
+            if (startDate != null) map.put("startDate", startDate);
+            if (endDate != null) map.put("endDate", endDate);
+
+            if (name != null) {
+                Map<String, String> unitObj = new HashMap<>();
+                unitObj.put("name", name);
+                map.put("name", unitObj);
+            }
+
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.serializeNulls().create();
+            String json = gson.toJson(map);
+
+            return json;
+        }
+
+    public static String generateFeedback (String test, String feedback){
+        Map<String, Object> map = new HashMap<>();
+
+        if (test != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("id", test);
+            map.put("test", unitObj);
+        }
+        if (feedback != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("questionId", feedback);
+            map.put("feedback", unitObj);
+        }
+
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
+
+        return json;
+    }
+
+}
 
 
 

@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import retrofit2.Response;
 import xbc.miniproject.com.xbcapplication.EditBiodataActivity;
 import xbc.miniproject.com.xbcapplication.R;
 import xbc.miniproject.com.xbcapplication.dummyModel.BiodataModel;
-import xbc.miniproject.com.xbcapplication.fragment.BiodataFragment;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
 import xbc.miniproject.com.xbcapplication.model.biodata.ModelBiodata;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
@@ -122,7 +120,7 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                             if (message!=null){
                                 DeactiveSuccessNotification(context,message);
                             } else{
-                                DeactiveSuccessNotification(context,"Message Gagal Dinonaktifkan");
+                                DeactiveSuccessNotification(context,"Message Gagal Diambil");
                             }
                         }
                     }
@@ -144,11 +142,6 @@ public class BiodataViewHolder extends RecyclerView.ViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        BiodataFragment biodataFragment = new BiodataFragment();
-                        EditText biodataEditTextSearch = (EditText) ((Activity) context).findViewById(R.id.biodataEditTextSearch);
-                        RecyclerView biodataRecyclerViewList = (RecyclerView) ((Activity) context).findViewById(R.id.biodataRecyclerViewList);
-                        biodataEditTextSearch.setText("");
-                        biodataRecyclerViewList.setVisibility(View.INVISIBLE);
                     }
                 })
                 .setCancelable(false)

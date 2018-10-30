@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -40,8 +39,6 @@ public class AddBatchActivity extends Activity {
             addBatchEditTextNotes;
 
     Spinner spinnerBatchType;
-
-    DataList data = new DataList();
 
     Button addBatchButtonSave, addBatchButtonCancel;
 
@@ -100,17 +97,6 @@ public class AddBatchActivity extends Activity {
                 arrayType);
         adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBatchType.setAdapter(adapterType);
-        spinnerBatchType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                data.setBootcampType(spinnerBatchType.getItemAtPosition(position));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         addBatchEditTextPeriodTo = (EditText) findViewById(R.id.addBatchEditTextPeriodTo);
         addBatchEditTextPeriodTo.setFocusable(false);
@@ -176,25 +162,24 @@ public class AddBatchActivity extends Activity {
             Toast.makeText(context, "Notes Field still empty!", Toast.LENGTH_SHORT).show();
         } else{
 //            SaveSuccessNotification();
-            createBatch();
+            callAPICreateBatch();
         }
     }
 
-    private void createBatch(){
+    private void callAPICreateBatch(){
         apiServices = APIUtilities.getAPIServices();
 
-
+        DataList data = new DataList();
 //        Technology data2 = new Technology();
 //        Trainer data3 = new Trainer();
-//
-//        data2.setName(addBatchEditTextTechnology.getText().toString());
-//        data3.setName(addBatchEditTextTrainer.getText().toString());
-//        data.setName(addBatchEditTextName.getText().toString());
-//        data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
-//        data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
-//        data.setRoom(addBatchEditTextRoom.getText().toString());
-////        data.setBootcampType(spinnerBatchType.getItemAtPosition()); //Belum ada getText //getAlignment :1, //getAdapter posisi array
-//        data.setNotes(addBatchEditTextNotes.getText().toString());
+        data.getTechnology().setName(addBatchEditTextTechnology.getText().toString());
+        data.getTrainer().setName(addBatchEditTextTrainer.getText().toString());
+        data.setName(addBatchEditTextName.getText().toString());
+        data.setPeriodFrom(addBatchEditTextPeriodForm.getText().toString());
+        data.setPeriodTo(addBatchEditTextPeriodTo.getText().toString());
+        data.setRoom(addBatchEditTextRoom.getText().toString());
+        data.setBootcampType(spinnerBatchType.getAdapter().toString()); //Belum ada getText
+        data.setNotes(addBatchEditTextNotes.getText().toString());
 
 
 
