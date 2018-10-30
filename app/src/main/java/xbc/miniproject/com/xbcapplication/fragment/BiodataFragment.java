@@ -39,8 +39,13 @@ import xbc.miniproject.com.xbcapplication.utility.LoadingClass;
 import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class BiodataFragment extends Fragment {
+<<<<<<< HEAD
     public EditText biodataEditTextSearch;
     private ImageView biodataButtonInsert, biodataButtonSearch;
+=======
+    private EditText biodataEditTextSearch;
+    private ImageView biodataButtonInsert;
+>>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
     private RecyclerView biodataRecyclerViewList;
 
     private List<BiodataList> listBiodata = new ArrayList<>();
@@ -115,6 +120,17 @@ public class BiodataFragment extends Fragment {
             }
         });
 
+<<<<<<< HEAD
+=======
+        biodataButtonInsert = (ImageView) view.findViewById(R.id.biodataButtonInsert);
+        biodataButtonInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),AddBiodataActivity.class);
+                startActivity(intent);
+            }
+        });
+>>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
 
 
 

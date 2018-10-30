@@ -30,6 +30,7 @@ import xbc.miniproject.com.xbcapplication.model.idleNews.getOne.ModelIdleNewsGet
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
 import xbc.miniproject.com.xbcapplication.utility.Constanta;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
 public class EditIdleNewsActivity extends Activity {
     private Context context = this;
@@ -111,11 +112,11 @@ public class EditIdleNewsActivity extends Activity {
 //        data.setContent(addIdleNewsEditTextContent.getText().toString());
 //        data.getCategory().setName(addIdleNewsEditTextCategory.getText().toString());
 
-        apiServices.createNewIdleNews("application/json", bodyRequest)
+        apiServices.editIdleNews("application/json", SessionManager.getToken(context), bodyRequest)
                 .enqueue(new Callback<ModelIdleNews>() {
                     @Override
                     public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
-                        if (response.code() == 201) {
+                        if (response.code() == 200) {
                             String message = response.body().getMessage();
                             if (message!=null){
                                 SaveSuccessNotification();
