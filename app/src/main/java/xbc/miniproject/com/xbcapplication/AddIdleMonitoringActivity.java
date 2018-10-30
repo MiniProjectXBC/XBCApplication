@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
@@ -40,10 +41,15 @@ import xbc.miniproject.com.xbcapplication.dummyModel.MonitoringModel;
 import xbc.miniproject.com.xbcapplication.model.monitoring.ModelMonitoring;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringBiodata;
 import xbc.miniproject.com.xbcapplication.model.monitoring.MonitoringDataList;
+import xbc.miniproject.com.xbcapplication.model.monitoring.autoComplete.DataList;
+import xbc.miniproject.com.xbcapplication.model.monitoring.autoComplete.ModelMonitoringAutoComplete;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.KArrayAdapter;
+import xbc.miniproject.com.xbcapplication.utility.LoadingClass;
+import xbc.miniproject.com.xbcapplication.utility.SessionManager;
 
-public class AddIdleMonitoringActivity extends AppCompatActivity {
+public class AddIdleMonitoringActivity extends Activity {
     private Context context = this;
 
     private EditText addMonitoringEditTextIdleDate,
@@ -55,23 +61,21 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
     private Button addMonitoringButtonSave,
             addMonitoringButtonCancel;
 
-    private List<String> names = new ArrayList<>();
-
     private boolean isNameSelected;
+
+    KArrayAdapter<DataList> adapter;
 
     private Calendar calendar;
 
     private RequestAPIServices apiServices;
-    private List<MonitoringDataList> listMonitoring = new ArrayList<>();
+    private List<DataList> listMonitoring = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_idle_monitoring);
 
-        getAutoCompleteAPI();
-
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Input Idle");
 
@@ -88,17 +92,14 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         };
 
         addMonitoringEditTextName = (AutoCompleteTextView) findViewById(R.id.addMonitoringEditTextName);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, names);
-        addMonitoringEditTextName.setThreshold(0);
-        addMonitoringEditTextName.setAdapter(adapter);
+        addMonitoringEditTextName.setThreshold(1);
 
         addMonitoringEditTextName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addMonitoringEditTextName.getText().toString().trim().length() == 0){
-                    addMonitoringEditTextName.showDropDown();
-                }
+//                if (addMonitoringEditTextName.getText().toString().trim().length() != 0) {
+//                    addMonitoringEditTextName.showDropDown();
+//                }
             }
         });
 
@@ -107,6 +108,10 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 isNameSelected = true;
                 addMonitoringEditTextName.setError(null);
+
+                DataList selected = (DataList) parent.getAdapter().getItem(position);
+                int aidi = selected.getId();
+                Toast.makeText(context,"idnya ini bos: "+aidi,Toast.LENGTH_LONG).show();
             }
         });
 
@@ -120,11 +125,15 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 isNameSelected = false;
                 addMonitoringEditTextName.setError("Name must from the list!");
+                listMonitoring = new ArrayList<>();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (addMonitoringEditTextName.getText().toString().trim().length() != 0) {
+                    String keyword = addMonitoringEditTextName.getText().toString().trim();
+                    getAutoCompleteAPI(keyword);
+                }
             }
         });
 
@@ -147,7 +156,7 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         addMonitoringButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    inputValidation();
+                inputValidation();
             }
         });
 
@@ -160,28 +169,50 @@ public class AddIdleMonitoringActivity extends AppCompatActivity {
         });
     }
 
-    private void getAutoCompleteAPI() {
+    private void getAutoCompleteAPI(String keyword) {
+//        final ProgressDialog loading = LoadingClass.loadingAnimationAndText(context,
+//                "Sedang Memuat Auto Complete . . .");
+//        loading.show();
+
         apiServices = APIUtilities.getAPIServices();
-
-        apiServices.getAutoCompleteMonitoringList().enqueue(new Callback<MonitoringDataList>() {
+        apiServices.getAutoCompleteMonitoringList(SessionManager.getToken(context), keyword).enqueue(new Callback<ModelMonitoringAutoComplete>() {
             @Override
-            public void onResponse(Call<MonitoringDataList> call, Response<MonitoringDataList> response) {
-                if (response.code()== 200){
-
+            public void onResponse(Call<ModelMonitoringAutoComplete> call, Response<ModelMonitoringAutoComplete> response) {
+                if (response.code() == 200) {
+//                    loading.dismiss();
+                    List<DataList> tmp = response.body().getDataList();
+                    listMonitoring = response.body().getDataList();
+//                    System.out.println(Arrays.toString(tmp.toArray()));
+//                    DataList data = new DataList();
+//                    for (int i=0;i<tmp.size();i++){
+//                        data.setId(response.body().getDataList().get(i).getId());
+//                        data.setName(response.body().getDataList().get(i).getName());
+//                        System.out.println(response.body().getDataList().get(i).getName());
+//                        listMonitoring.add(data);
+//                    }
+//                    System.out.println(Arrays.toString(response.body().getDataList().toArray()));
+                    getAutoCompletAdapter();
                 }
             }
 
             @Override
-            public void onFailure(Call<MonitoringDataList> call, Throwable t) {
+            public void onFailure(Call<ModelMonitoringAutoComplete> call, Throwable t) {
+//                loading.dismiss();
 
             }
         });
     }
 
+    private void getAutoCompletAdapter() {
+        adapter = new KArrayAdapter<>
+                (context, android.R.layout.simple_list_item_1, listMonitoring);
+        addMonitoringEditTextName.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
     private void updateLabel() {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         addMonitoringEditTextIdleDate.setText(sdf.format(calendar.getTime()));
     }
 
