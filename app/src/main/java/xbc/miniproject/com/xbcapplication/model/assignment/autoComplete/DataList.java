@@ -1,5 +1,5 @@
 
-package xbc.miniproject.com.xbcapplication.model.idleNews.autoComplete;
+package xbc.miniproject.com.xbcapplication.model.assignment.autoComplete;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

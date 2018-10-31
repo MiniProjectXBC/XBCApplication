@@ -10,7 +10,9 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import xbc.miniproject.com.xbcapplication.model.assignment.AssignmentList;
 import xbc.miniproject.com.xbcapplication.model.assignment.ModelAssignment;
+import xbc.miniproject.com.xbcapplication.model.assignment.autoComplete.ModelAutoCompleteAssignment;
 import xbc.miniproject.com.xbcapplication.model.batch.ModelBatch;
 import xbc.miniproject.com.xbcapplication.model.biodata.Biodata;
 import xbc.miniproject.com.xbcapplication.model.biodata.BiodataList;
@@ -269,7 +271,7 @@ public interface RequestAPIServices {
                                    @Body RequestBody  data);
 
     //GET AutoComplete
-    @GET("xbc-ws/api/idlenews/key/{keyword}")
+    @GET("/xbc-ws/api/idlenews/key/{keyword}")
     Call<ModelAutoCompleteIdleNews> idleNewsAutoComplete(@Header("Content-Type") String contentType,
                                                          @Header("Authorization") String tokenAuthorization,
                                                          @Path("keyword") String keyword);
@@ -289,7 +291,8 @@ public interface RequestAPIServices {
     //POST Share to email
     @POST ("/xbc-ws/api/idlenews/share-to-email")
     Call<ModelIdleNews> shareNewIdleNews(@Header("Content-Type") String contentType,
-                                         @Header("Authorization") String authorization);
+                                         @Header("Authorization") String authorization,
+                                         @Body IdleNewsList data);
 
 
 
@@ -332,11 +335,8 @@ public interface RequestAPIServices {
 
     //get question
 
-    //Koneksi API di menu Idle News
-    //GET Search
-    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
-    @GET("xbc-ws/api/assignment/biodataname/a")
-    Call<ModelAssignment> getListAssignment();
+
+
 
     //post create
     @POST("xbc-ws/api/feedback/create")
@@ -344,6 +344,48 @@ public interface RequestAPIServices {
                                              @Header("Authorization") String tokenAuthorization,
                                              @Body RequestBody data);
 
+
+
+    //Koneksi API di menu Assignmnet
+    //GET Search
+    @Headers("Authorization: JCZXSHTUOIW5PAAGXIYZFTTX43KGRGJGFKL8DLMPJUMNFRIYOSTZUSL2157WV2MKY8CNNJDP8SAYN1KHHGBHV0B2W1UFPCR4APQKYEW6HJVFM98F4KY5T0QVWRGZXRTP")
+    @GET("xbc-ws/api/assignment/biodataname/a")
+    Call<ModelAssignment> getListAssignment();
+
+    //POST Create
+    @POST("/xbc-ws/api/assignment/create")
+    Call<ModelAssignment> createNewAssignment(@Header("Content-Type") String contentType,
+                                              @Body RequestBody data);
+
+    //PUT edit
+    @PUT("/xbc-ws/api/assignment/update")
+    Call<ModelAssignment> editAssigment(@Header("Content-Type") String contentType,
+                                        @Header("Authorization") String authorization,
+                                        @Body RequestBody  data);
+
+    //DEL delete assignment
+    @DELETE("/xbc-ws/api/assignment/delete/{id}")
+    Call<ModelAssignment> deleteAssignmnet(@Header("Content-Type") String contentType,
+                                           @Header("Authorization") String authorization,
+                                           @Path("id") int id);
+
+    //PUT hold
+    @PUT("/xbc-ws/api/assignment/hold/{id}")
+    Call<ModelAssignment> holdAssigment(@Header("Content-Type") String contentType,
+                                        @Header("Authorization") String authorization,
+                                        @Path("id") int id);
+
+    //PUT done
+    @PUT("/xbc-ws/api/assignment/done")
+    Call<ModelAssignment> doneAssigment(@Header("Content-Type") String contentType,
+                                        @Header("Authorization") String authorization,
+                                        @Body AssignmentList data);
+
+    //GET AutoComplete
+    @GET("/xbc-ws/api/assignment/key/{keyword}")
+    Call<ModelAutoCompleteAssignment> assignmentAutoComplete(@Header("Content-Type") String contentType,
+                                                             @Header("Authorization") String tokenAuthorization,
+                                                             @Path("keyword") String keyword);
 
 
 }

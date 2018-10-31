@@ -93,25 +93,26 @@ public class AssignmentFragment extends Fragment {
         return view;
     }
 
-    private void getDataFromAPI() {
+    public void getDataFromAPI(){
         apiServices = APIUtilities.getAPIServices();
         apiServices.getListAssignment().enqueue(new Callback<ModelAssignment>() {
             @Override
             public void onResponse(Call<ModelAssignment> call, Response<ModelAssignment> response) {
                 if (response.code() == 200){
                     List<AssignmentList> tmp = response.body().getAssignmentList();
-                    for (int i = 0; i<tmp.size() ;i++){
+                    for (int i=0; i<tmp.size(); i++){
                         AssignmentList data = tmp.get(i);
                         listAssignment.add(data);
                     }
-                } else{
-                    Toast.makeText(getContext(), "Gagal Mendapatkan List Biodata: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getContext(), "Gagal Mendapatkan List Assignment: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ModelAssignment> call, Throwable t) {
-                Toast.makeText(getContext(), "List Biodata onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "List Assignment onFailure: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -124,18 +125,6 @@ public class AssignmentFragment extends Fragment {
         }
     }
 
-//    private void addDummyList() {
-//        int index = 1;
-//        for (int i = 0; i < 5; i++) {
-//            AssignmentModel data = new AssignmentModel();
-//            data.setName("Dummy Name " + index);
-//            data.setStartDate("Start Date");
-//            data.setEndDate("End Date");
-//            listAssignment.add(data);
-//            index++;
-//        }
-//    }
-
     private void filter(String text) {
         ArrayList<AssignmentList> filteredList = new ArrayList<>();
         for (AssignmentList item : listAssignment) {
@@ -146,4 +135,16 @@ public class AssignmentFragment extends Fragment {
 
         assignmentListAdapter.filterList(filteredList);
     }
+
+    //    private void addDummyList() {
+    //        int index = 1;
+    //        for (int i = 0; i < 5; i++) {
+    //            AssignmentModel data = new AssignmentModel();
+    //            data.setName("Dummy Name " + index);
+    //            data.setStartDate("Start Date");
+    //            data.setEndDate("End Date");
+    //            listAssignment.add(data);
+    //            index++;
+    //        }
+    //    }
 }

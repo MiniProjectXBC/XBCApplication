@@ -1,25 +1,25 @@
 
-package xbc.miniproject.com.xbcapplication.model.assignment;
+package xbc.miniproject.com.xbcapplication.model.assignment.autoComplete;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ModelAssignment {
+public class ModelAutoCompleteAssignment {
 
     @SerializedName("dataList")
     @Expose
-    private List<AssignmentList> assignmentList = null;
+    private List<DataList> dataList = null;
     @SerializedName("message")
     @Expose
     private String message;
 
-    public List<AssignmentList> getAssignmentList() {
-        return assignmentList;
+    public List<DataList> getDataList() {
+        return dataList;
     }
 
-    public void setAssignmentList(List<AssignmentList> assignmentList) {
-        this.assignmentList = assignmentList;
+    public void setDataList(List<DataList> dataList) {
+        this.dataList = dataList;
     }
 
     public String getMessage() {

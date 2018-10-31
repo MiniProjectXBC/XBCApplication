@@ -65,28 +65,38 @@ public class ShareIdleNewsActivity extends Activity {
             Toast.makeText(context,"Email Field still empty!",Toast.LENGTH_SHORT).show();
         } else{
 //            SaveSuccessNotification();
-            ShareIdleNewsAPI();
+            ShareQuestion();
         }
     }
 
-    public void SaveSuccessNotification(){
+    private void ShareQuestion() {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(context);
-        builder.setTitle("NOTIFICATION !")
-                .setMessage("Testimony Successfully Send !").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                finish();
-            }
-        })
+        builder.setTitle("Warning!")
+                .setMessage("Apakah Anda Yakin Akan Mengirim Data ?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+//                        DeleteSuccessNotification(context);
+                        dialog.dismiss();
+                        ShareIdleNewsAPI();
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
                 .setCancelable(false).show();
     }
 
     private void ShareIdleNewsAPI() {
         apiServices = APIUtilities.getAPIServices();
+        IdleNewsList data = new IdleNewsList();
+        data.setPublish(shareIdleNewsEditTextEmail.getText().toString());
 
-        apiServices.shareNewIdleNews("application/json", SessionManager.getToken(context))
+        apiServices.shareNewIdleNews("application/json", SessionManager.getToken(context), data)
                 .enqueue(new Callback<ModelIdleNews>() {
                     @Override
                     public void onResponse(Call<ModelIdleNews> call, Response<ModelIdleNews> response) {
@@ -103,7 +113,7 @@ public class ShareIdleNewsActivity extends Activity {
 
                     @Override
                     public void onFailure(Call<ModelIdleNews> call, Throwable t) {
-
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }

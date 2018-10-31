@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import xbc.miniproject.com.xbcapplication.R;
+import xbc.miniproject.com.xbcapplication.dummyModel.AssignmentModel;
 import xbc.miniproject.com.xbcapplication.model.assignment.AssignmentList;
 import xbc.miniproject.com.xbcapplication.viewHolder.AssignmentViewHolder;
 

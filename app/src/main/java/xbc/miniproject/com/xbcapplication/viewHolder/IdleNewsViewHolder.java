@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -111,7 +112,7 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
                 .setCancelable(false).show();
     }
 
-    private void DeleteIdleNewsAPI(IdleNewsList idleNewsList, final int position, final Context context){
+    private void DeleteIdleNewsAPI(final IdleNewsList idleNewsList, final int position, final Context context){
         apiServices = APIUtilities.getAPIServices();
         id = idleNewsList.getId();
 
@@ -132,7 +133,7 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
 
                     @Override
                     public void onFailure(Call<ModelIdleNews> call, Throwable t) {
-
+                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -194,7 +195,7 @@ public class IdleNewsViewHolder extends RecyclerView.ViewHolder {
 
                         @Override
                         public void onFailure(Call<ModelIdleNews> call, Throwable t) {
-
+                            Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
     }
