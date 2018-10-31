@@ -15,9 +15,12 @@ public class APIUtilities {
         return RetrofitClient.getClient(BASE_URL).create(RequestAPIServices.class);
     }
 
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
     public static MediaType mediaType() {
         return okhttp3.MediaType.parse("application/json; charset=utf-8");
     }
@@ -34,6 +37,18 @@ public class APIUtilities {
         return json;
     }
 
+<<<<<<< HEAD
+    //generate get idleNews MAP params
+    public static String generateIdleNewsMap(String title, String category, String content) {
+        Map<String, Object> map = new HashMap<>();
+        if (title != null) map.put("title", title);
+        if (content != null) map.put("content", content);
+
+        if (category != null) {
+            Map<String, String> unitObj = new HashMap<>();
+            unitObj.put("name", category);
+            map.put("name", unitObj);
+=======
 
 
 
@@ -54,9 +69,17 @@ public class APIUtilities {
             String json = gson.toJson(map);
 
             return json;
+>>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
         }
 
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.serializeNulls().create();
+        String json = gson.toJson(map);
 
+<<<<<<< HEAD
+        return json;
+    }
+=======
 
         //generated get assignment MAP param
         public static String generateAssignmentMap (String name, String title, String startDate, String endDate, String description){
@@ -100,6 +123,7 @@ public class APIUtilities {
         return json;
     }
 
+>>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
 }
 
 

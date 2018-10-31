@@ -7,7 +7,9 @@ import android.widget.Filter;
 
 import java.util.List;
 
+
 public class KArrayAdapter<T> extends ArrayAdapter<T> {
+
     private Filter filter = new KNoFilter();
     public List<T> items;
 
