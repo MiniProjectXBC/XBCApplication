@@ -1,5 +1,6 @@
 package xbc.miniproject.com.xbcapplication.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,10 +31,11 @@ import xbc.miniproject.com.xbcapplication.model.assignment.AssignmentList;
 import xbc.miniproject.com.xbcapplication.model.assignment.ModelAssignment;
 import xbc.miniproject.com.xbcapplication.retrofit.APIUtilities;
 import xbc.miniproject.com.xbcapplication.retrofit.RequestAPIServices;
+import xbc.miniproject.com.xbcapplication.utility.LoadingClass;
 
 public class AssignmentFragment extends Fragment {
     private EditText assignmentEditTextSearch;
-    private Button assignmentButtonInsert;
+    private ImageView assignmentButtonInsert, assignmentButtonSearch;
     private RecyclerView assignmentRecyclerViewList;
 
     private List<AssignmentList> listAssignment = new ArrayList<>();
@@ -49,14 +52,27 @@ public class AssignmentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assignment, container, false);
 
-        getDataFromAPI();
-
-        assignmentButtonInsert = (Button) view.findViewById(R.id.assignmentButtonInsert);
+        assignmentButtonInsert = (ImageView) view.findViewById(R.id.assignmentButtonInsert);
         assignmentButtonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),AddAssignmentActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        assignmentButtonSearch = (ImageView) view.findViewById(R.id.assignmentButtonSearch);
+        assignmentButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (assignmentEditTextSearch.getText().toString().trim().length() == 0){
+
+                }
+                else {
+                    String keyword = assignmentEditTextSearch.getText().toString().trim();
+                    listAssignment = new ArrayList<>();
+                    getDataFromAPI(keyword);
+                }
             }
         });
 
@@ -66,44 +82,51 @@ public class AssignmentFragment extends Fragment {
         assignmentRecyclerViewList.setLayoutManager(layoutManager);
 
         assignmentEditTextSearch = (EditText) view.findViewById(R.id.assignmentEditTextSearch);
-        assignmentRecyclerViewList.setVisibility(View.INVISIBLE);
-        assignmentEditTextSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (assignmentEditTextSearch.getText().toString().trim().length() == 0){
-                    assignmentRecyclerViewList.setVisibility(View.INVISIBLE);
-                } else{
-                    assignmentRecyclerViewList.setVisibility(View.VISIBLE);
-                    filter(editable.toString());
-                }
-            }
-        });
-        tampilkanListAssignment();
+//        assignmentRecyclerViewList.setVisibility(View.INVISIBLE);
+//        assignmentEditTextSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                if (assignmentEditTextSearch.getText().toString().trim().length() == 0){
+//                    assignmentRecyclerViewList.setVisibility(View.INVISIBLE);
+//                } else{
+//                    assignmentRecyclerViewList.setVisibility(View.VISIBLE);
+//                    filter(editable.toString());
+//                }
+//            }
+//        });
+//        tampilkanListAssignment();
 
         return view;
     }
 
-    public void getDataFromAPI(){
+    public void getDataFromAPI(String keyword){
+        final ProgressDialog loading = LoadingClass.loadingAnimationAndText(getContext(),
+                "Sedang Memuat Data . . .");
+        loading.show();
+
         apiServices = APIUtilities.getAPIServices();
         apiServices.getListAssignment().enqueue(new Callback<ModelAssignment>() {
             @Override
             public void onResponse(Call<ModelAssignment> call, Response<ModelAssignment> response) {
+                loading.dismiss();
                 if (response.code() == 200){
                     List<AssignmentList> tmp = response.body().getAssignmentList();
                     for (int i=0; i<tmp.size(); i++){
                         AssignmentList data = tmp.get(i);
                         listAssignment.add(data);
                     }
+                    assignmentRecyclerViewList.setVisibility(View.VISIBLE);
+                    tampilkanListAssignment();
                 }
                 else {
                     Toast.makeText(getContext(), "Gagal Mendapatkan List Assignment: " + response.code() + " msg: " + response.message(), Toast.LENGTH_LONG).show();
@@ -134,6 +157,17 @@ public class AssignmentFragment extends Fragment {
         }
 
         assignmentListAdapter.filterList(filteredList);
+    }
+
+    @Override
+    public void onResume() {
+        clearSearch();
+        super.onResume();
+    }
+
+    public void clearSearch(){
+        assignmentEditTextSearch.setText("");
+        assignmentRecyclerViewList.setVisibility(View.INVISIBLE);
     }
 
     //    private void addDummyList() {

@@ -167,7 +167,7 @@ public class AddUserActivity extends Activity {
             }
         }
     }
-<<<<<<< HEAD
+
     public void getRolefromApi(){
 //        apiServices =  APIUtilities.getAPIServices();
 
@@ -182,8 +182,6 @@ public class AddUserActivity extends Activity {
     public void panggilAPI() {
 //        saveDataNotification();
     }
-=======
->>>>>>> 8519365e95acd1b5238d87537bc8e4220ce090de
 
 
     public void panggilAPI(final int position){
